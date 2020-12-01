@@ -1,0 +1,10 @@
+.Swatches {
+  $checker-color: #f1f1f1;
+
+  display: flex;
+  flex-grow: 1;
+
+  &__swatch {
+    flex-grow: 1;
+  }
+}

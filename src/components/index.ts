@@ -1,0 +1,6 @@
+export * from './Canvas'
+export * from './Plotter'
+export * from './PlotterPoint'
+export * from './Swatches'
+export * from './ScaleGenerator'
+export * from './Draggable'

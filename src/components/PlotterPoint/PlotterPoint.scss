@@ -1,0 +1,36 @@
+.PlotterPoint {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 16px;
+  transform: translateY(-50%);
+  cursor: ew-resize;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.2);
+  }
+
+  &__point {
+    height: 8px;
+    width: 8px;
+    background-color: white;
+    border-radius: 1000px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 1);
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translate(-50%, -50%);
+  }
+
+  &__output {
+    user-select: none;
+    text-align: right;
+    font-size: 12px;
+    font-weight: bold;
+    color: rgba(0, 0, 0, 0.5);
+    margin-right: 8px;
+  }
+}
