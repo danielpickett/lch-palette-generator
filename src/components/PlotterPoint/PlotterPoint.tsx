@@ -1,28 +1,47 @@
+import chroma from 'chroma-js'
 import React, { useCallback, useEffect, useState } from 'react'
-import { CanvasSizeType, WashType } from 'types'
+import { CanvasSizeType, ColorExtended, WashType } from 'types'
 import './PlotterPoint.scss'
 
 export const PlotterPoint = ({
   wash,
+  hue,
+  onChromaChange,
   size = 3,
-  onChange,
 }: {
   wash: WashType
+  hue: number
+  onChromaChange: (chroma: number) => void
   size?: CanvasSizeType
-  onChange: (chroma: number) => void
 }) => {
   const [isDragging, setIsDragging] = useState(false)
   const [chromaOffset, setChromaOffset] = useState(0)
 
-  const handleMouseDown = () => {
-    setIsDragging(true)
+  const snapToMax = () => {
+    const color = chroma.lch(
+      wash.luminance / size,
+      wash.chroma / size,
+      hue
+    ) as ColorExtended
+    const gradientArr = (() => {
+      return 0
+    })()
+    console.log('snap', wash.luminance, wash.chroma, hue, color._rgb._clipped)
+  }
+
+  const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (e.altKey) {
+      snapToMax()
+    } else {
+      setIsDragging(true)
+    }
   }
   const handleMouseUp = useCallback(() => {
     const newChroma = wash.chroma + chromaOffset
-    onChange(newChroma < 0 ? 0 : newChroma)
+    onChromaChange(newChroma < 0 ? 0 : newChroma)
     setChromaOffset(0)
     setIsDragging(false)
-  }, [onChange, wash.chroma, chromaOffset])
+  }, [onChromaChange, wash.chroma, chromaOffset])
 
   const handleMouseMove = useCallback(
     (e: globalThis.MouseEvent) => {
@@ -49,7 +68,9 @@ export const PlotterPoint = ({
 
   return (
     <div
-      className="PlotterPoint"
+      className={
+        'PlotterPoint' + (isDragging ? ' PlotterPoint--is-dragging' : '')
+      }
       style={{
         width: `${150 * size}px`,
         top: `${(100 - wash.luminance) * size}px`,
@@ -60,7 +81,9 @@ export const PlotterPoint = ({
         className="PlotterPoint__point"
         style={{ left: `${(wash.chroma + chromaOffset) * size}px` }}
       />
-      <div className="PlotterPoint__output">{(wash.chroma + chromaOffset).toFixed(1)}</div>
+      <div className="PlotterPoint__output">
+        {(wash.chroma + chromaOffset).toFixed(1)}
+      </div>
     </div>
   )
 }

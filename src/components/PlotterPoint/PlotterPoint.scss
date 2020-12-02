@@ -9,10 +9,6 @@
   justify-content: flex-end;
   align-items: center;
 
-  &:hover {
-    background-color: rgba(0, 0, 0, 0.2);
-  }
-
   &__point {
     height: 8px;
     width: 8px;
@@ -32,5 +28,14 @@
     font-weight: bold;
     color: rgba(0, 0, 0, 0.5);
     margin-right: 8px;
+  }
+}
+
+.PlotterPoint {
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+  &--is-dragging {
+    background-color: rgba(0, 0, 0, 0.2);
   }
 }

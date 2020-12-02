@@ -3,6 +3,8 @@ import './Canvas.scss'
 import chroma from 'chroma-js'
 import { ColorExtended, CanvasSizeType } from 'types'
 
+type MyTuple = [_clipped: boolean, _unclipped: [number, number, number]]
+
 export const Canvas = React.memo(({
   hue,
   size = 3,
@@ -35,7 +37,6 @@ export const Canvas = React.memo(({
               image.data[C * 4 + 3] = 0
             }
           }
-          // console.log(L)
           canvasContext.putImageData(image, 0, 100 * scale - L)
         }
       }
