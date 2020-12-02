@@ -1,31 +1,21 @@
 .Plotter {
   position: relative;
 
-  &__points {
+  &__colors {
     position: absolute;
     top: 0;
     left: 0;
   }
 
-  &__handle {
-    background-color: rgba(0, 0, 0, .1);
+  &__color {
     position: absolute;
-    width: 100%;
+    left: 0;
+    top: 0;
+    height: 16px;
+    transform: translateY(-50%);
     cursor: ew-resize;
-  }
-
-  &__point {
-    position: absolute;
-    height: 0;
-    width: 0;
-  }
-
-  &__dot {
-    background-color: white;
-    border: 0.125rem solid black;
-    border-radius: 100rem;
-    height: 0.25rem;
-    width: 0.25rem;
-    transform: translate(-50%, -50%);
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
   }
 }

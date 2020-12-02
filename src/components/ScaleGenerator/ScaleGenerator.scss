@@ -12,6 +12,19 @@
     linear-gradient(  45deg, transparent    75%, $checker-color 75% ),
     linear-gradient( -45deg, transparent    75%, $checker-color 75% );
 
+  &__controls {
+    position: relative;
+  }
+
+  &__max-chroma-line {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.2);
+    width: 1px;
+    height: 100%;
+  }
+
   &__hue {
     background-color: white;
     margin: 0.5rem;

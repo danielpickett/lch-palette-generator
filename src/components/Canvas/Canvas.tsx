@@ -5,49 +5,47 @@ import { ColorExtended, CanvasSizeType } from 'types'
 
 type MyTuple = [_clipped: boolean, _unclipped: [number, number, number]]
 
-export const Canvas = React.memo(({
-  hue,
-  size = 3,
-}: {
-  hue: number
-  size?: CanvasSizeType
-}) => {
-  const canvasRef = useRef<HTMLCanvasElement>(null)
+export const Canvas = React.memo(
+  ({ hue, size = 3 }: { hue: number; size?: CanvasSizeType }) => {
+    const canvasRef = useRef<HTMLCanvasElement>(null)
 
-  useEffect(() => {
-    console.log('canvas rendered')
-    if (canvasRef.current) {
-      const scale = size
-      canvasRef.current.height = 100 * scale // px
-      canvasRef.current.width = 150 * scale //px
+    useEffect(() => {
+      console.log('canvas rendered')
+      if (canvasRef.current) {
+        canvasRef.current.height = 100 * size // px
+        canvasRef.current.width = 150 * size //px
 
-      const canvasContext = canvasRef.current.getContext('2d')
+        const canvasContext = canvasRef.current.getContext('2d')
 
-      if (canvasContext) {
-        const image = canvasContext.createImageData(1500, 1)
-        for (let L = 100 * scale; L >= 0; L--) {
-          for (let C = 0; C < 150 * scale; C++) {
-            const color = chroma.lch(L / scale, C / scale, hue) as ColorExtended
-            if (!color._rgb._clipped) {
-              image.data[C * 4 + 0] = color._rgb[0]
-              image.data[C * 4 + 1] = color._rgb[1]
-              image.data[C * 4 + 2] = color._rgb[2]
-              image.data[C * 4 + 3] = 255
-            } else {
-              image.data[C * 4 + 3] = 0
+        if (canvasContext) {
+          const image = canvasContext.createImageData(1500, 1)
+          for (let L = 100 * size; L >= 0; L--) {
+            for (let C = 0; C < 150 * size; C++) {
+              const color = chroma.lch(L / size, C / size, hue) as ColorExtended
+              if (!color._rgb._clipped) {
+                image.data[C * 4 + 0] = color._rgb[0]
+                image.data[C * 4 + 1] = color._rgb[1]
+                image.data[C * 4 + 2] = color._rgb[2]
+                image.data[C * 4 + 3] = 255
+              } else {
+                image.data[C * 4 + 3] = 0
+              }
             }
+            canvasContext.putImageData(image, 0, 100 * size - L)
           }
-          canvasContext.putImageData(image, 0, 100 * scale - L)
         }
       }
-    }
-  })
+    })
 
-  return (
-    <div className="Canvas">
-      <canvas className="Canvas__canvas" ref={canvasRef}>
-        Your browser is not supported
-      </canvas>
-    </div>
-  )
-})
+    return (
+      <div
+        className="Canvas"
+        style={{ height: `${100 * size}px`, width: `${150 * size}px` }}
+      >
+        <canvas className="Canvas__canvas" ref={canvasRef}>
+          Your browser is not supported
+        </canvas>
+      </div>
+    )
+  }
+)

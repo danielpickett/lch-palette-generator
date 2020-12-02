@@ -1,1 +1,1 @@
-export * from './initialwashes'
+export * from './inits'

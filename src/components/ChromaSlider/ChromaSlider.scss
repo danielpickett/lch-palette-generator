@@ -1,15 +1,7 @@
-.PlotterPoint {
-  position: absolute;
-  left: 0;
-  top: 0;
-  height: 16px;
-  transform: translateY(-50%);
-  cursor: ew-resize;
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-
-  &__point {
+.ChromaSlider {
+  position: relative;
+  
+  &__dot {
     height: 8px;
     width: 8px;
     background-color: white;
@@ -31,11 +23,11 @@
   }
 }
 
-.PlotterPoint {
+.ChromaSlider {
   &:hover {
-    background-color: rgba(0, 0, 0, 0.1);
+    background-color: rgba(0, 0, 0, 0.05);
   }
   &--is-dragging {
-    background-color: rgba(0, 0, 0, 0.2);
+    background-color: rgba(0, 0, 0, 0.1) !important;
   }
 }
