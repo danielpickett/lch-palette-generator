@@ -1,53 +1,81 @@
-import React, { useCallback, useState } from 'react'
+import React, { useReducer, useState } from 'react'
 import './App.scss'
 import { ChromaSlider, ScaleGenerator, Toolbar } from 'components'
 
-function App() {
-  const [luminances] = useState([97, 92, 85, 74, 61, 50, 40, 30, 20, 10])
-  const [hue1, setHue1] = useState(21)
-  const [hue2, setHue2] = useState(134)
-  const [hue3, setHue3] = useState(218)
+type ScaleType = {
+  hue: number
+  luminances: number[]
+  chromas: number[]
+}
 
-  const chromas = [3.7, 10.8, 21.3, 30.4, 31.0, 28.4, 24.3, 20.4, 15.7, 11.4]
+type ActionType = {
+  changeType: 'luminance' | 'chroma' | 'hue'
+  scaleIndex: number
+  value: number
+} & (
+  | { changeType: 'hue'; pointIndex?: undefined }
+  | { changeType: 'luminance' | 'chroma'; pointIndex: number }
+)
+
+const reducer = (
+  scales: ScaleType[],
+  { changeType, scaleIndex, pointIndex, value }: ActionType
+) => {
+  switch (changeType) {
+    case 'hue': {
+      return scales.map((scale, index) =>
+        index === scaleIndex ? { ...scale, hue: value } : scale
+      )
+    }
+    case 'chroma': {
+      return scales.map((scale, index) =>
+        index === scaleIndex
+          ? {
+              ...scale,
+              chromas: scale.chromas.map((chroma, index) =>
+                index === pointIndex
+                  ? chroma + value < 0
+                    ? 0
+                    : chroma + value
+                  : chroma
+              ),
+            }
+          : scale
+      )
+    }
+    default:
+      return scales
+  }
+}
+
+function App() {
+  const luminances = [97, 92, 85, 74, 61, 50, 40, 30, 20, 10],
+    initChromas = [3.7, 10.8, 21.3, 30.4, 31.0, 28.4, 24.3, 20.4, 15.7, 11.4]
+
+  const [scales, dispatch] = useReducer(reducer, [
+    {
+      luminances: luminances,
+      chromas: [...initChromas],
+      hue: 21,
+    },
+    {
+      luminances: luminances,
+      chromas: [...initChromas],
+      hue: 134,
+    },
+
+    {
+      luminances: luminances,
+      chromas: [...initChromas],
+      hue: 218,
+    },
+  ])
 
   const [maxChroma, setMaxChroma] = useState(132)
-  const [chromas1, setChromas1] = useState(chromas)
-  const [chromas2, setChromas2] = useState(chromas)
-  const [chromas3, setChromas3] = useState(chromas)
 
   const handleMaxChromaChange = (chromaChange: number) => {
     setMaxChroma((prevMaxChroma) => prevMaxChroma + chromaChange)
   }
-
-  const handleChromaChange1 = useCallback((chromaChange, i) => {
-    setChromas1((prevChromas) => {
-      return prevChromas.map((prevChroma, j) => {
-        if (i === j)
-          return prevChroma + chromaChange < 0 ? 0 : prevChroma + chromaChange
-        return prevChroma
-      })
-    })
-  }, [])
-
-  const handleChromaChange2 = useCallback((chromaChange, i) => {
-    setChromas2((prevChromas) => {
-      return prevChromas.map((prevChroma, j) => {
-        if (i === j)
-          return prevChroma + chromaChange < 0 ? 0 : prevChroma + chromaChange
-        return prevChroma
-      })
-    })
-  }, [])
-
-  const handleChromaChange3 = useCallback((chromaChange, i) => {
-    setChromas3((prevChromas) => {
-      return prevChromas.map((prevChroma, j) => {
-        if (i === j)
-          return prevChroma + chromaChange < 0 ? 0 : prevChroma + chromaChange
-        return prevChroma
-      })
-    })
-  }, [])
 
   const size = 3
 
@@ -60,33 +88,28 @@ function App() {
           size={size}
         />
       </Toolbar>
-      <ScaleGenerator
-        luminances={luminances}
-        hue={hue1}
-        onHueChange={setHue1}
-        chromas={chromas1}
-        onChromaChange={handleChromaChange1}
-        maxChroma={maxChroma}
-        size={size}
-      />
-      <ScaleGenerator
-        luminances={luminances}
-        hue={hue2}
-        onHueChange={setHue2}
-        chromas={chromas2}
-        onChromaChange={handleChromaChange2}
-        maxChroma={maxChroma}
-        size={size}
-      />
-      <ScaleGenerator
-        luminances={luminances}
-        hue={hue3}
-        onHueChange={setHue3}
-        chromas={chromas3}
-        onChromaChange={handleChromaChange3}
-        maxChroma={maxChroma}
-        size={size}
-      />
+      {scales.map((scale, scaleIndex) => (
+        <div key={scaleIndex}>
+          <ScaleGenerator
+            luminances={scale.luminances}
+            hue={scale.hue}
+            onHueChange={(newHue) =>
+              dispatch({ changeType: 'hue', scaleIndex, value: newHue })
+            }
+            chromas={scale.chromas}
+            onChromaChange={(chromaChange, pointIndex) =>
+              dispatch({
+                changeType: 'chroma',
+                scaleIndex,
+                pointIndex,
+                value: chromaChange,
+              })
+            }
+            maxChroma={maxChroma}
+            size={size}
+          />
+        </div>
+      ))}
     </div>
   )
 }

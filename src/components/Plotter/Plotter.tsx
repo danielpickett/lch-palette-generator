@@ -13,7 +13,7 @@ export const Plotter = ({
   hue: number
   chromas: number[]
   luminances: number[]
-  onChange: (chromaChange: number, index: number) => void
+  onChange: (chromaChange: number, pointIndex: number) => void
   size: CanvasSizeType
 }) => {
   return (
