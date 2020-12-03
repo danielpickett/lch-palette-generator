@@ -1,7 +1,7 @@
-import React, { useCallback } from 'react'
+import React from 'react'
 import './Plotter.scss'
 import { Canvas, ChromaSlider } from 'components'
-import { WashType, CanvasSizeType } from 'types'
+import { CanvasSizeType } from 'types'
 
 export type ArrOf10Nums = [
   number,
@@ -45,8 +45,9 @@ export const Plotter = ({
             }}
           >
             <ChromaSlider
+              size={size}
               chroma={chroma}
-              onInstantChromaChange={(chromaChange) =>
+              onChromaChange={(chromaChange) =>
                 onChange(chromaChange, index)
               }
             />

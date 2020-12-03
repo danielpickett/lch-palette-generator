@@ -10,7 +10,6 @@ export const Canvas = React.memo(
     const canvasRef = useRef<HTMLCanvasElement>(null)
 
     useEffect(() => {
-      console.log('canvas rendered')
       if (canvasRef.current) {
         canvasRef.current.height = 100 * size // px
         canvasRef.current.width = 150 * size //px

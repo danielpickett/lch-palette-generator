@@ -46,13 +46,13 @@ export const ScaleGenerator = ({
         ></div>
 
         <label className="ScaleGenerator__hue">
-          <span>Hue: </span>
+          <span>Hue: {hue} </span>
           <input
             className="ScaleGenerator__input"
             onChange={(e) => onHueChange(+e.target.value)}
             value={hue}
             type="range"
-            step="5"
+            step="1"
             min="0"
             max="360"
           />

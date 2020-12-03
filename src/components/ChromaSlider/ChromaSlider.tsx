@@ -1,48 +1,23 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import './ChromaSlider.scss'
-import {
-  CanvasSizeType,
-  // ColorExtended,
-  // WashType
-} from 'types'
-// import chroma from 'chroma-js'
+import { CanvasSizeType } from 'types'
 
 export const ChromaSlider = ({
   chroma,
   onChromaChange,
-  onInstantChromaChange,
   size = 3,
 }: {
   chroma: number
-  onChromaChange?: (chroma: number) => void
-  onInstantChromaChange?: (chromaChange: number) => void
+  onChromaChange: (chromaChange: number) => void
   size?: CanvasSizeType
 }) => {
   const [isDragging, setIsDragging] = useState(false)
-  const [chromaOffset, setChromaOffset] = useState(0)
 
-  useEffect(() => {
-    console.log('----------chroma', chroma)
-  })
-
-  const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
-    setIsDragging(true)
-  }
-  const handleMouseUp = useCallback(() => {
-    const newChroma = chroma + chromaOffset
-    if (onChromaChange) onChromaChange(newChroma < 0 ? 0 : newChroma)
-    setChromaOffset(0)
-    setIsDragging(false)
-  }, [onChromaChange, chroma, chromaOffset])
-
+  const handleMouseDown = () => setIsDragging(true)
+  const handleMouseUp = useCallback(() => setIsDragging(false), [])
   const handleMouseMove = useCallback(
-    (e: globalThis.MouseEvent) => {
-      setChromaOffset(
-        (prevChromaOffset) => prevChromaOffset + e.movementX / size
-      )
-      if (onInstantChromaChange) onInstantChromaChange(e.movementX / size)
-    },
-    [setChromaOffset, onInstantChromaChange, size]
+    (e: globalThis.MouseEvent) => onChromaChange(e.movementX / size),
+    [onChromaChange, size]
   )
 
   useEffect(() => {
@@ -70,18 +45,10 @@ export const ChromaSlider = ({
       <div
         className="ChromaSlider__dot"
         style={{
-          left: `${
-            chroma *
-            //  + chromaOffset
-            size
-          }px`,
+          left: `${chroma * size}px`,
         }}
       />
-      <div className="ChromaSlider__output">
-        {(chroma
-          //  + chromaOffset
-           ).toFixed(1)}
-      </div>
+      <div className="ChromaSlider__output">{chroma.toFixed(1)}</div>
     </div>
   )
 }

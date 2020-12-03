@@ -1,5 +1,6 @@
 .ChromaSlider {
   position: relative;
+  cursor: ew-resize;
   
   &__dot {
     height: 8px;
@@ -16,9 +17,6 @@
   &__output {
     user-select: none;
     text-align: right;
-    font-size: 12px;
-    font-weight: bold;
-    color: rgba(0, 0, 0, 0.5);
     margin-right: 8px;
   }
 }
