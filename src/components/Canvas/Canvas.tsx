@@ -6,7 +6,7 @@ import { ColorExtended, CanvasSizeType } from 'types'
 type MyTuple = [_clipped: boolean, _unclipped: [number, number, number]]
 
 export const Canvas = React.memo(
-  ({ hue, size = 3 }: { hue: number; size?: CanvasSizeType }) => {
+  ({ hue, size }: { hue: number; size: CanvasSizeType }) => {
     const canvasRef = useRef<HTMLCanvasElement>(null)
 
     useEffect(() => {

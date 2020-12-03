@@ -1,35 +1,26 @@
-import React, { useCallback, useState } from 'react'
+import React from 'react'
 import './ScaleGenerator.scss'
-import { ArrOf10Nums, Plotter } from 'components'
+import { Plotter } from 'components'
 import { Swatches } from 'components/Swatches'
 import { CanvasSizeType } from 'types'
-import { initialLuminances, initialChromas } from 'config-data'
 
 export const ScaleGenerator = ({
   hue,
-  maxChroma,
+  luminances,
+  chromas,
+  onChromaChange,
   onHueChange,
-  size = 3,
+  maxChroma,
+  size,
 }: {
   hue: number
-  maxChroma: number
+  luminances: number[]
+  chromas: number[]
+  onChromaChange: (chromaChang: number, pointIndex: number) => void
   onHueChange: (hue: number) => void
-  size?: CanvasSizeType
+  maxChroma: number
+  size: CanvasSizeType
 }) => {
-  const [luminances] = useState<ArrOf10Nums>([...initialLuminances])
-  const [chromas, setChromas] = useState<ArrOf10Nums>([...initialChromas])
-
-  const handleOnChange = useCallback((chromaChange, i) => {
-    console.log('changed?', chromaChange, i)
-    setChromas((prevChromas) => {
-      return prevChromas.map((prevChroma, j) => {
-        if (i === j)
-          return prevChroma + chromaChange < 0 ? 0 : prevChroma + chromaChange
-        return prevChroma
-      }) as ArrOf10Nums
-    })
-  }, [])
-
   return (
     <div className="ScaleGenerator">
       <div className="ScaleGenerator__controls">
@@ -38,7 +29,7 @@ export const ScaleGenerator = ({
           chromas={chromas}
           luminances={luminances}
           size={size}
-          onChange={handleOnChange}
+          onChange={onChromaChange}
         />
         <div
           className="ScaleGenerator__max-chroma-line"

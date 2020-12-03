@@ -3,31 +3,18 @@ import './Plotter.scss'
 import { Canvas, ChromaSlider } from 'components'
 import { CanvasSizeType } from 'types'
 
-export type ArrOf10Nums = [
-  number,
-  number,
-  number,
-  number,
-  number,
-  number,
-  number,
-  number,
-  number,
-  number
-]
-
 export const Plotter = ({
   hue,
   chromas,
   luminances,
   onChange,
-  size = 3,
+  size,
 }: {
   hue: number
-  chromas: ArrOf10Nums
-  luminances: ArrOf10Nums
+  chromas: number[]
+  luminances: number[]
   onChange: (chromaChange: number, index: number) => void
-  size?: CanvasSizeType
+  size: CanvasSizeType
 }) => {
   return (
     <div className="Plotter">

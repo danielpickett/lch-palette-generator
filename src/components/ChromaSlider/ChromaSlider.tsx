@@ -5,11 +5,11 @@ import { CanvasSizeType } from 'types'
 export const ChromaSlider = ({
   chroma,
   onChromaChange,
-  size = 3,
+  size,
 }: {
   chroma: number
   onChromaChange: (chromaChange: number) => void
-  size?: CanvasSizeType
+  size: CanvasSizeType
 }) => {
   const [isDragging, setIsDragging] = useState(false)
 
