@@ -1,10 +1,22 @@
 .Swatches {
-  $checker-color: #f1f1f1;
-
   display: flex;
   flex-grow: 1;
+  min-width: 0;
 
   &__swatch {
-    flex-grow: 1;
+    min-width: 0;
+    padding: 0.5rem;
+
+    &--is-impossible-color {
+      $checker-color: #f1f1f1;
+      background-size: 20px 20px;
+      background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+      /* prettier-ignore */
+      background-image: 
+        linear-gradient(  45deg, $checker-color 25%, transparent    25% ),
+        linear-gradient( -45deg, $checker-color 25%, transparent    25% ),
+        linear-gradient(  45deg, transparent    75%, $checker-color 75% ),
+        linear-gradient( -45deg, transparent    75%, $checker-color 75% );
+    }
   }
 }

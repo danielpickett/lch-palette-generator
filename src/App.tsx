@@ -1,14 +1,23 @@
 import React, { useReducer, useState } from 'react'
 import './App.scss'
-import { ChromaSlider, ScaleGenerator, Toolbar } from 'components'
+import {
+  ChromaSlider,
+  Output,
+  parseConfig,
+  parseScales,
+  ScaleGenerator,
+  Toolbar,
+} from 'components'
 
-type ScaleType = {
+export type ScaleType = {
+  scaleName?: string
+  colorNames?: string[]
   hue: number
   luminances: number[]
   chromas: number[]
 }
 
-type ActionType = {
+export type ScalesActionType = {
   changeType: 'luminance' | 'chroma' | 'hue'
   scaleIndex: number
   value: number
@@ -19,7 +28,7 @@ type ActionType = {
 
 const reducer = (
   scales: ScaleType[],
-  { changeType, scaleIndex, pointIndex, value }: ActionType
+  { changeType, scaleIndex, pointIndex, value }: ScalesActionType
 ) => {
   switch (changeType) {
     case 'hue': {
@@ -50,24 +59,55 @@ const reducer = (
 
 function App() {
   const luminances = [97, 92, 85, 74, 61, 50, 40, 30, 20, 10],
-    initChromas = [3.7, 10.8, 21.3, 30.4, 31.0, 28.4, 24.3, 20.4, 15.7, 11.4]
+    initChromas = [3.7, 10.8, 21.3, 30.4, 31.0, 28.4, 24.3, 20.4, 15.7, 11.4],
+    colorNames = [
+      '050',
+      '100',
+      '200',
+      '300',
+      '400',
+      '500',
+      '600',
+      '700',
+      '800',
+      '900',
+    ]
 
-  const [scales, dispatch] = useReducer(reducer, [
+  const [scales, handleScalesChanges] = useReducer(reducer, [
     {
+      scaleName: 'Primary',
+      colorNames: colorNames,
       luminances: luminances,
       chromas: [...initChromas],
       hue: 21,
     },
     {
+      scaleName: 'Secondary',
+      colorNames: colorNames,
       luminances: luminances,
       chromas: [...initChromas],
-      hue: 134,
+      hue: 332,
     },
-
     {
+      scaleName: 'Success',
+      colorNames: colorNames,
       luminances: luminances,
       chromas: [...initChromas],
-      hue: 218,
+      hue: 332,
+    },
+    {
+      scaleName: 'Warning',
+      colorNames: colorNames,
+      luminances: luminances,
+      chromas: [...initChromas],
+      hue: 332,
+    },
+    {
+      scaleName: 'Danger',
+      colorNames: colorNames,
+      luminances: luminances,
+      chromas: [...initChromas],
+      hue: 332,
     },
   ])
 
@@ -77,7 +117,20 @@ function App() {
     setMaxChroma((prevMaxChroma) => prevMaxChroma + chromaChange)
   }
 
-  const size = 3
+  const cssOutput = parseScales(
+    scales,
+    (x) => `  --color-${x.scaleNameKebab}-${x.colorName}: ${x.colorHex}`
+  )
+
+  const scssOutput = parseScales(
+    scales,
+    (x) =>
+      `$color-${x.scaleNameKebab}-${x.colorName}: var(--color-${x.scaleNameKebab}-${x.colorName});`
+  )
+
+  const configOutput = parseConfig(scales)
+
+  const size = 2
 
   return (
     <div className="App">
@@ -88,28 +141,38 @@ function App() {
           size={size}
         />
       </Toolbar>
-      {scales.map((scale, scaleIndex) => (
-        <div key={scaleIndex}>
+
+      <div className="App__scales">
+        {scales.map((scale, scaleIndex) => (
           <ScaleGenerator
-            luminances={scale.luminances}
+            key={scaleIndex}
+            scaleIndex={scaleIndex}
+            scale={scale}
             hue={scale.hue}
-            onHueChange={(newHue) =>
-              dispatch({ changeType: 'hue', scaleIndex, value: newHue })
-            }
-            chromas={scale.chromas}
-            onChromaChange={(chromaChange, pointIndex) =>
-              dispatch({
-                changeType: 'chroma',
-                scaleIndex,
-                pointIndex,
-                value: chromaChange,
-              })
-            }
+            onChange={handleScalesChanges}
             maxChroma={maxChroma}
             size={size}
           />
-        </div>
-      ))}
+        ))}
+      </div>
+
+      <div className="App__output">
+        <Output
+          heading="Root CSS Variables"
+          content={cssOutput}
+          style={{ maxWidth: '325px' }}
+        />
+        <Output
+          heading="SCSS Aliases"
+          content={scssOutput}
+          style={{ maxWidth: '500px' }}
+        />
+        <Output
+          heading="Config"
+          content={configOutput}
+          style={{ maxWidth: '675px' }}
+        />
+      </div>
     </div>
   )
 }

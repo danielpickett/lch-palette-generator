@@ -3,44 +3,53 @@ import './ScaleGenerator.scss'
 import { Plotter } from 'components'
 import { Swatches } from 'components/Swatches'
 import { CanvasSizeType } from 'types'
+import { ScaleType, ScalesActionType } from 'App'
 
 export const ScaleGenerator = ({
+  scale,
   hue,
-  luminances,
-  chromas,
-  onChromaChange,
-  onHueChange,
+  onChange,
   maxChroma,
   size,
+  scaleIndex,
 }: {
+  scale: ScaleType
   hue: number
-  luminances: number[]
-  chromas: number[]
-  onChromaChange: (chromaChang: number, pointIndex: number) => void
-  onHueChange: (hue: number) => void
+  onChange: (action: ScalesActionType) => void
+
   maxChroma: number
   size: CanvasSizeType
+  scaleIndex: number
 }) => {
+  const handleChromaChange = (chromaChange: number, pointIndex: number) => {
+    onChange({
+      changeType: 'chroma',
+      scaleIndex: scaleIndex,
+      pointIndex,
+      value: chromaChange,
+    })
+  }
+
   return (
     <div className="ScaleGenerator">
       <div className="ScaleGenerator__controls">
-        <Plotter
-          hue={hue}
-          chromas={chromas}
-          luminances={luminances}
-          size={size}
-          onChange={onChromaChange}
-        />
+        <Plotter scale={scale} size={size} onChange={handleChromaChange} />
         <div
           className="ScaleGenerator__max-chroma-line"
           style={{ left: `${maxChroma * size}px` }}
-        ></div>
+        />
 
         <label className="ScaleGenerator__hue">
           <span>Hue: {hue} </span>
           <input
             className="ScaleGenerator__input"
-            onChange={(e) => onHueChange(+e.target.value)}
+            onChange={(e) =>
+              onChange({
+                changeType: 'hue',
+                scaleIndex: scaleIndex,
+                value: +e.target.value,
+              })
+            }
             value={hue}
             type="range"
             step="1"
@@ -49,13 +58,7 @@ export const ScaleGenerator = ({
           />
         </label>
       </div>
-      <Swatches
-        hue={hue}
-        washes={chromas.map((chroma, index) => ({
-          luminance: luminances[index],
-          chroma: chroma,
-        }))}
-      />
+      <Swatches hue={hue} scale={scale} />
     </div>
   )
 }
