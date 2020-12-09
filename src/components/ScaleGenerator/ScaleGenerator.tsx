@@ -2,7 +2,7 @@ import React from 'react'
 import './ScaleGenerator.scss'
 import { Plotter } from 'components'
 import { Swatches } from 'components/Swatches'
-import { ScaleType, ScalesActionType } from 'App'
+import { ScaleType, ActionType } from 'App'
 
 export const ScaleGenerator = ({
   scale,
@@ -14,8 +14,7 @@ export const ScaleGenerator = ({
 }: {
   scale: ScaleType
   hue: number
-  onChange: (action: ScalesActionType) => void
-
+  onChange: (action: ActionType) => void
   maxChroma: number
   size: number
   scaleIndex: number

@@ -17,51 +17,75 @@ export type ScaleType = {
   chromas: number[]
 }
 
-export type ScalesActionType = {
-  changeType: 'luminance' | 'chroma' | 'hue'
-  scaleIndex: number
+export type ActionType = {
+  changeType: 'luminance' | 'chroma' | 'hue' | 'chromaLimit'
   value: number
 } & (
-  | { changeType: 'hue'; pointIndex?: undefined }
-  | { changeType: 'luminance' | 'chroma'; pointIndex: number }
+  | { changeType: 'hue'; scaleIndex: number; pointIndex?: undefined }
+  | {
+      changeType: 'luminance' | 'chroma'
+      scaleIndex: number
+      pointIndex: number
+    }
+  | {
+      changeType: 'chromaLimit'
+      scaleIndex?: undefined
+      pointIndex?: undefined
+    }
 )
 
 const reducer = (
-  scales: ScaleType[],
-  { changeType, scaleIndex, pointIndex, value }: ScalesActionType
+  state: { chromaLimit: number; scales: ScaleType[] },
+  { changeType, scaleIndex, pointIndex, value }: ActionType
 ) => {
-  // const clampChroma = (color: { l: number; c: number; h: number }) => {}
-
   switch (changeType) {
+    case 'chromaLimit': {
+      return { ...state, chromaLimit: value }
+    }
     case 'hue': {
-      return scales.map((scale, index) =>
-        index === scaleIndex ? { ...scale, hue: value } : scale
-      )
+      return {
+        ...state,
+        scales: state.scales.map((scale, index) =>
+          index === scaleIndex ? { ...scale, hue: value } : scale
+        ),
+      }
     }
     case 'chroma': {
-      return scales.map((scale, index) =>
-        index === scaleIndex
-          ? {
-              ...scale,
-              chromas: scale.chromas.map((chroma, index) => {
-                if (index === pointIndex) {
-                  if (chroma + value < 0) return 0
-                  const maxChroma = getMaxChroma({
-                    l: scale.luminances[pointIndex],
-                    c: scale.chromas[pointIndex],
-                    h: scale.hue,
-                  })
-                  if (chroma + value > maxChroma) return maxChroma
-                  return chroma + value
-                }
-                return chroma
-              }),
-            }
-          : scale
-      )
+      return {
+        ...state,
+        scales: state.scales.map((scale, index) =>
+          index === scaleIndex
+            ? {
+                ...scale,
+                chromas: scale.chromas.map((chroma, index) => {
+                  if (index === pointIndex) {
+                    if (chroma + value < 0) return 0
+                    const maxChroma = getMaxChroma({
+                      l: scale.luminances[pointIndex],
+                      c: scale.chromas[pointIndex],
+                      h: scale.hue,
+                    })
+                    if (
+                      chroma + value > maxChroma ||
+                      chroma + value > state.chromaLimit
+                    )
+                      return state.chromaLimit < maxChroma
+                        ? state.chromaLimit
+                        : maxChroma
+                    return chroma + value
+                  }
+                  return chroma
+                }),
+              }
+            : scale
+        ),
+      }
     }
     default:
-      return scales
+      return {
+        ...state,
+        scales: [...state.scales],
+      }
   }
 }
 
@@ -81,62 +105,73 @@ function App() {
       '900',
     ]
 
-  const [scales, handleScalesChanges] = useReducer(reducer, [
-    {
-      scaleName: 'Primary',
-      colorNames: colorNames,
-      luminances: luminances,
-      chromas: [...initChromas],
-      hue: 21,
-    },
-    {
-      scaleName: 'Secondary',
-      colorNames: colorNames,
-      luminances: luminances,
-      chromas: [...initChromas],
-      hue: 332,
-    },
-    {
-      scaleName: 'Success',
-      colorNames: colorNames,
-      luminances: luminances,
-      chromas: [...initChromas],
-      hue: 332,
-    },
-    {
-      scaleName: 'Warning',
-      colorNames: colorNames,
-      luminances: luminances,
-      chromas: [...initChromas],
-      hue: 332,
-    },
-    {
-      scaleName: 'Danger',
-      colorNames: colorNames,
-      luminances: luminances,
-      chromas: [...initChromas],
-      hue: 332,
-    },
-  ])
+  const [state, handleStateChanges] = useReducer(reducer, {
+    chromaLimit: 50,
+    scales: [
+      {
+        scaleName: 'Primary',
+        colorNames: colorNames,
+        luminances: luminances,
+        chromas: [...initChromas],
+        hue: 21,
+      },
+      {
+        scaleName: 'Secondary',
+        colorNames: colorNames,
+        luminances: luminances,
+        chromas: [...initChromas],
+        hue: 332,
+      },
+      {
+        scaleName: 'Success',
+        colorNames: colorNames,
+        luminances: luminances,
+        chromas: [...initChromas],
+        hue: 332,
+      },
+      {
+        scaleName: 'Warning',
+        colorNames: colorNames,
+        luminances: luminances,
+        chromas: [...initChromas],
+        hue: 332,
+      },
+      {
+        scaleName: 'Danger',
+        colorNames: colorNames,
+        luminances: luminances,
+        chromas: [...initChromas],
+        hue: 332,
+      },
+    ],
+  })
 
-  const [maxChroma, setMaxChroma] = useState(132)
+  // const [maxChroma, setMaxChroma] = useState(132)
 
-  const handleMaxChromaChange = (chromaChange: number) => {
-    setMaxChroma((prevMaxChroma) => prevMaxChroma + chromaChange)
+  const handleChromaLimitChange = (chromaChange: number) => {
+    handleStateChanges({
+      changeType: 'chromaLimit',
+      value:
+        state.chromaLimit + chromaChange > 150
+          ? 150
+          : state.chromaLimit + chromaChange < 0
+          ? 0
+          : state.chromaLimit + chromaChange,
+    })
   }
 
   const cssOutput = parseScales(
-    scales,
+    state.scales,
     (x) => `  --color-${x.scaleNameKebab}-${x.colorName}: ${x.colorHex}`
   )
 
   const scssOutput = parseScales(
-    scales,
+    state.scales,
     (x) =>
       `$color-${x.scaleNameKebab}-${x.colorName}: var(--color-${x.scaleNameKebab}-${x.colorName});`
   )
 
-  const configOutput = parseConfig(scales)
+  const configOutput = parseConfig(state.scales)
 
   const size = 2
 
@@ -145,21 +180,21 @@ function App() {
       <MaxChromaTester />
       <Toolbar>
         <ChromaSlider
-          chroma={maxChroma}
-          onChromaChange={handleMaxChromaChange}
+          chroma={state.chromaLimit}
+          onChromaChange={handleChromaLimitChange}
           size={size}
         />
       </Toolbar>
 
       <div className="App__scales">
-        {scales.map((scale, scaleIndex) => (
+        {state.scales.map((scale, scaleIndex) => (
           <ScaleGenerator
             key={scaleIndex}
             scaleIndex={scaleIndex}
             scale={scale}
             hue={scale.hue}
-            onChange={handleScalesChanges}
-            maxChroma={maxChroma}
+            onChange={handleStateChanges}
+            maxChroma={state.chromaLimit}
             size={size}
           />
         ))}
