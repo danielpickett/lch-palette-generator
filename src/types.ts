@@ -1,8 +1,6 @@
 import { Color } from 'chroma-js'
 
-export type WashType = { luminance: number; chroma: number }
-
-export type CanvasSizeType = 1 | 2 | 3 | 4 | 5 | 6
+export type LCHColor = { l: number; c: number; h: number }
 
 export type ColorExtended = Color & {
   _rgb: {

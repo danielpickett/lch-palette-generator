@@ -1,7 +1,7 @@
 import React from 'react'
 import './Plotter.scss'
 import { Canvas, ChromaSlider } from 'components'
-import { CanvasSizeType } from 'types'
+
 import { ScaleType} from 'App'
 
 export const Plotter = ({
@@ -11,7 +11,7 @@ export const Plotter = ({
 }: {
   scale: ScaleType
   onChange: (chromaChange: number, pointIndex: number) => void
-  size: CanvasSizeType
+  size: number
 }) => {
   return (
     <div className="Plotter">

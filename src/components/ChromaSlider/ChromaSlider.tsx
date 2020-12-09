@@ -1,6 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import './ChromaSlider.scss'
-import { CanvasSizeType } from 'types'
 
 export const ChromaSlider = ({
   chroma,
@@ -9,7 +8,7 @@ export const ChromaSlider = ({
 }: {
   chroma: number
   onChromaChange: (chromaChange: number) => void
-  size: CanvasSizeType
+  size: number
 }) => {
   const [isDragging, setIsDragging] = useState(false)
 

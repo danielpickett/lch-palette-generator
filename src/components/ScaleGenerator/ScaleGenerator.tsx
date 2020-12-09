@@ -2,7 +2,6 @@ import React from 'react'
 import './ScaleGenerator.scss'
 import { Plotter } from 'components'
 import { Swatches } from 'components/Swatches'
-import { CanvasSizeType } from 'types'
 import { ScaleType, ScalesActionType } from 'App'
 
 export const ScaleGenerator = ({
@@ -18,7 +17,7 @@ export const ScaleGenerator = ({
   onChange: (action: ScalesActionType) => void
 
   maxChroma: number
-  size: CanvasSizeType
+  size: number
   scaleIndex: number
 }) => {
   const handleChromaChange = (chromaChange: number, pointIndex: number) => {

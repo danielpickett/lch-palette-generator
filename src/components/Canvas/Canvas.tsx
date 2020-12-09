@@ -1,10 +1,10 @@
 import React, { useEffect, useRef } from 'react'
 import './Canvas.scss'
 import chroma from 'chroma-js'
-import { ColorExtended, CanvasSizeType } from 'types'
+import { ColorExtended } from 'types'
 
 export const Canvas = React.memo(
-  ({ hue, size }: { hue: number; size: CanvasSizeType }) => {
+  ({ hue, size }: { hue: number; size: number }) => {
     const canvasRef = useRef<HTMLCanvasElement>(null)
 
     useEffect(() => {

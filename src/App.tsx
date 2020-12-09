@@ -2,12 +2,12 @@ import React, { useReducer, useState } from 'react'
 import './App.scss'
 import {
   ChromaSlider,
+  MaxChromaTester,
   Output,
-  parseConfig,
-  parseScales,
   ScaleGenerator,
   Toolbar,
 } from 'components'
+import { getMaxChroma, parseConfig, parseScales } from 'utils'
 
 export type ScaleType = {
   scaleName?: string
@@ -30,6 +30,8 @@ const reducer = (
   scales: ScaleType[],
   { changeType, scaleIndex, pointIndex, value }: ScalesActionType
 ) => {
+  // const clampChroma = (color: { l: number; c: number; h: number }) => {}
+
   switch (changeType) {
     case 'hue': {
       return scales.map((scale, index) =>
@@ -41,13 +43,19 @@ const reducer = (
         index === scaleIndex
           ? {
               ...scale,
-              chromas: scale.chromas.map((chroma, index) =>
-                index === pointIndex
-                  ? chroma + value < 0
-                    ? 0
-                    : chroma + value
-                  : chroma
-              ),
+              chromas: scale.chromas.map((chroma, index) => {
+                if (index === pointIndex) {
+                  if (chroma + value < 0) return 0
+                  const maxChroma = getMaxChroma({
+                    l: scale.luminances[pointIndex],
+                    c: scale.chromas[pointIndex],
+                    h: scale.hue,
+                  })
+                  if (chroma + value > maxChroma) return maxChroma
+                  return chroma + value
+                }
+                return chroma
+              }),
             }
           : scale
       )
@@ -134,6 +142,7 @@ function App() {
 
   return (
     <div className="App">
+      <MaxChromaTester />
       <Toolbar>
         <ChromaSlider
           chroma={maxChroma}
