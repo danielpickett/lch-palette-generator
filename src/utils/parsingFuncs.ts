@@ -1,5 +1,5 @@
 import { ColorExtended } from 'types'
-import { ScaleType } from 'App'
+import { ScaleType } from 'types'
 import chromajs from 'chroma-js'
 
 export const parseScales = (

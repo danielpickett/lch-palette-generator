@@ -1,0 +1,23 @@
+.HueSlider {
+  display: flex;
+  align-items: center;
+  padding: 8px;
+  flex-grow: 1;
+
+  &__hue {
+    position: relative;
+    background-color: white;
+    margin: 0.5rem;
+    margin-top: 1rem;
+    border-radius: 100rem;
+    box-shadow: 0 0 0.5rem 0 rgba(0, 0, 0, 0.3);
+    border: 0.0625rem solid rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.125rem 0.75rem;
+  }
+  &__input {
+    flex-grow: 1;
+  }
+}

@@ -1,8 +1,7 @@
-.ChromaSlider {
+.ChromaDetail {
   position: relative;
   cursor: ew-resize;
   outline: none;
-  height: 12px;
 
   &__dot {
     height: 8px;
@@ -23,17 +22,17 @@
   }
 }
 
-.ChromaSlider:hover {
+.ChromaDetail:hover {
   background-color: rgba(0, 0, 0, 0.05);
 }
-.ChromaSlider--is-dragging {
+.ChromaDetail--is-dragging {
   background-color: rgba(0, 0, 0, 0.1) !important;
 }
 
-.ChromaSlider:focus {
+.ChromaDetail:focus {
   background-color: rgba(0, 0, 0, 0.05);
 
-  .ChromaSlider {
+  .ChromaDetail {
     &__dot {
       box-shadow: 0 0 8px rgba(0, 0, 0, 1), 0 0 0 1px rgba(0, 0, 0, 1);
       &::after {

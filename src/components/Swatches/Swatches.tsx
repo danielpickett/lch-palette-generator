@@ -1,14 +1,10 @@
 import React from 'react'
 import './Swatches.scss'
 import { ColorExtended } from 'types'
-import { ScaleType } from 'App'
+import { ScaleType } from 'types'
 import chromajs from 'chroma-js'
-// import { getMaxChroma } from 'utils'
 
 export const Swatches = ({ hue, scale }: { hue: number; scale: ScaleType }) => {
-  // useEffect(()=> {
-  //   getMaxChroma(scale.chromas[2], scale.luminances[2], hue)
-  // }, [scale.chromas[2]])
   return (
     <div className="Swatches">
       {scale.chromas.map((chroma, index) => {

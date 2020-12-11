@@ -1,62 +1,113 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import './ScaleGenerator.scss'
 import { Plotter } from 'components'
 import { Swatches } from 'components/Swatches'
-import { ScaleType, ActionType } from 'App'
+import { ScaleType, ActionType } from 'types'
+import { HueSlider } from 'components/HueSlider'
+import chromajs from 'chroma-js'
+import { Button } from 'components'
 
-export const ScaleGenerator = ({
-  scale,
-  hue,
-  onChange,
-  maxChroma,
-  size,
-  scaleIndex,
-}: {
-  scale: ScaleType
-  hue: number
-  onChange: (action: ActionType) => void
-  maxChroma: number
-  size: number
-  scaleIndex: number
-}) => {
-  const handleChromaChange = (chromaChange: number, pointIndex: number) => {
-    onChange({
-      changeType: 'chroma',
-      scaleIndex: scaleIndex,
-      pointIndex,
-      value: chromaChange,
-    })
-  }
+export const ScaleGenerator = React.memo(
+  ({
+    scale,
+    hue,
+    onChange,
+    chromaLimit,
+    size,
+    scaleIndex,
+  }: {
+    scale: ScaleType
+    hue: number
+    onChange: (action: ActionType) => void
+    chromaLimit: number
+    size: number
+    scaleIndex: number
+  }) => {
+    const handleChromaChange = useCallback(
+      (chromaChange: number, pointIndex: number) => {
+        onChange({
+          changeType: 'chroma',
+          scaleIndex: scaleIndex,
+          pointIndex,
+          value: chromaChange,
+        })
+      },
+      [onChange, scaleIndex]
+    )
 
-  return (
-    <div className="ScaleGenerator">
-      <div className="ScaleGenerator__controls">
-        <Plotter scale={scale} size={size} onChange={handleChromaChange} />
-        <div
-          className="ScaleGenerator__max-chroma-line"
-          style={{ left: `${maxChroma * size}px` }}
-        />
+    // console.log('rendered - ScaleGenerator')
 
-        <label className="ScaleGenerator__hue">
-          <span>Hue: {hue} </span>
-          <input
-            className="ScaleGenerator__input"
-            onChange={(e) =>
-              onChange({
-                changeType: 'hue',
-                scaleIndex: scaleIndex,
-                value: +e.target.value,
-              })
-            }
-            value={hue}
-            type="range"
-            step="1"
-            min="0"
-            max="360"
-          />
-        </label>
+    const handleSnapChroma = (value: number) => {
+      scale.chromas.forEach((chroma, index) => {
+        onChange({
+          changeType: 'chroma',
+          scaleIndex: scaleIndex,
+          pointIndex: index,
+          value: value,
+        })
+      })
+    }
+
+    const handleChromaReset = () => {
+      console.log('reset')
+      scale.chromas.forEach((chroma, index) => {
+        onChange({
+          changeType: 'chromaReset',
+          scaleIndex: scaleIndex,
+          value: 0,
+        })
+      })
+    }
+
+    return (
+      <div className="ScaleGenerator">
+        <div className="ScaleGenerator__points">
+          <div className="ScaleGenerator__toolbar">
+            <div className="ScaleGenerator__button">
+              <Button onClick={handleChromaReset} icon="reset" />
+            </div>
+            <div className="ScaleGenerator__button">
+              <Button onClick={() => handleSnapChroma(-150)} icon="left" />
+            </div>
+            <div className="ScaleGenerator__button">
+              <Button onClick={() => handleSnapChroma(150)} icon="right" />
+            </div>
+          </div>
+          <div className="ScaleGenerator__plot">
+            <div className="ScaleGenerator__chroma-details">
+              {scale.colorNames?.map((colorName, index) => (
+                <div
+                  className="ScaleGenerator__chroma-detail"
+                  key={index}
+                  style={{ top: `${(100 - scale.luminances[index]) * size}px` }}
+                >
+                  {colorName}
+                </div>
+              ))}
+            </div>
+            <div
+              style={{
+                color: chromajs.lch(70, chromaLimit, hue).alpha(0.5).hex(),
+              }}
+            >
+              <Plotter
+                scale={scale}
+                size={size}
+                onChange={handleChromaChange}
+                chromaLimit={chromaLimit}
+              />
+            </div>
+          </div>
+          <div className="ScaleGenerator__footer">
+            <HueSlider
+              hue={scale.hue}
+              onChange={onChange}
+              scaleIndex={scaleIndex}
+            />
+          </div>
+        </div>
+        <Swatches hue={hue} scale={scale} />
       </div>
-      <Swatches hue={hue} scale={scale} />
-    </div>
-  )
-}
+    )
+  }
+)

@@ -21,6 +21,7 @@ export const MaxChromaTester = () => {
       <p>Hello from the MaxChromaTester component</p>
       <ChromaSlider
         chroma={inputColor.c}
+        index={0}
         onChromaChange={(chromaChange) => {
           setInputColor({
             l: inputColor.l,

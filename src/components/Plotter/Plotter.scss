@@ -18,4 +18,20 @@
     justify-content: flex-end;
     align-items: center;
   }
+
+  &__chroma-limit-line {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1px;
+    background-position: right;
+    background-size: 12px 12px;
+    background-repeat: repeat-y;
+    height: 100%;
+    mix-blend-mode: lighten;
+    background-image: linear-gradient(
+      currentColor 50%,
+      rgba(255, 255, 255, .5) 0%
+    );
+  }
 }

@@ -1,93 +1,9 @@
-import React, { useReducer, useState } from 'react'
+import React, { useReducer } from 'react'
+
+import { reducerMain } from 'reducers'
 import './App.scss'
-import {
-  ChromaSlider,
-  MaxChromaTester,
-  Output,
-  ScaleGenerator,
-  Toolbar,
-} from 'components'
-import { getMaxChroma, parseConfig, parseScales } from 'utils'
-
-export type ScaleType = {
-  scaleName?: string
-  colorNames?: string[]
-  hue: number
-  luminances: number[]
-  chromas: number[]
-}
-
-export type ActionType = {
-  changeType: 'luminance' | 'chroma' | 'hue' | 'chromaLimit'
-  value: number
-} & (
-  | { changeType: 'hue'; scaleIndex: number; pointIndex?: undefined }
-  | {
-      changeType: 'luminance' | 'chroma'
-      scaleIndex: number
-      pointIndex: number
-    }
-  | {
-      changeType: 'chromaLimit'
-      scaleIndex?: undefined
-      pointIndex?: undefined
-    }
-)
-
-const reducer = (
-  state: { chromaLimit: number; scales: ScaleType[] },
-  { changeType, scaleIndex, pointIndex, value }: ActionType
-) => {
-  switch (changeType) {
-    case 'chromaLimit': {
-      return { ...state, chromaLimit: value }
-    }
-    case 'hue': {
-      return {
-        ...state,
-        scales: state.scales.map((scale, index) =>
-          index === scaleIndex ? { ...scale, hue: value } : scale
-        ),
-      }
-    }
-    case 'chroma': {
-      return {
-        ...state,
-        scales: state.scales.map((scale, index) =>
-          index === scaleIndex
-            ? {
-                ...scale,
-                chromas: scale.chromas.map((chroma, index) => {
-                  if (index === pointIndex) {
-                    if (chroma + value < 0) return 0
-                    const maxChroma = getMaxChroma({
-                      l: scale.luminances[pointIndex],
-                      c: scale.chromas[pointIndex],
-                      h: scale.hue,
-                    })
-                    if (
-                      chroma + value > maxChroma ||
-                      chroma + value > state.chromaLimit
-                    )
-                      return state.chromaLimit < maxChroma
-                        ? state.chromaLimit
-                        : maxChroma
-                    return chroma + value
-                  }
-                  return chroma
-                }),
-              }
-            : scale
-        ),
-      }
-    }
-    default:
-      return {
-        ...state,
-        scales: [...state.scales],
-      }
-  }
-}
+import { ChromaSlider, Output, ScaleGenerator, Toolbar } from 'components'
+import { parseConfig, parseScales } from 'utils'
 
 function App() {
   const luminances = [97, 92, 85, 74, 61, 50, 40, 30, 20, 10],
@@ -105,8 +21,8 @@ function App() {
       '900',
     ]
 
-  const [state, handleStateChanges] = useReducer(reducer, {
-    chromaLimit: 50,
+  const [state, handleStateChanges] = useReducer(reducerMain, {
+    chromaLimit: 150,
     scales: [
       {
         scaleName: 'Primary',
@@ -146,8 +62,6 @@ function App() {
     ],
   })
 
-  // const [maxChroma, setMaxChroma] = useState(132)
-
   const handleChromaLimitChange = (chromaChange: number) => {
     handleStateChanges({
       changeType: 'chromaLimit',
@@ -177,11 +91,12 @@ function App() {
 
   return (
     <div className="App">
-      <MaxChromaTester />
       <Toolbar>
+        <div style={{ width: '48px', padding: '0 4px' }}>{state.chromaLimit.toFixed(1)}</div>
         <ChromaSlider
           chroma={state.chromaLimit}
           onChromaChange={handleChromaLimitChange}
+          index={0}
           size={size}
         />
       </Toolbar>
@@ -194,7 +109,7 @@ function App() {
             scale={scale}
             hue={scale.hue}
             onChange={handleStateChanges}
-            maxChroma={state.chromaLimit}
+            chromaLimit={state.chromaLimit}
             size={size}
           />
         ))}
