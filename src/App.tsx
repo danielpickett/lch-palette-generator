@@ -1,12 +1,12 @@
 import React, { useEffect, useReducer } from 'react'
-import { reducerMain } from 'reducers'
+import { reducer } from 'reducer'
 import './App.scss'
 import { ChromaSlider, Output, ScaleGenerator, Toolbar } from 'components'
 import { parseConfig, parseScales } from 'utils'
 import initialTheme from 'themes/initial.json'
 
 function App() {
-  const [state, handleStateChanges] = useReducer(reducerMain, initialTheme)
+  const [state, handleStateChanges] = useReducer(reducer, initialTheme)
 
   const handleChromaLimitChange = (chromaChange: number) => {
     handleStateChanges({
@@ -51,12 +51,12 @@ function App() {
           <div style={{ width: '48px', padding: '0 4px' }}>
             {state.chromaLimit.toFixed(1)}
           </div>
-          <ChromaSlider
+          {/* <ChromaSlider
             chroma={state.chromaLimit}
             onChromaChange={handleChromaLimitChange}
             index={0}
             size={size}
-          />
+          /> */}
         </Toolbar>
       </div>
 

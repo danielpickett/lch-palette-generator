@@ -6,11 +6,13 @@ export const ChromaSlider = React.memo(
     chroma,
     index,
     onChromaChange,
+    onLuminanceChange,
     size,
   }: {
     chroma: number
     index: number
     onChromaChange: (chromaChange: number, pointIndex: number) => void
+    onLuminanceChange?: (luminanceChange: number, pointIndex: number) => void
     size: number
   }) => {
     const [isDragging, setIsDragging] = useState(false)
@@ -18,18 +20,38 @@ export const ChromaSlider = React.memo(
     const handleMouseDown = () => setIsDragging(true)
     const handleMouseUp = useCallback(() => setIsDragging(false), [])
     const handleMouseMove = useCallback(
-      (e: globalThis.MouseEvent) => onChromaChange(e.movementX / size, index),
-      [onChromaChange, size, index]
+      (e: globalThis.MouseEvent) => {
+        if (e.shiftKey) {
+          if (onLuminanceChange) {
+            onLuminanceChange((e.movementY * -1) / size, index)
+          }
+        } else {
+          onChromaChange(e.movementX / size, index)
+        }
+      },
+      [onChromaChange, onLuminanceChange, size, index]
     )
     const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
+      e.preventDefault()
       if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
         let sign = e.key === 'ArrowLeft' ? -1 : 1
         if (e.altKey) {
-          onChromaChange(0.1 * sign, index)
+          onChromaChange(chroma + 0.1 * sign, index)
         } else if (e.shiftKey) {
-          onChromaChange(10 * sign, index)
+          onChromaChange(chroma + 10 * sign, index)
         } else {
-          onChromaChange(1 * sign, index)
+          onChromaChange(chroma + 1 * sign, index)
+        }
+      }
+
+      if (onLuminanceChange && (e.key === 'ArrowUp' || e.key === 'ArrowDown')) {
+        let sign = e.key === 'ArrowDown' ? -1 : 1
+        if (e.altKey) {
+          onLuminanceChange(chroma + 0.1 * sign, index)
+        } else if (e.shiftKey) {
+          onLuminanceChange(chroma + 10 * sign, index)
+        } else {
+          onLuminanceChange(chroma + 1 * sign, index)
         }
       }
     }
@@ -65,8 +87,9 @@ export const ChromaSlider = React.memo(
           style={{
             left: `${chroma * size}px`,
           }}
-        />
-        {/* <div className="ChromaSlider__output">{chroma.toFixed(1)}</div> */}
+        >
+          <div className="ChromaSlider__tooltip">{chroma.toFixed(1)}</div>
+        </div>
       </div>
     )
   }

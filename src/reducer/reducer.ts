@@ -1,8 +1,6 @@
 import { ActionType, StateType } from 'types'
 
-import { getMaxChroma } from 'utils'
-
-export const reducerMain = (
+export const reducer = (
   state: StateType,
   { changeType, scaleIndex, pointIndex, value }: ActionType
 ) => {
@@ -52,21 +50,30 @@ export const reducerMain = (
                 chromas: scale.chromas.map((chroma, index) => {
                   if (index === pointIndex) {
                     if (chroma + value < 0) return 0
-                    const maxChroma = getMaxChroma({
-                      l: scale.luminances[pointIndex],
-                      c: scale.chromas[pointIndex],
-                      h: scale.hue,
-                    })
-                    if (
-                      chroma + value > maxChroma ||
-                      chroma + value > state.chromaLimit
-                    )
-                      return state.chromaLimit < maxChroma
-                        ? state.chromaLimit
-                        : maxChroma
+                    if (chroma + value > 150) return 150
                     return chroma + value
                   }
                   return chroma
+                }),
+              }
+            : scale
+        ),
+      }
+    }
+    case 'luminance': {
+      return {
+        ...state,
+        scales: state.scales.map((scale, index) =>
+          index === scaleIndex
+            ? {
+                ...scale,
+                luminances: scale.luminances.map((lum, index) => {
+                  if (index === pointIndex) {
+                    if (lum + value < 0) return 0
+                    if (lum + value > 100) return 100
+                    return lum + value
+                  }
+                  return lum
                 }),
               }
             : scale

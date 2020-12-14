@@ -6,6 +6,7 @@ import { ScaleType, ActionType } from 'types'
 import { HueSlider } from 'components/HueSlider'
 import chromajs from 'chroma-js'
 import { Button } from 'components'
+import { ChromaSlider } from 'components/ChromaSlider'
 
 export const ScaleGenerator = React.memo(
   ({
@@ -30,6 +31,18 @@ export const ScaleGenerator = React.memo(
           scaleIndex: scaleIndex,
           pointIndex,
           value: chromaChange,
+        })
+      },
+      [onChange, scaleIndex]
+    )
+
+    const handleLuminanceChange = useCallback(
+      (lumChange: number, pointIndex: number) => {
+        onChange({
+          changeType: 'luminance',
+          scaleIndex: scaleIndex,
+          pointIndex,
+          value: lumChange,
         })
       },
       [onChange, scaleIndex]
@@ -92,9 +105,27 @@ export const ScaleGenerator = React.memo(
               <Plotter
                 scale={scale}
                 size={size}
-                onChange={handleChromaChange}
                 chromaLimit={chromaLimit}
-              />
+              >
+                {scale.chromas.map((chroma, index) => (
+                  <div
+                    className="ScaleGenerator__point"
+                    key={index}
+                    style={{
+                      width: `${150 * size}px`,
+                      top: `${(100 - scale.luminances[index]) * size}px`,
+                    }}
+                  >
+                    <ChromaSlider
+                      size={size}
+                      index={index}
+                      chroma={chroma}
+                      onChromaChange={handleChromaChange}
+                      onLuminanceChange={handleLuminanceChange}
+                    />
+                  </div>
+                ))}
+              </Plotter>
             </div>
           </div>
           <div className="ScaleGenerator__footer">

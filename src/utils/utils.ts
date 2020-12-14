@@ -26,35 +26,62 @@ export const getMaxChroma = (color: LCHColor) => {
   return chroma
 }
 
-export const getMinMaxLuminance = (color: LCHColor) => {
+export const getMinMaxLuminance = (
+  color: LCHColor
+): [number, number] | null => {
   if (isClipped(color)) {
-    console.log("It's clipped. I'll have to do this the hard way.")
+    console.log("It's clipped. HARD WAY!")
     let lum = 100
 
     while (isClipped({ l: lum, c: color.c, h: color.h }) && lum >= 0) {
+      console.log('finding max', lum)
       lum = lum - 0.1
     }
     const maxLum = lum
     while (!isClipped({ l: lum, c: color.c, h: color.h }) && lum >= 0) {
+      console.log('finding min', lum)
       lum = lum - 0.1
     }
-    const minLum = lum
-    if (maxLum === 0 || minLum === 0)
-      throw new Error('no valid color found for this chroma')
+    const minLum = lum + 0.1
+    if (maxLum === 0 || minLum === 0) return null
 
     return [minLum, maxLum]
   } else {
-    console.log("It's not clipped!")
-    let lum = 100
+    console.log("It's not clipped. EASY WAY!")
+    let lum = color.l
+    let step = 100 - color.l
 
-    while (isClipped({ l: lum, c: color.c, h: color.h }) && lum >= 0) {
-      lum = lum - 0.1
+    const halfIsOk = (sign: number) =>
+      !isClipped({ ...color, l: lum + (step * sign) / 2 })
+    const goHalf = (sign: number) => {
+      lum = lum + (step / 2) * sign
     }
+
+    while (step > 0.01) {
+      console.log('finding max', lum)
+      if (halfIsOk(1)) {
+        goHalf(1)
+      } else {
+        step = step / 2
+      }
+    }
+    if (lum <= 0.01) throw new Error('no valid color found for this chroma')
     const maxLum = lum
+    step = color.l
+
+    while (step > 0.01) {
+      console.log('finding min', lum)
+      if (halfIsOk(-1)) {
+        goHalf(-1)
+      } else {
+        step = step / 2
+      }
+    }
+
     while (!isClipped({ l: lum, c: color.c, h: color.h }) && lum >= 0) {
       lum = lum - 0.1
     }
-    const minLum = lum
+    const minLum = lum + 0.1
 
     return [minLum, maxLum]
   }

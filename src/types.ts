@@ -26,7 +26,7 @@ export type ScaleType = {
   chromas: number[]
 }
 
-export type StateType ={
+export type StateType = {
   chromaLimit: number
   scales: ScaleType[]
 }
@@ -40,6 +40,12 @@ export type ActionType =
     }
   | {
       changeType: 'chroma'
+      scaleIndex: number
+      pointIndex: number
+      value: number
+    }
+  | {
+      changeType: 'luminance'
       scaleIndex: number
       pointIndex: number
       value: number

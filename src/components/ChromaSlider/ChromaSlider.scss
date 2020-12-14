@@ -16,24 +16,48 @@
     transform: translate(-50%, -50%);
   }
 
-  &__output {
-    user-select: none;
-    text-align: right;
-    margin-right: 8px;
+  &__tooltip {
+    position: absolute;
+    top: 50%;
+    left: calc(100% + 8px);
+    background-color: black;
+    transform: translateY(-50%);
+    color: white;
+    padding: 0 4px;
+    font-size: 12px;
+    border-radius: 5px;
+    pointer-events: none;
+    opacity: 0;
+    // transition: opacity 1s;
   }
 }
 
 .ChromaSlider:hover {
   background-color: rgba(0, 0, 0, 0.05);
+  .ChromaSlider {
+    &__tooltip {
+      opacity: 1;
+      // transition: opacity 0s;
+    }
+  }
 }
 .ChromaSlider--is-dragging {
   background-color: rgba(0, 0, 0, 0.1) !important;
+  .ChromaSlider {
+    &__tooltip {
+      opacity: 1;
+      // transition: opacity 0s;
+    }
+  }
 }
 
 .ChromaSlider:focus {
   background-color: rgba(0, 0, 0, 0.05);
 
   .ChromaSlider {
+    &__tooltip {
+      display: block;
+    }
     &__dot {
       box-shadow: 0 0 8px rgba(0, 0, 0, 1), 0 0 0 1px rgba(0, 0, 0, 1);
       &::after {
