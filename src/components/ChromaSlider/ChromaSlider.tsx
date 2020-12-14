@@ -19,7 +19,7 @@ export const ChromaSlider = React.memo(
     const handleMouseUp = useCallback(() => setIsDragging(false), [])
     const handleMouseMove = useCallback(
       (e: globalThis.MouseEvent) => onChromaChange(e.movementX / size, index),
-      [onChromaChange, size]
+      [onChromaChange, size, index]
     )
     const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
       if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {

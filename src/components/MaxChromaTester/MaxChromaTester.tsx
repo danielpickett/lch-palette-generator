@@ -6,7 +6,7 @@ import { ChromaSlider } from 'components/ChromaSlider'
 import { ColorExtended } from 'types'
 
 export const MaxChromaTester = () => {
-  const initColor = { l: 80, c: 50, h: 50 }
+  const initColor = { l: 50, c: 50, h: 50 }
 
   const [inputColor, setInputColor] = useState(initColor)
   const [outputColor, setOutputColor] = useState(initColor)

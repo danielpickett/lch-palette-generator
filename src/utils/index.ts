@@ -1,2 +1,1 @@
-export * from './parsingFuncs'
-export * from './getMaxChroma'
+export * from './utils'

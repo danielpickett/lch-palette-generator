@@ -49,8 +49,7 @@ export const ScaleGenerator = React.memo(
     }
 
     const handleChromaReset = () => {
-      console.log('reset')
-      scale.chromas.forEach((chroma, index) => {
+      scale.chromas.forEach(() => {
         onChange({
           changeType: 'chromaReset',
           scaleIndex: scaleIndex,
@@ -106,7 +105,7 @@ export const ScaleGenerator = React.memo(
             />
           </div>
         </div>
-        <Swatches hue={hue} scale={scale} />
+        <Swatches scale={scale} />
       </div>
     )
   }

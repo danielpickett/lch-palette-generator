@@ -2,6 +2,9 @@ $dark-grey: rgb(32, 32, 32);
 
 .Output {
   flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+
   &__heading {
     color: white;
     margin-top: 0;
@@ -9,62 +12,46 @@ $dark-grey: rgb(32, 32, 32);
 
   &__output {
     position: relative;
+    flex-grow: 1;
   }
 
   &__textarea {
+    resize: none;
     background-color: $dark-grey;
     color: white;
     padding: 0.5rem;
     border-radius: 6px;
     width: 100%;
-    height: 450px;
+    height: 100%;
   }
 
-  &__clipboard-icon {
-    width: 20px;
-    height: 20px;
-  }
-
-  &__copy-button {
+  &__button {
     position: absolute;
     top: 10px;
     right: 10px;
-    color: grey;
-    background-color: $dark-grey;
-    border: 1px solid grey;
-    border-radius: 6px;
-    padding: 5px;
-    cursor: pointer;
-
-    &:hover {
-      color: $dark-grey;
-      background-color: white;
-    }
   }
 
-  &__copy-confirmation {
-    color: $dark-grey;
-    background-color: white;
-    padding: 8px 16px;
-    border-radius: 6px;
+  &__confirmation {
+    color: rgb(103, 103, 103);
+    background-color: rgb(232, 232, 232);
+    padding: 0px 16px;
+    border-radius: 5px;
     position: absolute;
-    right: calc(100% + 8px);
+    right: 100%;
     top: 0;
     height: 100%;
     opacity: 0;
     pointer-events: none;
+    display: flex;
+    align-items: center;
+    font-weight: lighter;
   }
 }
 
 .Output--is-confirming {
   .Output {
-    &__copy-confirmation {
+    &__confirmation {
       opacity: 1;
-    }
-    &__copy-button {
-      color: $dark-grey;
-      background-color: white;
-      border: 1px solid white;
     }
   }
 }

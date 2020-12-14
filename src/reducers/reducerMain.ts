@@ -1,9 +1,9 @@
-import { ActionType, ScaleType } from 'types'
+import { ActionType, StateType } from 'types'
 
 import { getMaxChroma } from 'utils'
 
 export const reducerMain = (
-  state: { chromaLimit: number; scales: ScaleType[] },
+  state: StateType,
   { changeType, scaleIndex, pointIndex, value }: ActionType
 ) => {
   switch (changeType) {
