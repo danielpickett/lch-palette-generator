@@ -19,8 +19,9 @@ export type ColorExtended = Color & {
 }
 
 export type ScaleType = {
-  scaleName?: string
-  colorNames?: string[]
+  scaleName: string
+  textChroma: number
+  colorNames: string[]
   hue: number
   luminances: number[]
   chromas: number[]
@@ -35,7 +36,7 @@ export type ActionType =
   | {
       changeType: 'hue'
       scaleIndex: number
-      pointIndex?: undefined
+      // pointIndex?: undefined
       value: number
     }
   | {
@@ -43,22 +44,34 @@ export type ActionType =
       scaleIndex: number
       pointIndex: number
       value: number
+      min: number,
+      max: number
     }
   | {
       changeType: 'luminance'
       scaleIndex: number
       pointIndex: number
       value: number
+      min: number,
+      max: number
     }
   | {
       changeType: 'chromaLimit'
-      scaleIndex?: undefined
-      pointIndex?: undefined
+      // scaleIndex?: undefined
+      // pointIndex?: undefined
+      value: number,
+      min: number,
+      max: number
+    }
+  | {
+      changeType: 'textChroma'
+      scaleIndex: number
+      // pointIndex?: undefined
       value: number
     }
   | {
       changeType: 'chromaReset'
       scaleIndex: number
-      pointIndex?: undefined
+      // pointIndex?: undefined
       value: number
     }

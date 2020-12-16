@@ -5,7 +5,6 @@ export const isClipped = (color: LCHColor) =>
   (chromajs.lch(color.l, color.c, color.h) as ColorExtended)._rgb._clipped
 
 export const getMaxChroma = (color: LCHColor) => {
-  console.log('\nstarting...')
   let chroma = 0
   let step = 150
 
@@ -15,7 +14,6 @@ export const getMaxChroma = (color: LCHColor) => {
   }
 
   while (step >= 0.1) {
-    console.log('step', step)
     if (halfIsOk()) {
       goHalf()
     } else {
@@ -30,16 +28,13 @@ export const getMinMaxLuminance = (
   color: LCHColor
 ): [number, number] | null => {
   if (isClipped(color)) {
-    console.log("It's clipped. HARD WAY!")
     let lum = 100
 
     while (isClipped({ l: lum, c: color.c, h: color.h }) && lum >= 0) {
-      console.log('finding max', lum)
       lum = lum - 0.1
     }
     const maxLum = lum
     while (!isClipped({ l: lum, c: color.c, h: color.h }) && lum >= 0) {
-      console.log('finding min', lum)
       lum = lum - 0.1
     }
     const minLum = lum + 0.1
@@ -47,7 +42,6 @@ export const getMinMaxLuminance = (
 
     return [minLum, maxLum]
   } else {
-    console.log("It's not clipped. EASY WAY!")
     let lum = color.l
     let step = 100 - color.l
 
@@ -58,7 +52,6 @@ export const getMinMaxLuminance = (
     }
 
     while (step > 0.01) {
-      console.log('finding max', lum)
       if (halfIsOk(1)) {
         goHalf(1)
       } else {
@@ -70,7 +63,6 @@ export const getMinMaxLuminance = (
     step = color.l
 
     while (step > 0.01) {
-      console.log('finding min', lum)
       if (halfIsOk(-1)) {
         goHalf(-1)
       } else {

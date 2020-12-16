@@ -1,6 +1,7 @@
-import { Button } from 'components'
+import { IconButton } from 'components'
 import React, { CSSProperties, useEffect, useRef, useState } from 'react'
 import './Output.scss'
+import { faClipboard } from '@fortawesome/pro-light-svg-icons'
 
 export const Output = ({
   heading,
@@ -47,13 +48,14 @@ export const Output = ({
         />
 
         <div className="Output__button">
-          <Button
+          <IconButton
             onClick={() => {
               if (ref.current) {
                 copyToClipboard(ref.current)
               }
             }}
-            icon="clipboard"
+            // icon="clipboard"
+            faIcon={faClipboard}
           />
           <div className="Output__confirmation">Copied</div>
         </div>
