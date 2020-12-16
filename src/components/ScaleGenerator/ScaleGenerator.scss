@@ -4,6 +4,13 @@
 
   &__toolbar {
     display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+
+  }
+
+  &__buttons {
+    display: flex;
     justify-content: flex-end;
     padding: 8px;
   }
@@ -15,6 +22,13 @@
   &__footer {
     display: flex;
     align-items: center;
+  }
+
+  &__hue {
+    width: 48px;
+    text-align: center;
+    white-space: nowrap;
+    font-size: 10px;
   }
 
   &__point {
@@ -72,6 +86,22 @@
       background-color: $bg;
       transform: translateX(-50%) rotate(45deg);
     }
+  }
+
+  &__limit-line {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1px;
+    background-position: right;
+    background-size: 12px 12px;
+    background-repeat: repeat-y;
+    height: 100%;
+    mix-blend-mode: lighten;
+    background-image: linear-gradient(
+      currentColor 50%,
+      rgba(255, 255, 255, .5) 0%
+    );
   }
 }
 

@@ -34,6 +34,8 @@ export const Canvas = React.memo(
       }
     })
 
+    // console.log('rendered - Canvas')
+
     return (
       <div
         className="Canvas"

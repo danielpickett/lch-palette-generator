@@ -1,18 +1,15 @@
 import { ActionType, StateType } from 'types'
 
-export const reducer = (
-  state: StateType,
-  { changeType, scaleIndex, pointIndex, value }: ActionType
-) => {
-  switch (changeType) {
+export const reducer = (state: StateType, action: ActionType) => {
+  switch (action.changeType) {
     case 'chromaLimit': {
-      return { ...state, chromaLimit: value }
+      return { ...state, chromaLimit: action.value }
     }
     case 'chromaReset': {
       return {
         ...state,
         scales: state.scales.map((scale, index) =>
-          index === scaleIndex
+          index === action.scaleIndex
             ? {
                 ...scale,
                 chromas: [
@@ -32,11 +29,24 @@ export const reducer = (
         ),
       }
     }
+
+    case 'textChroma': {
+      return {
+        ...state,
+        scales: state.scales.map((scale, index) =>
+          index === action.scaleIndex
+            ? { ...scale, textChroma: scale.textChroma + action.value }
+            : scale
+        ),
+      }
+    }
     case 'hue': {
       return {
         ...state,
         scales: state.scales.map((scale, index) =>
-          index === scaleIndex ? { ...scale, hue: value } : scale
+          index === action.scaleIndex
+            ? { ...scale, hue: scale.hue + action.value }
+            : scale
         ),
       }
     }
@@ -44,14 +54,14 @@ export const reducer = (
       return {
         ...state,
         scales: state.scales.map((scale, index) =>
-          index === scaleIndex
+          index === action.scaleIndex
             ? {
                 ...scale,
                 chromas: scale.chromas.map((chroma, index) => {
-                  if (index === pointIndex) {
-                    if (chroma + value < 0) return 0
-                    if (chroma + value > 150) return 150
-                    return chroma + value
+                  if (index === action.pointIndex) {
+                    if (chroma + action.value < action.min) return action.min
+                    if (chroma + action.value > action.max) return action.max
+                    return chroma + action.value
                   }
                   return chroma
                 }),
@@ -64,14 +74,14 @@ export const reducer = (
       return {
         ...state,
         scales: state.scales.map((scale, index) =>
-          index === scaleIndex
+          index === action.scaleIndex
             ? {
                 ...scale,
                 luminances: scale.luminances.map((lum, index) => {
-                  if (index === pointIndex) {
-                    if (lum + value < 0) return 0
-                    if (lum + value > 100) return 100
-                    return lum + value
+                  if (index === action.pointIndex) {
+                    if (lum + action.value < action.min) return action.min
+                    if (lum + action.value > action.max) return action.max
+                    return lum + action.value
                   }
                   return lum
                 }),

@@ -3,6 +3,7 @@
   "scales": [
     {
       "scaleName": "Primary",
+      "textChroma": 150,
       "colorNames": [
         "050",
         "100",
@@ -43,6 +44,7 @@
     },
     {
       "scaleName": "Secondary",
+      "textChroma": 150,
       "colorNames": [
         "050",
         "100",
@@ -83,6 +85,7 @@
     },
     {
       "scaleName": "Success",
+      "textChroma": 150,
       "colorNames": [
         "050",
         "100",
@@ -123,6 +126,7 @@
     },
     {
       "scaleName": "Warning",
+      "textChroma": 150,
       "colorNames": [
         "050",
         "100",
@@ -163,6 +167,7 @@
     },
     {
       "scaleName": "Danger",
+      "textChroma": 150,
       "colorNames": [
         "050",
         "100",

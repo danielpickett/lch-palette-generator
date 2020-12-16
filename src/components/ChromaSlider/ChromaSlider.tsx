@@ -1,60 +1,110 @@
 import React, { useCallback, useEffect, useState } from 'react'
+import { ActionType, LCHColor } from 'types'
+import { getMaxChroma, getMinMaxLuminance } from 'utils'
 import './ChromaSlider.scss'
+
+type ChromaSliderPropsType = {
+  color: LCHColor
+  scaleIndex: number
+  pointIndex: number
+  onChange: (action: ActionType) => void
+  size: number
+}
 
 export const ChromaSlider = React.memo(
   ({
-    chroma,
-    index,
-    onChromaChange,
-    onLuminanceChange,
+    color,
+    scaleIndex,
+    pointIndex,
+    onChange,
     size,
-  }: {
-    chroma: number
-    index: number
-    onChromaChange: (chromaChange: number, pointIndex: number) => void
-    onLuminanceChange?: (luminanceChange: number, pointIndex: number) => void
-    size: number
-  }) => {
+  }: ChromaSliderPropsType) => {
     const [isDragging, setIsDragging] = useState(false)
+
+    const maxChroma = getMaxChroma(color)
+    const minMaxLum = getMinMaxLuminance(color)
+    const minLum = minMaxLum?.[0]
+    const maxLum = minMaxLum?.[1]
 
     const handleMouseDown = () => setIsDragging(true)
     const handleMouseUp = useCallback(() => setIsDragging(false), [])
     const handleMouseMove = useCallback(
       (e: globalThis.MouseEvent) => {
         if (e.shiftKey) {
-          if (onLuminanceChange) {
-            onLuminanceChange((e.movementY * -1) / size, index)
-          }
+          const min = minLum || 0
+          const max = maxLum || 100
+
+          onChange({
+            changeType: 'luminance',
+            scaleIndex,
+            pointIndex,
+            value: (e.movementY * -1) / size,
+            min,
+            max,
+          })
         } else {
-          onChromaChange(e.movementX / size, index)
+          let chromaChange = e.movementX / size
+          onChange({
+            changeType: 'chroma',
+            scaleIndex,
+            pointIndex,
+            value: chromaChange,
+            min: 0,
+            max: maxChroma,
+          })
         }
       },
-      [onChromaChange, onLuminanceChange, size, index]
+      [size, scaleIndex, pointIndex, maxChroma, minLum, maxLum, onChange]
     )
-    const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
-      e.preventDefault()
-      if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
-        let sign = e.key === 'ArrowLeft' ? -1 : 1
-        if (e.altKey) {
-          onChromaChange(chroma + 0.1 * sign, index)
-        } else if (e.shiftKey) {
-          onChromaChange(chroma + 10 * sign, index)
-        } else {
-          onChromaChange(chroma + 1 * sign, index)
-        }
-      }
+    const handleKeyDown = useCallback(
+      (e: React.KeyboardEvent<HTMLDivElement>) => {
+        e.preventDefault() // stops page from scrolling on up/down arrow keys
 
-      if (onLuminanceChange && (e.key === 'ArrowUp' || e.key === 'ArrowDown')) {
-        let sign = e.key === 'ArrowDown' ? -1 : 1
-        if (e.altKey) {
-          onLuminanceChange(chroma + 0.1 * sign, index)
-        } else if (e.shiftKey) {
-          onLuminanceChange(chroma + 10 * sign, index)
-        } else {
-          onLuminanceChange(chroma + 1 * sign, index)
+        if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
+          let sign = e.key === 'ArrowLeft' ? -1 : 1
+          let chromaChange: number
+
+          if (e.altKey) chromaChange = 0.1 * sign
+          else if (e.shiftKey) chromaChange = 10 * sign
+          else chromaChange = 1 * sign
+
+          onChange({
+            changeType: 'chroma',
+            scaleIndex,
+            pointIndex,
+            value: chromaChange,
+            min: 0,
+            max: maxChroma,
+          })
         }
-      }
-    }
+
+        if (e.key === 'ArrowUp' || e.key === 'ArrowDown') {
+          let sign = e.key === 'ArrowDown' ? -1 : 1
+          let lumChange: number
+
+          if (e.altKey) {
+            lumChange = 0.1 * sign
+          } else if (e.shiftKey) {
+            lumChange = 10 * sign
+          } else {
+            lumChange = 1 * sign
+          }
+
+          const min = minLum || 0
+          const max = maxLum || 100
+
+          onChange({
+            changeType: 'luminance',
+            scaleIndex,
+            pointIndex,
+            value: lumChange,
+            min: min,
+            max: max,
+          })
+        }
+      },
+      [scaleIndex, pointIndex, maxChroma, minLum, maxLum, onChange]
+    )
 
     useEffect(() => {
       if (isDragging) {
@@ -85,10 +135,10 @@ export const ChromaSlider = React.memo(
         <div
           className="ChromaSlider__dot"
           style={{
-            left: `${chroma * size}px`,
+            left: `${color.c * size}px`,
           }}
         >
-          <div className="ChromaSlider__tooltip">{chroma.toFixed(1)}</div>
+          <div className="ChromaSlider__tooltip">{color.c.toFixed(1)}</div>
         </div>
       </div>
     )
