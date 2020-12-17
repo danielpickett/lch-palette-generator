@@ -1,20 +1,17 @@
-import { LCHColor } from "types"
-import { getMaxChroma } from "utils"
+import { LCHColor } from 'types'
+import { getMaxChroma } from 'utils'
 import chromajs from 'chroma-js'
 
-export const transformColors = ({
+export const getTextColor = ({
   bgColor,
-  lumOffset,
   textChroma,
-  splitPoint,
-  multiplier,
 }: {
   bgColor: LCHColor
-  splitPoint: number
-  lumOffset: number
   textChroma: number
-  multiplier: number
 }) => {
+  const multiplier = 1.3
+  const lumOffset = 55
+  const splitPoint = 65
   let newLum = bgColor.l
   if (newLum > splitPoint) newLum = newLum - lumOffset * multiplier
   else newLum = newLum + lumOffset * multiplier
@@ -28,7 +25,7 @@ export const transformColors = ({
   const bgHex = chromajs.lch(bgColor.l, bgColor.c, bgColor.h).hex()
   const textHex = chromajs.lch(textLCH.l, textLCH.c, textLCH.h).hex()
 
-  const contrast = chromajs.contrast(textHex, bgHex).toFixed(2)
+  const contrast = chromajs.contrast(textHex, bgHex)
 
   return { textLCH, textHex, bgHex, contrast }
 }

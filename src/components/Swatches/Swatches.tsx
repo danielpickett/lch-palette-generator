@@ -8,7 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronDown, faChevronUp } from '@fortawesome/pro-light-svg-icons'
 
 export const Swatches = React.memo(({ scale }: { scale: ScaleType }) => {
-  console.log('rendered - Swatches')
+  // console.log('rendered - Swatches')
   return (
     <div className="Swatches">
       {scale.chromas.map((_, index) => {

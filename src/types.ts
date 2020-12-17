@@ -36,15 +36,16 @@ export type ActionType =
   | {
       changeType: 'hue'
       scaleIndex: number
-      // pointIndex?: undefined
       value: number
+      min: number
+      max: number
     }
   | {
       changeType: 'chroma'
       scaleIndex: number
       pointIndex: number
       value: number
-      min: number,
+      min: number
       max: number
     }
   | {
@@ -52,26 +53,24 @@ export type ActionType =
       scaleIndex: number
       pointIndex: number
       value: number
-      min: number,
+      min: number
       max: number
     }
   | {
       changeType: 'chromaLimit'
-      // scaleIndex?: undefined
-      // pointIndex?: undefined
-      value: number,
-      min: number,
+      value: number
+      min: number
       max: number
     }
   | {
       changeType: 'textChroma'
       scaleIndex: number
-      // pointIndex?: undefined
       value: number
+      min: number
+      max: number
     }
   | {
       changeType: 'chromaReset'
       scaleIndex: number
-      // pointIndex?: undefined
       value: number
     }

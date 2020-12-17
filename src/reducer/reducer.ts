@@ -31,23 +31,37 @@ export const reducer = (state: StateType, action: ActionType) => {
     }
 
     case 'textChroma': {
+      const { scaleIndex, value, min, max } = action
       return {
         ...state,
-        scales: state.scales.map((scale, index) =>
-          index === action.scaleIndex
-            ? { ...scale, textChroma: scale.textChroma + action.value }
-            : scale
-        ),
+        scales: state.scales.map((scale, index) => {
+          if (index === scaleIndex) {
+            let newTextChroma: number
+            if (scale.textChroma + value < min) newTextChroma = min
+            else if (scale.textChroma + value > max) newTextChroma = max
+            else newTextChroma = scale.textChroma + value
+            return { ...scale, textChroma: newTextChroma }
+          } else {
+            return scale
+          }
+        }),
       }
     }
     case 'hue': {
+      const { scaleIndex, value, min, max } = action
       return {
         ...state,
-        scales: state.scales.map((scale, index) =>
-          index === action.scaleIndex
-            ? { ...scale, hue: scale.hue + action.value }
-            : scale
-        ),
+        scales: state.scales.map((scale, index) => {
+          if (index === scaleIndex) {
+            let newHue: number
+            if (scale.hue + value < min) newHue = min
+            else if (scale.hue + value > max) newHue = max
+            else newHue = scale.hue + value
+            return { ...scale, hue: newHue }
+          } else {
+            return scale
+          }
+        }),
       }
     }
     case 'chroma': {

@@ -1,0 +1,11 @@
+.TextColorsSample {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 22px;
+  
+  &__icon {
+    margin-left: 12px;
+    font-size: 14px;
+  }
+}

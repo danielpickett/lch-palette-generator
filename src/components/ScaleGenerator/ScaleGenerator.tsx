@@ -55,11 +55,17 @@ export const ScaleGenerator = React.memo(
     }
 
     const handleHueChange = (value: number, diff: number) => {
-      onChange({ changeType: 'hue', scaleIndex, value: diff })
+      onChange({ changeType: 'hue', scaleIndex, value: diff, min: 0, max: 360 })
     }
 
     const handleTextChromaChange = (value: number, diff: number) => {
-      onChange({ changeType: 'textChroma', scaleIndex, value: diff })
+      onChange({
+        changeType: 'textChroma',
+        scaleIndex,
+        value: diff,
+        min: 0,
+        max: 150,
+      })
     }
 
     // console.log('rendered - ScaleGenerator')
