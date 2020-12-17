@@ -1,7 +1,7 @@
-import React, { ReactNode, useCallback, useReducer } from 'react'
+import React, { useReducer } from 'react'
 import { reducer } from 'reducer'
 import './App.scss'
-import { Output, ScaleGenerator, Toolbar, Slider } from 'components'
+import { Output, ScaleGenerator } from 'components'
 import { parseConfig, parseScales } from 'utils'
 import initialTheme from 'themes/initial.json'
 
@@ -27,34 +27,8 @@ function App() {
 
   const size = 2
 
-  const handleChromaLimitChange = useCallback(
-    (value: number) =>
-      handleStateChanges({
-        changeType: 'chromaLimit',
-        value: value,
-        min: 0,
-        max: 150,
-      }),
-    [handleStateChanges]
-  )
-
   return (
     <div className="App">
-      {/* <div className="App__toolbar">
-        <Toolbar>
-          <div style={{ width: '48px', padding: '0 4px' }}>
-            {state.chromaLimit.toFixed(1)}
-          </div>
-          <Slider
-            value={state.chromaLimit}
-            min={0}
-            max={150}
-            width={150 * size + 'px'}
-            onChange={handleChromaLimitChange}
-          />
-        </Toolbar>
-      </div> */}
-
       <div className="App__scales">
         {state.scales.map((scale, scaleIndex) => (
           <ScaleGenerator
