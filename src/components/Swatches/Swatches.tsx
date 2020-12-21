@@ -1,42 +1,79 @@
-import React, { useState } from 'react'
+import React from 'react'
 import './Swatches.scss'
 import { ColorExtended } from 'types'
 import { ScaleType } from 'types'
 import chromajs from 'chroma-js'
-import { TextColors } from 'components'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faChevronDown, faChevronUp } from '@fortawesome/pro-light-svg-icons'
+import { TextSamples } from 'components'
+import { luminances, colorNames } from 'config'
 
-export const Swatches = React.memo(({ scale }: { scale: ScaleType }) => {
-  // console.log('rendered - Swatches')
-  return (
-    <div className="Swatches">
-      {scale.chromas.map((_, index) => {
-        return <Swatch scale={scale} index={index} key={index} />
-      })}
-    </div>
-  )
-})
-
-const Swatch = ({ scale, index }: { scale: ScaleType; index: number }) => {
-  const [showPlot, setShowPlot] = useState(true)
-  const handleToggleShowPlot = () => {
-    setShowPlot(!showPlot)
+export const Swatches = React.memo(
+  ({
+    scale,
+    scaleIndex,
+    showTextPlots,
+    showTextDetails,
+  }: {
+    scale: ScaleType
+    scaleIndex: number
+    showTextPlots: boolean
+    showTextDetails: boolean
+  }) => {
+    // console.log('rendered - Swatches')
+    return (
+      <div className="Swatches">
+        {scale.chromas.map((_, pointIndex) => {
+          const hide = false // index === 0
+          return hide ? (
+            <div
+              key={pointIndex}
+              className="Swatches__swatch"
+              style={{
+                backgroundColor: 'white',
+                flexBasis: `${(1 / scale.chromas.length) * 100}%`,
+              }}
+            />
+          ) : (
+            <Swatch
+              scale={scale}
+              pointIndex={pointIndex}
+              scaleIndex={scaleIndex}
+              key={pointIndex}
+              showTextPlots={showTextPlots}
+              showTextDetails={showTextDetails}
+            />
+          )
+        })}
+      </div>
+    )
   }
+)
 
+const Swatch = ({
+  scale,
+  pointIndex,
+  scaleIndex,
+  showTextPlots,
+  showTextDetails,
+}: {
+  scale: ScaleType
+  pointIndex: number
+  scaleIndex: number
+  showTextPlots: boolean
+  showTextDetails: boolean
+}) => {
   const color = chromajs.lch(
-    scale.luminances[index],
-    scale.chromas[index],
+    luminances[pointIndex],
+    scale.chromas[pointIndex],
     scale.hue
   ) as ColorExtended
-  const swatchColor = color._rgb._clipped ? undefined : color.css()
+  const swatchColor = color._rgb._clipped ? undefined : color.hex()
   return (
     <div
-      key={index}
+      key={pointIndex}
       className="Swatches__swatch"
       style={{
         color:
-          scale.luminances[index] > 60 || !swatchColor
+          luminances[pointIndex] > 60 || !swatchColor
             ? 'rgba(0, 0, 0, .7)'
             : 'rgba(255, 255, 255, .7)',
         backgroundColor: swatchColor,
@@ -44,29 +81,24 @@ const Swatch = ({ scale, index }: { scale: ScaleType; index: number }) => {
       }}
     >
       <div className="Swatches__label">
-        {scale.scaleName} {scale.colorNames?.[index]}
+        {scale.scaleName} {colorNames?.[pointIndex]}
       </div>
 
-      <div className="Swatches__text-colors">
-        {swatchColor && (
-          <TextColors
-            bgColor={{
-              l: scale.luminances[index],
-              c: scale.chromas[index],
-              h: scale.hue,
-            }}
-            textChroma={scale.textChroma}
-            showPlot={showPlot}
-            renderPlotToggle={
-              <div className="Swatches__toggle" onClick={handleToggleShowPlot}>
-                <FontAwesomeIcon
-                  icon={showPlot ? faChevronUp : faChevronDown}
-                />
-              </div>
-            }
-          />
-        )}
-      </div>
+      {swatchColor && (
+        <TextSamples
+          bgColor={{
+            l: luminances[pointIndex],
+            c: scale.chromas[pointIndex],
+            h: scale.hue,
+          }}
+          pointIndex={pointIndex}
+          scaleIndex={scaleIndex}
+          textChroma={scale.textChroma}
+          showPlot={showTextPlots}
+          showDetails={showTextDetails}
+        />
+      )}
+      <div className="Swatches__hex-color">{swatchColor}</div>
     </div>
   )
 }

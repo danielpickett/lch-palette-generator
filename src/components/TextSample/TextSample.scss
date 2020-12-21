@@ -1,0 +1,20 @@
+.TextSample {
+  min-height: 24px;
+  position: relative;
+  padding: 4px 8px;
+
+  &__main-copy {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__icon {
+    margin-left: 12px;
+    font-size: 14px;
+  }
+
+  &__micro-copy {
+    font-size: 0.8em;
+  }
+}

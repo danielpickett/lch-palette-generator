@@ -8,6 +8,7 @@ export const Slider = React.memo(
     max,
     width,
     background,
+    renderBackground,
     onChange,
   }: {
     value: number
@@ -15,6 +16,7 @@ export const Slider = React.memo(
     max: number
     width?: string
     background?: ReactNode
+    renderBackground?: (isDragging: boolean) => ReactNode
     onChange: (value: number, diff: number) => void
   }) => {
     const [isDragging, setIsDragging] = useState(false)
@@ -84,6 +86,7 @@ export const Slider = React.memo(
         style={{ width }}
       >
         {!!background && background}
+        {!!renderBackground && !background && renderBackground(isDragging)}
         <div
           className="Slider__handle"
           style={{

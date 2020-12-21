@@ -1,5 +1,6 @@
 import chromajs from 'chroma-js'
 import { ColorExtended, LCHColor, StateType, ScaleType } from 'types'
+import { luminances, colorNames } from 'config'
 
 export const isClipped = (color: LCHColor) =>
   (chromajs.lch(color.l, color.c, color.h) as ColorExtended)._rgb._clipped
@@ -91,10 +92,10 @@ export const parseScales = (
   scales
     .map((scale) =>
       scale.scaleName
-        ? scale.colorNames
-            ?.map((colorName, index) => {
+        ? colorNames
+            .map((colorName, index) => {
               const color = chromajs.lch(
-                scale.luminances[index],
+                luminances[index],
                 scale.chromas[index],
                 scale.hue
               ) as ColorExtended

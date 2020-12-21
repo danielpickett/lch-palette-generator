@@ -1,9 +1,10 @@
-import React, { useReducer } from 'react'
+import React, { useReducer, useState } from 'react'
 import { reducer } from 'reducer'
 import './App.scss'
-import { Output, ScaleGenerator } from 'components'
+import { HueSliderBackground, IconButton, Output, ScaleGenerator } from 'components'
 import { parseConfig, parseScales } from 'utils'
-import initialTheme from 'themes/initial.json'
+import { initialTheme } from 'config'
+import { faChartScatter, faInfoCircle } from '@fortawesome/pro-light-svg-icons'
 
 function App() {
   const [state, handleStateChanges] = useReducer(reducer, initialTheme)
@@ -27,16 +28,38 @@ function App() {
 
   const size = 2
 
+  const [showTextPlots, setShowTextPlots] = useState(false)
+  const [showTextDetails, setShowTextDetails] = useState(false)
+
   return (
     <div className="App">
+      <div className="App__toolbar">
+        <div className="App__buttons">
+          <div className="App__button">
+            <IconButton
+              onClick={() => setShowTextDetails(!showTextDetails)}
+              faIcon={faInfoCircle}
+              title="Show LCH and RGB color breakdown"
+            />
+          </div>
+          <div className="App__button">
+            <IconButton
+              onClick={() => setShowTextPlots(!showTextPlots)}
+              faIcon={faChartScatter}
+              title="Show plot of text color on LCH canvas"
+            />
+          </div>
+        </div>
+      </div>
       <div className="App__scales">
         {state.scales.map((scale, scaleIndex) => (
           <ScaleGenerator
+            showTextPlots={showTextPlots}
+            showTextDetails={showTextDetails}
             key={scaleIndex}
             scaleIndex={scaleIndex}
             scale={scale}
             onChange={handleStateChanges}
-            chromaLimit={state.chromaLimit}
             size={size}
           />
         ))}

@@ -1,0 +1,15 @@
+.HueSliderBackground {
+  height: 100%;
+  width: 100%;
+  background-size: 100%;
+  border-radius: 4px;
+  // &:not(:hover) {
+  //   background-image: none !important;
+  //   background-color: white;
+  // }
+}
+
+.HueSliderBackground--is-hidden {
+  background-image: none !important;
+  background-color: white;
+}
