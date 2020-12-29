@@ -1,7 +1,7 @@
 .TextSample {
-  min-height: 24px;
+  min-height: 20px;
   position: relative;
-  padding: 4px 8px;
+  padding: 2px 8px;
 
   &__main-copy {
     display: flex;
@@ -16,5 +16,6 @@
 
   &__micro-copy {
     font-size: 0.8em;
+    margin-bottom: 8px;
   }
 }

@@ -1,0 +1,17 @@
+.ChromaLimitSlider {
+  
+  &__background {
+    display: flex;
+    align-items: center;
+    background-color: white;
+    height: 100%;
+    width: 100%;
+    &::before {
+      content: '';
+      display: block;
+      height: 4px;
+      width: 100%;
+      background-color: rgb(221, 221, 221);
+    }
+  }
+}

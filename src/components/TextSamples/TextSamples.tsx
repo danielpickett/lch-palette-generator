@@ -1,111 +1,94 @@
 import React from 'react'
 import { LCHColor } from 'types'
 import './TextSamples.scss'
-import { TextSample, TextColorsPlot } from 'components'
+import { TextSample, TextSamplesPlot } from 'components'
+import { faSquare, faCircle } from '@fortawesome/pro-solid-svg-icons'
 import { getTextColor } from './getTextColor'
+import {
+  greyscaleTextColorConfig,
+  chromaticTextColorConfig,
+  vividTextColorConfig,
+} from 'config'
+import { lch } from 'utils'
 
-const defaultConfig = [
-  { lum: 15, chroma: 20, mix: 0.7 }, // 000 white
-  { lum: 20, mix: 0.65 }, // 050
-  { lum: 20, mix: 0.7 }, // 100
-  { lum: 20, mix: 0.6 }, // 200
-  { lum: 20, mix: 0.5 }, // 300
-  { lum: 100, mix: 0.5 }, // 400
-  { lum: 100, mix: 0.5 }, // 500
-  { lum: 100, mix: 0.5 }, // 600
-  { lum: 100, mix: 0.5 }, // 700
-  { lum: 100, mix: 0.5 }, // 800
-  { lum: 100, mix: 0.5 }, // 900 darkest
-]
-
-const vividConfig = [
-  { lum: 50, mix: 0.6 }, // 000 white
-  { lum: 50, mix: 0.6 }, // 050
-  { lum: 50, mix: 0.6 }, // 100
-  { lum: 50, mix: 0.6 }, // 200
-  { lum: 50, mix: 0.5 }, // 300
-  { lum: 50, mix: 0.5 }, // 400
-  { lum: 50, mix: 0.5 }, // 500
-  { lum: 50, mix: 0.5 }, // 600
-  { lum: 50, mix: 0.5 }, // 700
-  { lum: 50, mix: 0.5 }, // 800
-  { lum: 50, mix: 0.5 }, // 900 darkest
-]
 
 export const TextSamples = ({
   bgColor,
   textChroma,
+  vividTextChroma,
   scaleIndex,
   pointIndex,
+  highestFoundChromaInScale,
   showPlot,
   showDetails,
 }: {
   bgColor: LCHColor
   textChroma: number
+  vividTextChroma: number
   scaleIndex: number
   pointIndex: number
+  highestFoundChromaInScale: number
   showPlot: boolean
   showDetails: boolean
 }) => {
-  const defaultText = getTextColor(
-    bgColor,
-    defaultConfig[pointIndex].lum,
-    textChroma,
-    defaultConfig[pointIndex].mix
-  )
+  const greyOnGrey =
+    scaleIndex === 0
+      ? getTextColor({
+          bgColor: bgColor,
+          lum: greyscaleTextColorConfig[pointIndex].lum,
+          chroma: highestFoundChromaInScale,
+          mix: greyscaleTextColorConfig[pointIndex].mix,
+          icon: faCircle,
+          label: 'greyscale',
+        })
+      : null
 
-  const vividText = getTextColor(
-    bgColor,
-    vividConfig[pointIndex].lum,
-    textChroma,
-    vividConfig[pointIndex].mix
-  )
+  const chromaticText = getTextColor({
+    bgColor: bgColor,
+    lum: chromaticTextColorConfig[pointIndex].lum,
+    chroma: textChroma,
+    mix: chromaticTextColorConfig[pointIndex].mix,
+    icon: faCircle,
+    label: 'chromatic',
+  })
+
+  const vividText = getTextColor({
+    bgColor: bgColor,
+    lum: vividTextColorConfig[pointIndex].lum,
+    minLum: vividTextColorConfig[pointIndex].minLum,
+    chroma: vividTextChroma,
+    mix: vividTextColorConfig[pointIndex].mix,
+    maximizeChroma: true,
+    icon: faSquare,
+    label: 'vivid',
+  })
+
+  const textColorConfigs = greyOnGrey
+    ? [greyOnGrey]
+    : [chromaticText, vividText]
 
   return (
     <div className="TextSamples">
-      <div className="TextSamples__samples">
-        <TextSample
-          colorLCH={defaultText.regular.lch}
-          contrast={defaultText.regular.contrast}
-          showDetails={showDetails}
-        />
-        <TextSample
-          colorLCH={defaultText.subdued.lch}
-          contrast={defaultText.subdued.contrast}
-          showDetails={showDetails}
-        />
-        <br />
-        <TextSample
-          colorLCH={vividText.regular.lch}
-          contrast={vividText.regular.contrast}
-          showDetails={showDetails}
-        />
-        <TextSample
-          colorLCH={vividText.subdued.lch}
-          contrast={vividText.subdued.contrast}
-          showDetails={showDetails}
-        />
-      </div>
+      {textColorConfigs.map((config, index) => (
+        <div className="TextSamples__samples" key={index}>
+          <TextSample
+            bgColorHex={lch(config.bgColor).hex()}
+            colorLCH={config.regular.lch}
+            contrast={config.regular.contrast}
+            showDetails={showDetails}
+          />
+          <TextSample
+            bgColorHex={lch(config.bgColor).hex()}
+            colorLCH={config.subdued.lch}
+            contrast={config.subdued.contrast}
+            showDetails={showDetails}
+          />
+        </div>
+      ))}
 
       {showPlot && (
         <div className="TextSamples__plot">
-          <TextColorsPlot
-            colors={[
-              bgColor,
-              defaultText.regular.lch,
-              defaultText.subdued.lch,
-              vividText.regular.lch,
-              vividText.subdued.lch,
-            ]}
-            labels={[
-              'bg',
-              'regular',
-              'subdued',
-              'vivid-regular',
-              'vivid- subdued',
-            ]}
-            canvasHue={bgColor.h}
-          />
+          <TextSamplesPlot textColorConfigs={textColorConfigs} />
         </div>
       )}
     </div>

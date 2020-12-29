@@ -1,7 +1,6 @@
 import React, { useEffect, useRef } from 'react'
 import './Canvas.scss'
-import chroma from 'chroma-js'
-import { ColorExtended } from 'types'
+import { lch } from 'utils'
 
 export const Canvas = React.memo(
   ({ hue, size }: { hue: number; size: number }) => {
@@ -18,7 +17,7 @@ export const Canvas = React.memo(
           const image = canvasContext.createImageData(1500, 1)
           for (let L = 100 * size; L >= 0; L--) {
             for (let C = 0; C < 150 * size; C++) {
-              const color = chroma.lch(L / size, C / size, hue) as ColorExtended
+              const color = lch({ l: L / size, c: C / size, h: hue })
               if (!color._rgb._clipped) {
                 image.data[C * 4 + 0] = color._rgb[0]
                 image.data[C * 4 + 1] = color._rgb[1]

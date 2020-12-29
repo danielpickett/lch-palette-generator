@@ -28,17 +28,34 @@ export const reducer = (state: StateType, action: ActionType) => {
       }
     }
 
-    case 'textChroma': {
+    case 'chromaticTextChroma': {
       const { scaleIndex, value, min, max } = action
       return {
         ...state,
         scales: state.scales.map((scale, index) => {
           if (index === scaleIndex) {
-            let newTextChroma: number
-            if (scale.textChroma + value < min) newTextChroma = min
-            else if (scale.textChroma + value > max) newTextChroma = max
-            else newTextChroma = scale.textChroma + value
-            return { ...scale, textChroma: newTextChroma }
+            let newChromaticTextChroma: number
+            if (scale.chromaticTextChroma + value < min) newChromaticTextChroma = min
+            else if (scale.chromaticTextChroma + value > max) newChromaticTextChroma = max
+            else newChromaticTextChroma = scale.chromaticTextChroma + value
+            return { ...scale, chromaticTextChroma: newChromaticTextChroma }
+          } else {
+            return scale
+          }
+        }),
+      }
+    }
+    case 'vividTextChroma': {
+      const { scaleIndex, value, min, max } = action
+      return {
+        ...state,
+        scales: state.scales.map((scale, index) => {
+          if (index === scaleIndex) {
+            let newVividTextChroma: number
+            if (scale.vividTextChroma + value < min) newVividTextChroma = min
+            else if (scale.vividTextChroma + value > max) newVividTextChroma = max
+            else newVividTextChroma = scale.vividTextChroma + value
+            return { ...scale, vividTextChroma: newVividTextChroma }
           } else {
             return scale
           }

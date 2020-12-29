@@ -2,39 +2,88 @@
   "scales": [
     {
       "scaleName": "Grey",
-      "textChroma": 140,
+      "chromaticTextChroma": 11.5,
+      "vividTextChroma": 11.5,
       "chromas": [0, 1.2, 3.8, 5.8, 7, 11, 11.1, 10.8, 11.4, 11.3, 11.4],
       "hue": 268
     },
     {
       "scaleName": "Primary",
-      "textChroma": 140,
-      "chromas": [0, 3.7, 8.3, 14.3, 23.4, 33, 38.6, 33.8, 28.9, 23.3, 16.4],
+      "chromaticTextChroma": 31.9,
+      "vividTextChroma": 38.3,
+      "chromas": [
+        0,
+        3.7,
+        8.3,
+        14.3,
+        23.4,
+        33,
+        38.6,
+        33.8,
+        28.9,
+        21.387,
+        13.184
+      ],
       "hue": 268
     },
     {
       "scaleName": "Secondary",
-      "textChroma": 140,
+      "chromaticTextChroma": 65.5,
+      "vividTextChroma": 123.5,
       "chromas": [0, 3.7, 10.8, 21.3, 36.9, 53.5, 64.9, 56.3, 46.4, 37.2, 24.4],
       "hue": 310
     },
     {
       "scaleName": "Success",
-      "textChroma": 140,
-      "chromas": [0, 15.9, 25.3, 35.3, 49.9, 66, 73.2, 63.1, 51.8, 40.1, 21.4],
+      "chromaticTextChroma": 147,
+      "vividTextChroma": 149,
+      "chromas": [
+        0,
+        15.9,
+        25.3,
+        35.3,
+        49.9,
+        66,
+        73.2,
+        61.963,
+        48.413,
+        31.274,
+        10.767
+      ],
       "hue": 137
     },
     {
       "scaleName": "Warning",
-      "textChroma": 140,
-      "chromas": [0, 3.7, 10.8, 24.1, 43.4, 60.5, 71.6, 61.7, 49.8, 35.8, 18.5],
+      "chromaticTextChroma": 147,
+      "vividTextChroma": 149,
+      "chromas": [
+        0,
+        3.7,
+        10.8,
+        24.1,
+        43.4,
+        60.5,
+        71.6,
+        60.571,
+        46.289,
+        27.466,
+        9.229
+      ],
       "hue": 55
     },
     {
       "scaleName": "Danger",
-      "textChroma": 140,
-      "chromas": [0, 3.9, 11, 21.9, 42.1, 69.5, 82.4, 71, 57.8, 44.2, 30.3],
+      "chromaticTextChroma": 147,
+      "vividTextChroma": 149,
+      "chromas": [0, 3.9, 11, 21.9, 42.1, 69.5, 82.4, 71, 55.8, 37.7, 14.941],
       "hue": 31
+    },
+    {
+      "scaleName": "Inform",
+      "chromaticTextChroma": 147,
+      "vividTextChroma": 149,
+      "chromas": [0, 3.9, 11, 21.9, 42.1, 69.5, 82.4, 71, 55.8, 37.7, 14.941],
+      "hue": 305.9
     }
   ]
 }

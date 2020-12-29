@@ -3,26 +3,21 @@ import './TextSample.scss'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faExclamationTriangle } from '@fortawesome/pro-solid-svg-icons'
 import { LCHColor } from 'types'
-import chromajs from 'chroma-js'
 import { lch } from 'utils'
 
 export const TextSample = ({
+  bgColorHex,
   colorLCH,
   contrast,
   showDetails,
 }: {
+  bgColorHex: string
   colorLCH: LCHColor
   contrast: number
   showDetails: boolean
 }) => {
-  const colorHex = chromajs.lch(...lch(colorLCH)).hex()
-  const colorRGB =
-    'rgb(' +
-    chromajs
-      .lch(...lch(colorLCH))
-      .rgb()
-      .join(', ') +
-    ')'
+  const colorHex = lch(colorLCH).hex()
+  const colorRGB = 'rgb(' + lch(colorLCH).rgb().join(', ') + ')'
 
   const microCopy = [
     `L: ${colorLCH.l.toFixed(1)}`,
@@ -31,7 +26,10 @@ export const TextSample = ({
   ].join(', ')
 
   return (
-    <div className="TextSample" style={{ color: colorHex }}>
+    <div
+      className="TextSample"
+      style={{ color: colorHex, backgroundColor: bgColorHex }}
+    >
       <div className="TextSample__main-copy">
         <span>Sample Text {contrast.toFixed(2)}</span>
         <span>

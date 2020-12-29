@@ -1,9 +1,8 @@
-import chromajs from 'chroma-js'
-import { ColorExtended, LCHColor, StateType, ScaleType } from 'types'
+import { LCHColor, StateType, ScaleType } from 'types'
 import { luminances, colorNames } from 'config'
+import { lch } from 'utils'
 
-export const isClipped = (color: LCHColor) =>
-  (chromajs.lch(color.l, color.c, color.h) as ColorExtended)._rgb._clipped
+export const isClipped = (color: LCHColor) => lch(color)._rgb._clipped
 
 export const getMaxChroma = (color: LCHColor) => {
   let chroma = 0
@@ -94,11 +93,11 @@ export const parseScales = (
       scale.scaleName
         ? colorNames
             .map((colorName, index) => {
-              const color = chromajs.lch(
-                luminances[index],
-                scale.chromas[index],
-                scale.hue
-              ) as ColorExtended
+              const color = lch({
+                l: luminances[index],
+                c: scale.chromas[index],
+                h: scale.hue,
+              })
               const swatchColor = color._rgb._clipped ? undefined : color.hex()
               return scale.scaleName
                 ? callback({

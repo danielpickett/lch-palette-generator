@@ -5,6 +5,7 @@ import { ScaleType } from 'types'
 import chromajs from 'chroma-js'
 import { TextSamples } from 'components'
 import { luminances, colorNames } from 'config'
+import { lch } from 'utils'
 
 export const Swatches = React.memo(
   ({
@@ -19,6 +20,15 @@ export const Swatches = React.memo(
     showTextDetails: boolean
   }) => {
     // console.log('rendered - Swatches')
+
+    const highestFoundChromaInScale = (() => {
+      let result = 0
+      scale.chromas.forEach((chroma) => {
+        if (chroma > result) result = chroma
+      })
+      return result
+    })()
+
     return (
       <div className="Swatches">
         {scale.chromas.map((_, pointIndex) => {
@@ -33,10 +43,11 @@ export const Swatches = React.memo(
               }}
             />
           ) : (
-            <Swatch
+            <SwatchesSwatch
               scale={scale}
               pointIndex={pointIndex}
               scaleIndex={scaleIndex}
+              highestFoundChromaInScale={highestFoundChromaInScale}
               key={pointIndex}
               showTextPlots={showTextPlots}
               showTextDetails={showTextDetails}
@@ -48,24 +59,26 @@ export const Swatches = React.memo(
   }
 )
 
-const Swatch = ({
+const SwatchesSwatch = ({
   scale,
   pointIndex,
   scaleIndex,
+  highestFoundChromaInScale,
   showTextPlots,
   showTextDetails,
 }: {
   scale: ScaleType
   pointIndex: number
   scaleIndex: number
+  highestFoundChromaInScale: number
   showTextPlots: boolean
   showTextDetails: boolean
 }) => {
-  const color = chromajs.lch(
-    luminances[pointIndex],
-    scale.chromas[pointIndex],
-    scale.hue
-  ) as ColorExtended
+  const color = lch({
+    l: luminances[pointIndex],
+    c: scale.chromas[pointIndex],
+    h: scale.hue,
+  })
   const swatchColor = color._rgb._clipped ? undefined : color.hex()
   return (
     <div
@@ -93,12 +106,17 @@ const Swatch = ({
           }}
           pointIndex={pointIndex}
           scaleIndex={scaleIndex}
-          textChroma={scale.textChroma}
+          textChroma={scale.chromaticTextChroma}
+          highestFoundChromaInScale={highestFoundChromaInScale}
+          vividTextChroma={scale.vividTextChroma}
           showPlot={showTextPlots}
           showDetails={showTextDetails}
         />
       )}
-      <div className="Swatches__hex-color">{swatchColor}</div>
+      <div className="Swatches__outputs">
+        <div>{swatchColor}</div>
+        {!!swatchColor && <div>{chromajs(swatchColor).css()}</div>}
+      </div>
     </div>
   )
 }

@@ -7,7 +7,7 @@ export const Slider = React.memo(
     min,
     max,
     width,
-    background,
+    renderHandle,
     renderBackground,
     onChange,
   }: {
@@ -15,7 +15,7 @@ export const Slider = React.memo(
     min: number
     max: number
     width?: string
-    background?: ReactNode
+    renderHandle?: (isDragging: boolean) => ReactNode
     renderBackground?: (isDragging: boolean) => ReactNode
     onChange: (value: number, diff: number) => void
   }) => {
@@ -85,14 +85,13 @@ export const Slider = React.memo(
         ref={ref}
         style={{ width }}
       >
-        {!!background && background}
-        {!!renderBackground && !background && renderBackground(isDragging)}
-        <div
+        {!!renderBackground && renderBackground(isDragging)}
+        {!!renderHandle ? renderHandle(isDragging) :<div
           className="Slider__handle"
           style={{
             left: `${(value / (max - min)) * 100}%`,
           }}
-        />
+        />}
       </div>
     )
   }

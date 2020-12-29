@@ -14,7 +14,7 @@
         linear-gradient( -45deg, transparent    75%, $checker-color 75% );
 
   &__swatch {
-    min-width: 0;
+    min-width: 160px;
     display: flex;
     flex-direction: column;
   }
@@ -23,7 +23,11 @@
     padding: 8px;
   }
 
-  &__hex-color {
+  &__outputs {
     padding: 8px;
+    font-size: 10px;
+    display: grid; 
+    gap: 2px;
   }
+
 }

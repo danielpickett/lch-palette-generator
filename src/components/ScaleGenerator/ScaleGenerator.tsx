@@ -13,6 +13,7 @@ import {
 } from '@fortawesome/pro-light-svg-icons'
 import { getMaxChroma } from 'utils'
 import { HueSliderBackground } from 'components/HueSliderBackground'
+import { ChromaLimitSlider } from 'components/ChromaLimitSlider'
 
 export const ScaleGenerator = React.memo(
   ({
@@ -64,7 +65,16 @@ export const ScaleGenerator = React.memo(
 
     const handleTextChromaChange = (value: number, diff: number) => {
       onChange({
-        changeType: 'textChroma',
+        changeType: 'chromaticTextChroma',
+        scaleIndex,
+        value: diff,
+        min: 0,
+        max: 150,
+      })
+    }
+    const handleVividTextChromaChange = (value: number, diff: number) => {
+      onChange({
+        changeType: 'vividTextChroma',
         scaleIndex,
         value: diff,
         min: 0,
@@ -101,33 +111,23 @@ export const ScaleGenerator = React.memo(
                 />
               </div>
             </div>
-            <div className="ScaleGenerator__text-chroma">
-              <Slider
-                value={scale.textChroma}
-                min={0}
-                max={150}
-                width={150 * size + 'px'}
-                onChange={handleTextChromaChange}
-                background={
-                  <div
-                    style={{
-                      backgroundColor: 'white',
-                      height: '100%',
-                      width: '100%',
-                      display: 'flex',
-                      alignItems: 'center',
-                    }}
-                  >
-                    <div
-                      style={{
-                        height: '1px',
-                        backgroundColor: 'silver',
-                        width: '100%',
-                      }}
-                    />
-                  </div>
-                }
-              />
+            <div className="ScaleGenerator__toolbar-sliders">
+              <div className="ScaleGenerator__toolbar-slider">
+                <div>reg</div>
+                <ChromaLimitSlider
+                  value={scale.chromaticTextChroma}
+                  onChange={handleTextChromaChange}
+                  size={size}
+                />
+              </div>
+              <div className="ScaleGenerator__toolbar-slider">
+                <div>vivid</div>
+                <ChromaLimitSlider
+                  value={scale.vividTextChroma}
+                  onChange={handleVividTextChromaChange}
+                  size={size}
+                />
+              </div>
             </div>
           </div>
           <div className="ScaleGenerator__plot">
@@ -148,7 +148,11 @@ export const ScaleGenerator = React.memo(
               <Plotter scale={scale} size={size}>
                 <div
                   className="ScaleGenerator__limit-line"
-                  style={{ left: `${scale.textChroma * size}px` }}
+                  style={{ left: `${scale.chromaticTextChroma * size}px` }}
+                />
+                <div
+                  className="ScaleGenerator__limit-line"
+                  style={{ left: `${scale.vividTextChroma * size}px` }}
                 />
                 {scale.chromas.map((chroma, pointIndex) =>
                   pointIndex === 0 ? null : (
@@ -179,17 +183,18 @@ export const ScaleGenerator = React.memo(
           </div>
           <div className="ScaleGenerator__footer">
             <div className="ScaleGenerator__hue">h: {scale.hue.toFixed(1)}</div>
-
-            <Slider
-              value={scale.hue}
-              min={0}
-              max={360}
-              width={150 * size + 'px'}
-              onChange={handleHueChange}
-              renderBackground={(isDragging) => (
-                <HueSliderBackground active={isDragging} />
-              )}
-            />
+            <div className="ScaleGenerator__hue-slider">
+              <Slider
+                value={scale.hue}
+                min={0}
+                max={360}
+                width={150 * size + 'px'}
+                onChange={handleHueChange}
+                renderBackground={(isDragging) => (
+                  <HueSliderBackground active={isDragging} />
+                )}
+              />
+            </div>
           </div>
         </div>
         <Swatches

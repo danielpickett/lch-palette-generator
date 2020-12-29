@@ -28,7 +28,8 @@ export type ColorExtended = Color & {
 
 export type ScaleType = {
   scaleName: string
-  textChroma: number
+  chromaticTextChroma: number
+  vividTextChroma: number
   hue: number
   chromas: number[]
 }
@@ -54,7 +55,14 @@ export type ActionType =
       max: number
     }
   | {
-      changeType: 'textChroma'
+      changeType: 'chromaticTextChroma'
+      scaleIndex: number
+      value: number
+      min: number
+      max: number
+    }
+  | {
+      changeType: 'vividTextChroma'
       scaleIndex: number
       value: number
       min: number
