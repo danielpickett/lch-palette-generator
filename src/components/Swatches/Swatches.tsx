@@ -1,6 +1,5 @@
 import React from 'react'
 import './Swatches.scss'
-import { ColorExtended } from 'types'
 import { ScaleType } from 'types'
 import chromajs from 'chroma-js'
 import { TextSamples } from 'components'
