@@ -14,28 +14,20 @@
         linear-gradient( -45deg, transparent    75%, $checker-color 75% );
 
   &__swatch {
-    min-width: 0;
-    padding: 0.5rem;
-  }
-  &__toggle {
-    width: 26px;
-    height: 26px;
-    font-size: 16px;
-    margin: 8px 0;
-    border: none;
-    border-radius: 5px;
-    display: grid;
-    place-items: center;
-    padding: 0;
-    cursor: pointer;
-    outline: none;
-
-    &:hover {
-      box-shadow: 0 0 0 1px currentColor;
-    }
+    min-width: 160px;
+    display: flex;
+    flex-direction: column;
   }
 
-  &__text-colors {
-    padding-bottom: 32px;
+  &__label {
+    padding: 8px;
   }
+
+  &__outputs {
+    padding: 8px;
+    font-size: 10px;
+    display: grid; 
+    gap: 2px;
+  }
+
 }

@@ -1,5 +1,13 @@
 import { Color } from 'chroma-js'
 
+// type ButtonPropsType = {
+//   foo: 'normal' | 'primary' | 'plain-text' | 'danger'
+// }
+
+// type TextPropsType = {
+//   foo: 'normal' | 'subdued' | 'high-contrast' | 'vivid'
+// }
+
 export type LCHColor = { l: number; c: number; h: number }
 
 export type ColorExtended = Color & {
@@ -20,15 +28,13 @@ export type ColorExtended = Color & {
 
 export type ScaleType = {
   scaleName: string
-  textChroma: number
-  colorNames: string[]
+  chromaticTextChroma: number
+  vividTextChroma: number
   hue: number
-  luminances: number[]
   chromas: number[]
 }
 
 export type StateType = {
-  chromaLimit: number
   scales: ScaleType[]
 }
 
@@ -36,42 +42,34 @@ export type ActionType =
   | {
       changeType: 'hue'
       scaleIndex: number
-      // pointIndex?: undefined
       value: number
+      min: number
+      max: number
     }
   | {
       changeType: 'chroma'
       scaleIndex: number
       pointIndex: number
       value: number
-      min: number,
+      min: number
       max: number
     }
   | {
-      changeType: 'luminance'
+      changeType: 'chromaticTextChroma'
       scaleIndex: number
-      pointIndex: number
       value: number
-      min: number,
+      min: number
       max: number
     }
   | {
-      changeType: 'chromaLimit'
-      // scaleIndex?: undefined
-      // pointIndex?: undefined
-      value: number,
-      min: number,
-      max: number
-    }
-  | {
-      changeType: 'textChroma'
+      changeType: 'vividTextChroma'
       scaleIndex: number
-      // pointIndex?: undefined
       value: number
+      min: number
+      max: number
     }
   | {
       changeType: 'chromaReset'
       scaleIndex: number
-      // pointIndex?: undefined
       value: number
     }

@@ -8,14 +8,10 @@ export const Plotter = React.memo(
   ({
     scale,
     size,
-    // chromaLimit,
-    chromaLimitLine,
     children,
   }: {
     scale: ScaleType
     size: number
-    // chromaLimit: number
-    chromaLimitLine?: ReactNode
     children: ReactNode
   }) => {
     // console.log('rendered - Plotter')
@@ -29,7 +25,6 @@ export const Plotter = React.memo(
         </div>
 
         <Canvas hue={scale.hue} size={size} />
-        {!!chromaLimitLine && chromaLimitLine}
       </div>
     )
   }

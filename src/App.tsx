@@ -1,12 +1,13 @@
-import React, { useReducer } from 'react'
+import React, { useCallback, useReducer, useState } from 'react'
 import { reducer } from 'reducer'
 import './App.scss'
-import { Output, ScaleGenerator } from 'components'
+import { IconButton, Output, ScaleGenerator } from 'components'
 import { parseConfig, parseScales } from 'utils'
-import initialTheme from 'themes/initial.json'
+import theme from 'config/initial-theme.json'
+import { faChartScatter, faInfoCircle } from '@fortawesome/pro-light-svg-icons'
 
 function App() {
-  const [state, handleStateChanges] = useReducer(reducer, initialTheme)
+  const [state, handleStateChanges] = useReducer(reducer, theme)
 
   const cssOutput =
     ':root {\n' +
@@ -27,16 +28,33 @@ function App() {
 
   const size = 2
 
+  const [showTextDetails, setShowTextDetails] = useState(false)
+  const handleShowTextDetailsChange = useCallback(
+    () => setShowTextDetails(!showTextDetails),
+    [setShowTextDetails, showTextDetails]
+  )
+
+  const [showTextPlots, setShowTextPlots] = useState(true)
+  const handleShowTextPlotsChange = useCallback(
+    () => setShowTextPlots(!showTextPlots),
+    [setShowTextPlots, showTextPlots]
+  )
+
   return (
     <div className="App">
+      <AppToolbar
+        onShowTextDetailsChange={handleShowTextDetailsChange}
+        onShowTextPlotsChange={handleShowTextPlotsChange}
+      />
       <div className="App__scales">
         {state.scales.map((scale, scaleIndex) => (
           <ScaleGenerator
+            showTextPlots={showTextPlots}
+            showTextDetails={showTextDetails}
             key={scaleIndex}
             scaleIndex={scaleIndex}
             scale={scale}
             onChange={handleStateChanges}
-            chromaLimit={state.chromaLimit}
             size={size}
           />
         ))}
@@ -52,3 +70,34 @@ function App() {
 }
 
 export default App
+
+const AppToolbar = React.memo(
+  ({
+    onShowTextDetailsChange,
+    onShowTextPlotsChange,
+  }: {
+    onShowTextDetailsChange: () => void
+    onShowTextPlotsChange: () => void
+  }) => {
+    return (
+      <div className="App__toolbar">
+        <div className="App__buttons">
+          <div className="App__button">
+            <IconButton
+              onClick={onShowTextDetailsChange}
+              faIcon={faInfoCircle}
+              title="Show LCH and RGB color breakdown"
+            />
+          </div>
+          <div className="App__button">
+            <IconButton
+              onClick={onShowTextPlotsChange}
+              faIcon={faChartScatter}
+              title="Show plot of text color on LCH canvas"
+            />
+          </div>
+        </div>
+      </div>
+    )
+  }
+)

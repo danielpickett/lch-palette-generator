@@ -1,6 +1,12 @@
-.TextColors {
-  margin: 16px 8px;
+.TextSamples {
   font-size: 12px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+
+  &__samples {
+    padding-bottom: 16px;
+  }
 
   &__tooltip {
     position: absolute;
@@ -27,7 +33,7 @@
   }
 
   &__plot {
-    padding-bottom: 16px;
+    margin-top: auto;
+    padding: 8px;
   }
-
 }

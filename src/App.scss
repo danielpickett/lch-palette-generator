@@ -6,6 +6,13 @@
 
   &__toolbar {
     flex-grow: 0;
+    box-shadow: 0 0 16px rgba(0, 0, 0, 0.3);
+    position: relative;
+    z-index: 1;
+  }
+  &__buttons {
+    display: flex;
+    padding: 8px;
   }
 
   &__scales {
@@ -22,6 +29,5 @@
     padding: 1rem;
     display: flex;
     gap: 1rem;
-
   }
 }

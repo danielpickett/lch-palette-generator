@@ -6,6 +6,7 @@ import { IconDefinition } from '@fortawesome/pro-light-svg-icons'
 type IconButtonPropsType = {
   faIcon?: IconDefinition
   onClick: () => void
+  title?: string
 }
 
 export const IconButton = React.forwardRef<
@@ -13,7 +14,7 @@ export const IconButton = React.forwardRef<
   IconButtonPropsType
 >((props, ref) => {
   return (
-    <button ref={ref} className="Button" onClick={props.onClick}>
+    <button title={props.title} ref={ref} className="Button" onClick={props.onClick}>
       {!!props.faIcon && <FontAwesomeIcon icon={props.faIcon} />}
     </button>
   )

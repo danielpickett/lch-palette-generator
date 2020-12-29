@@ -5,8 +5,7 @@
   &__toolbar {
     display: flex;
     flex-direction: column;
-    align-items: flex-end;
-
+    visibility: hidden;
   }
 
   &__buttons {
@@ -15,13 +14,22 @@
     padding: 8px;
   }
 
-  &__button {
-    opacity: 0;
-  }
-
   &__footer {
     display: flex;
     align-items: center;
+    margin: 2px 0;
+  }
+
+  &__toolbar-sliders {
+    margin-bottom: 12px;
+  }
+
+  &__toolbar-slider {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-left: 4px;
+    // margin-bottom: 2px;
   }
 
   &__hue {
@@ -29,6 +37,10 @@
     text-align: center;
     white-space: nowrap;
     font-size: 10px;
+  }
+
+  &__hue-slider {
+    visibility: hidden;
   }
 
   &__point {
@@ -100,14 +112,27 @@
     mix-blend-mode: lighten;
     background-image: linear-gradient(
       currentColor 50%,
-      rgba(255, 255, 255, .5) 0%
+      rgba(255, 255, 255, 0.5) 0%
     );
+    opacity: 0.5;
   }
 }
 
 .ScaleGenerator__points:hover {
   .ScaleGenerator {
-    &__button {
+    &__text-chroma {
+      visibility: visible;
+    }
+
+    &__toolbar {
+      visibility: visible;
+    }
+
+    &__hue-slider {
+      visibility: visible;
+    }
+
+    &__limit-line {
       opacity: 1;
     }
   }

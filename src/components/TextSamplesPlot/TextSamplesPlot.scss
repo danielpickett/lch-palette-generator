@@ -1,0 +1,52 @@
+.TextSamplesPlot {
+  position: relative;
+  background-color: white;
+
+  &__dot {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    border: 1px solid black;
+    border-radius: 1000px;
+    background-color: white;
+    box-shadow: 0 0 6px 2px rgba(0, 0, 0, 0.25);
+    transform: translate(-50%, 50%);
+  }
+
+  &__dot-label {
+    position: absolute;
+    background-color: black;
+    color: white;
+    font-size: 10px;
+    top: 50%;
+    left: calc(100% + 8px);
+    transform: translateY(-50%);
+    white-space: nowrap;
+    padding: 1px 4px;
+    border-radius: 4px;
+  }
+
+  &__mark {
+    position: absolute;
+    width: 0;
+    height: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 6px;
+    filter: drop-shadow(0 0 3px rgba(0, 0, 0, 0.5)) drop-shadow(0 0 0.5px black);
+  }
+
+  &__bg-mark {
+    $size: 4px;
+    width: $size;
+    min-width: $size;
+    height: $size;
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 1), 0 0 4px rgba(0, 0, 0, 1);
+    border-radius: 1000px;
+    &--on-light-bg {
+      box-shadow: 0 0 0 1px rgba(0, 0, 0, 1), 0 0 4px rgba(0, 0, 0, 1);
+    }
+  }
+}
