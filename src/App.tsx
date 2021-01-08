@@ -1,4 +1,4 @@
-import React, { useCallback, useReducer, useState } from 'react'
+import React, { useCallback, useEffect, useReducer, useState } from 'react'
 import { reducer } from 'reducer'
 import './App.scss'
 import { IconButton, Output, ScaleGenerator } from 'components'
@@ -40,6 +40,38 @@ function App() {
     [setShowTextPlots, showTextPlots]
   )
 
+  const [handleIsDragging, setHandleIsDragging] = useState(false)
+  const [outputHeightPx, setOutputHeightPx] = useState(200)
+
+  const handleMouseDown = () => setHandleIsDragging(true)
+  const handleMouseUp = useCallback(() => setHandleIsDragging(false), [
+    setHandleIsDragging,
+  ])
+  const handleMouseMove = useCallback((e: globalThis.MouseEvent) => {
+    let heightChange = e.movementY
+
+    setOutputHeightPx((prev) => {
+      const newHeight = prev + heightChange * -1
+      return newHeight < 100 ? 100 : newHeight
+    })
+  }, [])
+
+  useEffect(() => {
+    if (handleIsDragging) {
+      window.addEventListener('mousemove', handleMouseMove)
+      window.addEventListener('mouseup', handleMouseUp)
+      document.body.style.userSelect = 'none'
+    } else {
+      window.removeEventListener('mousemove', handleMouseMove)
+      window.removeEventListener('mouseup', handleMouseUp)
+      document.body.style.userSelect = 'auto'
+    }
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove)
+      window.removeEventListener('mouseup', handleMouseUp)
+    }
+  }, [handleIsDragging, handleMouseUp, handleMouseMove])
+
   return (
     <div className="App">
       <AppToolbar
@@ -58,9 +90,11 @@ function App() {
             size={size}
           />
         ))}
+        <div className="App__the-end"></div>
       </div>
 
-      <div className="App__output">
+      <div className="App__output" style={{ flexBasis: outputHeightPx + 'px' }}>
+        <div className="App__drag-handle" onMouseDown={handleMouseDown} />
         <Output heading="Root CSS Variables" content={cssOutput} />
         <Output heading="SCSS Aliases" content={scssOutput} />
         <Output heading="Config" content={configOutput} />

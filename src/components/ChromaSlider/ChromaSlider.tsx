@@ -20,7 +20,6 @@ export const ChromaSlider = React.memo(
     size,
   }: ChromaSliderPropsType) => {
     const [isDragging, setIsDragging] = useState(false)
-
     const maxChroma = getMaxChroma(color)
 
     const handleMouseDown = () => setIsDragging(true)
