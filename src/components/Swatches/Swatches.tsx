@@ -79,6 +79,14 @@ const SwatchesSwatch = ({
     h: scale.hue,
   })
   const swatchColor = color._rgb._clipped ? undefined : color.hex()
+
+  const handleClick = () => {
+    const sliderHandle = document.querySelector(
+      `[data-slider-handle="scale${scaleIndex}-point${pointIndex}"]`
+    ) as HTMLDivElement
+    if (sliderHandle) sliderHandle.focus()
+  }
+
   return (
     <div
       key={pointIndex}
@@ -91,6 +99,7 @@ const SwatchesSwatch = ({
         backgroundColor: swatchColor,
         flexBasis: `${(1 / scale.chromas.length) * 100}%`,
       }}
+      onClick={handleClick}
     >
       <div className="Swatches__label">
         {scale.scaleName} {colorNames?.[pointIndex]}

@@ -3,7 +3,7 @@ import { reducer } from 'reducer'
 import './App.scss'
 import { IconButton, Output, ScaleGenerator } from 'components'
 import { parseConfig, parseScales } from 'utils'
-import theme from 'config/initial-theme.json'
+import theme from 'config/beewo-theme.json'
 import { faChartScatter, faInfoCircle } from '@fortawesome/pro-light-svg-icons'
 
 function App() {

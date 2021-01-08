@@ -1,13 +1,5 @@
 import { Color } from 'chroma-js'
 
-// type ButtonPropsType = {
-//   foo: 'normal' | 'primary' | 'plain-text' | 'danger'
-// }
-
-// type TextPropsType = {
-//   foo: 'normal' | 'subdued' | 'high-contrast' | 'vivid'
-// }
-
 export type LCHColor = { l: number; c: number; h: number }
 
 export type ColorExtended = Color & {
@@ -28,6 +20,8 @@ export type ColorExtended = Color & {
 
 export type ScaleType = {
   scaleName: string
+  targetColorString?: string
+  targetColorNickname?: string
   chromaticTextChroma: number
   vividTextChroma: number
   hue: number
@@ -73,3 +67,9 @@ export type ActionType =
       scaleIndex: number
       value: number
     }
+
+  | {
+    changeType: 'targetColorString'
+    scaleIndex: number
+    value: string | undefined
+  }

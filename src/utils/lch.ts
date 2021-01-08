@@ -9,8 +9,9 @@ export function lch(lch: LCHObject): ColorExtended
 
 export function lch(lch: LCHTuple | LCHObject) {
   if (Array.isArray(lch)) {
-    return { l: lch[0], c: lch[1], h: lch[2] } as LCHObject
+    return { l: lch[0], c: lch[1], h: isNaN(lch[2]) ? 0 : lch[2] } as LCHObject
   } else {
     return chromajs.lch(lch.l, lch.c, lch.h) as ColorExtended
   }
 }
+

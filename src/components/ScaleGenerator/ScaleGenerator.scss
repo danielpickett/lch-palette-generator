@@ -70,33 +70,78 @@
   }
 
   &__chroma-detail {
-    filter: drop-shadow(0 0 4px rgba(0, 0, 0, 0.25));
-    $bg: white;
     position: absolute;
-    display: flex;
-    align-items: center;
     font-size: 10px;
     transform: translateY(-50%);
-    background-color: $bg;
-    padding: 0px 4px;
-    border-top-left-radius: 100px;
-    border-bottom-left-radius: 100px;
     left: 4px;
     top: 0;
     width: calc(100% - 12px);
     height: 12px;
+    text-align: right;
+  }
+
+  &__target-color-input {
+    position: absolute;
     z-index: 1;
+    top: calc(100% + 8px);
+    left: 0;
+  }
+
+  &__target-color-sample {
+    position: absolute;
+    top: 8px;
+    left: 16px;
+    $size: 26px;
+    border-radius: 5px;
+    height: $size;
+    width: $size;
+  }
+
+  &__target-color-nickname {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    top: 8px;
+    left: 52px;
+    $size: 26px;
+    border-radius: 5px;
+    height: $size;
+    width: $size;
+  }
+
+  &__target-color-crosshairs {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 1px;
+    width: 1px;
+
+    border-radius: 1000px;
 
     &::before {
       content: '';
-      z-index: 0;
-      display: block;
-      height: 8px;
-      width: 8px;
       position: absolute;
-      left: 100%;
-      background-color: $bg;
-      transform: translateX(-50%) rotate(45deg);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 20px;
+      height: 1px;
+      background-color: black;
+      border: 1px solid white;
+      z-index: 0;
+    }
+    &::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 1px;
+      height: 20px;
+      background-color: black;
+      border: 1px solid white;
+      z-index: 0;
     }
   }
 
@@ -118,7 +163,7 @@
   }
 }
 
-.ScaleGenerator__points:hover {
+.ScaleGenerator:hover {
   .ScaleGenerator {
     &__text-chroma {
       visibility: visible;

@@ -1,4 +1,5 @@
 import { ActionType, StateType } from 'types'
+import chromajs from 'chroma-js'
 
 export const reducer = (state: StateType, action: ActionType) => {
   switch (action.changeType) {
@@ -20,7 +21,7 @@ export const reducer = (state: StateType, action: ActionType) => {
                   24.976,
                   20.508,
                   16.04,
-                  11.572
+                  11.572,
                 ],
               }
             : scale
@@ -35,8 +36,10 @@ export const reducer = (state: StateType, action: ActionType) => {
         scales: state.scales.map((scale, index) => {
           if (index === scaleIndex) {
             let newChromaticTextChroma: number
-            if (scale.chromaticTextChroma + value < min) newChromaticTextChroma = min
-            else if (scale.chromaticTextChroma + value > max) newChromaticTextChroma = max
+            if (scale.chromaticTextChroma + value < min)
+              newChromaticTextChroma = min
+            else if (scale.chromaticTextChroma + value > max)
+              newChromaticTextChroma = max
             else newChromaticTextChroma = scale.chromaticTextChroma + value
             return { ...scale, chromaticTextChroma: newChromaticTextChroma }
           } else {
@@ -53,7 +56,8 @@ export const reducer = (state: StateType, action: ActionType) => {
           if (index === scaleIndex) {
             let newVividTextChroma: number
             if (scale.vividTextChroma + value < min) newVividTextChroma = min
-            else if (scale.vividTextChroma + value > max) newVividTextChroma = max
+            else if (scale.vividTextChroma + value > max)
+              newVividTextChroma = max
             else newVividTextChroma = scale.vividTextChroma + value
             return { ...scale, vividTextChroma: newVividTextChroma }
           } else {
@@ -99,10 +103,29 @@ export const reducer = (state: StateType, action: ActionType) => {
         ),
       }
     }
-    default:
+    case 'targetColorString': {
+      let hue: number | null
+      if (action.value) {
+        try {
+          hue = chromajs(action.value).lch()[2]
+        } catch (error) {
+          hue = null
+        }
+      }
       return {
         ...state,
-        scales: [...state.scales],
+        scales: state.scales.map((scale, index) =>
+          index === action.scaleIndex
+            ? {
+                ...scale,
+                targetColorString: action.value,
+                hue: hue ? hue : scale.hue,
+              }
+            : scale
+        ),
       }
+    }
+    default:
+      return state
   }
 }

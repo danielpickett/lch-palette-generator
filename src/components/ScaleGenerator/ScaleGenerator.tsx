@@ -1,19 +1,22 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './ScaleGenerator.scss'
 import { Plotter, Slider } from 'components'
 import { Swatches } from 'components/Swatches'
 import { ScaleType, ActionType } from 'types'
 import { IconButton } from 'components'
 import { ChromaSlider } from 'components/ChromaSlider'
-import { luminances, colorNames } from 'config'
+import { colorNames, luminances } from 'config'
+import chromajs from 'chroma-js'
 import {
   faArrowToRight,
   faArrowToLeft,
   faUndo,
+  faFillDrip,
 } from '@fortawesome/pro-light-svg-icons'
-import { getMaxChroma } from 'utils'
+import { getMaxChroma, lch } from 'utils'
 import { HueSliderBackground } from 'components/HueSliderBackground'
 import { ChromaLimitSlider } from 'components/ChromaLimitSlider'
+import { TargetColorInput } from 'components/TargetColorInput'
 
 export const ScaleGenerator = React.memo(
   ({
@@ -82,14 +85,60 @@ export const ScaleGenerator = React.memo(
       })
     }
 
+    const [showTargetColorInput, setShowTargetColorInput] = useState(false)
+    const handleToggleTargetColorInput = () => {
+      setShowTargetColorInput(!showTargetColorInput)
+    }
+
     // console.log('rendered - ScaleGenerator')
+
+    const targetColor = (() => {
+      if (scale.targetColorString) {
+        try {
+          const c = chromajs(scale.targetColorString)
+          return { lch: lch(c.lch()), hex: c.hex() }
+        } catch (error) {
+          return null
+        }
+      }
+    })()
 
     return (
       <div className="ScaleGenerator">
         <div className="ScaleGenerator__points">
+          <div
+            className="ScaleGenerator__target-color-sample"
+            style={{ backgroundColor: scale.targetColorString }}
+          />
+          <div className="ScaleGenerator__target-color-nickname">
+            {scale.targetColorNickname}
+          </div>
           <div className="ScaleGenerator__toolbar">
             <div className="ScaleGenerator__buttons">
-              <div className="ScaleGenerator__button">
+              <div
+                className="ScaleGenerator__button"
+                style={{ position: 'relative' }}
+              >
+                <IconButton
+                  onClick={handleToggleTargetColorInput}
+                  faIcon={faFillDrip}
+                  title="Enter a target color for this scale"
+                />
+                {showTargetColorInput && (
+                  <div className="ScaleGenerator__target-color-input">
+                    <TargetColorInput
+                      value={scale.targetColorString || ''}
+                      scaleIndex={scaleIndex}
+                      onChange={onChange}
+                      onBlur={() => setShowTargetColorInput(false)}
+                    />
+                  </div>
+                )}
+              </div>
+              <div
+                className="ScaleGenerator__button"
+                style={{ marginLeft: 'auto' }}
+              >
                 <IconButton
                   onClick={handleChromaReset}
                   faIcon={faUndo}
@@ -144,42 +193,51 @@ export const ScaleGenerator = React.memo(
                 )
               )}
             </div>
-            <div>
-              <Plotter scale={scale} size={size}>
+
+            <Plotter scale={scale} size={size}>
+              {targetColor && (
                 <div
-                  className="ScaleGenerator__limit-line"
-                  style={{ left: `${scale.chromaticTextChroma * size}px` }}
+                  className="ScaleGenerator__target-color-crosshairs"
+                  style={{
+                    left: `${Math.round(targetColor.lch.c * size)}px`,
+                    top: `${(100 - Math.round(targetColor.lch.l)) * size}px`,
+                    backgroundColor: targetColor.hex,
+                  }}
                 />
-                <div
-                  className="ScaleGenerator__limit-line"
-                  style={{ left: `${scale.vividTextChroma * size}px` }}
-                />
-                {scale.chromas.map((chroma, pointIndex) =>
-                  pointIndex === 0 ? null : (
-                    <div
-                      className="ScaleGenerator__point"
-                      key={pointIndex}
-                      style={{
-                        width: `${150 * size}px`,
-                        top: `${(100 - luminances[pointIndex]) * size}px`,
+              )}
+              <div
+                className="ScaleGenerator__limit-line"
+                style={{ left: `${scale.chromaticTextChroma * size}px` }}
+              />
+              <div
+                className="ScaleGenerator__limit-line"
+                style={{ left: `${scale.vividTextChroma * size}px` }}
+              />
+              {scale.chromas.map((chroma, pointIndex) =>
+                pointIndex === 0 ? null : (
+                  <div
+                    className="ScaleGenerator__point"
+                    key={pointIndex}
+                    style={{
+                      width: `${150 * size}px`,
+                      top: `${(100 - luminances[pointIndex]) * size}px`,
+                    }}
+                  >
+                    <ChromaSlider
+                      size={size}
+                      scaleIndex={scaleIndex}
+                      pointIndex={pointIndex}
+                      color={{
+                        l: luminances[pointIndex],
+                        c: scale.chromas[pointIndex],
+                        h: scale.hue,
                       }}
-                    >
-                      <ChromaSlider
-                        size={size}
-                        scaleIndex={scaleIndex}
-                        pointIndex={pointIndex}
-                        color={{
-                          l: luminances[pointIndex],
-                          c: scale.chromas[pointIndex],
-                          h: scale.hue,
-                        }}
-                        onChange={onChange}
-                      />
-                    </div>
-                  )
-                )}
-              </Plotter>
-            </div>
+                      onChange={onChange}
+                    />
+                  </div>
+                )
+              )}
+            </Plotter>
           </div>
           <div className="ScaleGenerator__footer">
             <div className="ScaleGenerator__hue">h: {scale.hue.toFixed(1)}</div>

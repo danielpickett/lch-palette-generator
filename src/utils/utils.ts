@@ -119,7 +119,7 @@ export const parseConfig = (state: StateType) =>
   JSON.stringify(
     state,
     function (key, val) {
-      return val.toFixed ? Number(val.toFixed(3)) : val
+      return val?.toFixed ? Number(val.toFixed(3)) : val
     },
     2
   )

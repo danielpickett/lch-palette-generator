@@ -89,6 +89,7 @@ export const ChromaSlider = React.memo(
         onMouseDown={handleMouseDown}
         tabIndex={0}
         onKeyDown={handleKeyDown}
+        data-slider-handle={`scale${scaleIndex}-point${pointIndex}`}
       >
         <div
           className="ChromaSlider__dot"

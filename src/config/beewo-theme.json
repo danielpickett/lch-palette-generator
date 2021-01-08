@@ -4,8 +4,10 @@
       "scaleName": "Grey",
       "chromaticTextChroma": 11.5,
       "vividTextChroma": 11.5,
-      "chromas": [0, 1.2, 3.8, 5.8, 7, 11, 11.1, 10.8, 11.4, 11.3, 11.4],
-      "hue": 268
+      "chromas": [0, 1.2, 3.8, 5.8, 7, 11, 12.1, 10.8, 11.4, 11.3, 7.104],
+      "hue": 230.487,
+      "targetColorString": "#44c2e6",
+      "targetColorNickname": "Grey based on Sky"
     },
     {
       "scaleName": "Primary",
@@ -13,26 +15,62 @@
       "vividTextChroma": 38.3,
       "chromas": [
         0,
-        3.7,
-        8.3,
-        14.3,
-        23.4,
-        33,
-        38.6,
-        33.8,
-        28.9,
-        21.387,
-        13.184
+        11.499,
+        38.306,
+        85.4,
+        76.099,
+        65.112,
+        55.811,
+        46.509,
+        36.035,
+        21.899,
+        7.471
       ],
-      "hue": 268,
-      "targetColorString": "#5696d8"
+      "hue": 92.398,
+      "targetColorString": "#fdd918",
+      "targetColorNickname": "Gold"
     },
     {
       "scaleName": "Secondary",
       "chromaticTextChroma": 65.5,
       "vividTextChroma": 123.5,
-      "chromas": [0, 3.7, 10.8, 21.3, 36.9, 53.5, 64.9, 56.3, 46.4, 37.2, 24.4],
-      "hue": 310
+      "chromas": [
+        0,
+        3.7,
+        18.677,
+        40.503,
+        80.493,
+        68.848,
+        59.033,
+        49.219,
+        37.939,
+        22.852,
+        7.764
+      ],
+      "hue": 75.204,
+      "targetColorString": "#feaa03",
+      "targetColorNickname": "Honey"
+    },
+    {
+      "scaleName": "Tertiary",
+      "chromaticTextChroma": 65.5,
+      "vividTextChroma": 123.5,
+      "chromas": [
+        0,
+        3.7,
+        10.8,
+        21.3,
+        36.9,
+        35.596,
+        30.469,
+        25.415,
+        19.849,
+        14.282,
+        7.104
+      ],
+      "hue": 230.487,
+      "targetColorString": "#44c2e6",
+      "targetColorNickname": "Sky"
     },
     {
       "scaleName": "Success",
