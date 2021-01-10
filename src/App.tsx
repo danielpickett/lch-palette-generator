@@ -27,7 +27,7 @@ function App() {
   const outputHeightPx = useDragHandle(dragHandleRef)
 
   const colors = deriveColors(state)
-  console.log('colors', colors)
+  // console.log('colors', colors)
 
   return (
     <div className="App">
@@ -43,6 +43,7 @@ function App() {
             key={scaleIndex}
             scaleIndex={scaleIndex}
             scale={scale}
+            derivedColor={colors[scaleIndex]}
             onChange={handleStateChanges}
             size={size}
           />

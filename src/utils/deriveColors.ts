@@ -8,7 +8,44 @@ import {
   // greyscaleTextColorConfig,
 } from 'config'
 
-export const deriveColors = (state: StateType) => {
+export type TextColorsType = {
+  tokenName: string
+  lch: {
+    l: number
+    c: number
+    h: number
+  }
+  hex: string | null
+  contrast: number | null
+  plotLabel: string
+  plotMarker: JSX.Element
+}
+
+export type BGColorType = {
+  tokenName: string
+  lch: {
+    l: number
+    c: number
+    h: number
+  }
+  hex: string | null
+}
+
+export type DerivedShadeType = {
+  shadeName: string
+  bgColor: BGColorType
+  textColor: TextColorsType
+  textColorSubdued: TextColorsType
+  vividTextColor: TextColorsType
+  vividTextColorSubdued: TextColorsType
+}
+
+export type DerivedColorType = {
+  scaleName: string
+  shades: DerivedShadeType[]
+}
+
+export const deriveColors = (state: StateType): DerivedColorType[] => {
   return state.scales.map((scale, scaleIndex) => {
     return {
       scaleName: scale.scaleName,

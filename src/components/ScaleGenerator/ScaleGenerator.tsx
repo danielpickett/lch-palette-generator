@@ -3,6 +3,7 @@ import './ScaleGenerator.scss'
 import { Plotter, Slider } from 'components'
 import { Swatches } from 'components/Swatches'
 import { ScaleType, ThemeActionType } from 'types'
+import { DerivedColorType } from 'utils//deriveColors'
 import { IconButton } from 'components'
 import { ChromaSlider } from 'components/ChromaSlider'
 import { colorNames, luminances } from 'config'
@@ -21,6 +22,7 @@ import { TargetColorInput } from 'components/TargetColorInput'
 export const ScaleGenerator = React.memo(
   ({
     scale,
+    derivedColor,
     onChange,
     size,
     scaleIndex,
@@ -28,6 +30,7 @@ export const ScaleGenerator = React.memo(
     showTextDetails,
   }: {
     scale: ScaleType
+    derivedColor: DerivedColorType
     onChange: (action: ThemeActionType) => void
     size: number
     scaleIndex: number
@@ -257,6 +260,7 @@ export const ScaleGenerator = React.memo(
         </div>
         <Swatches
           scale={scale}
+          derivedColor={derivedColor}
           scaleIndex={scaleIndex}
           showTextPlots={showTextPlots}
           showTextDetails={showTextDetails}
