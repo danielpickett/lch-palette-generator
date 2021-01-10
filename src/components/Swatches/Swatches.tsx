@@ -5,6 +5,7 @@ import chromajs from 'chroma-js'
 import { TextSamples } from 'components'
 import { luminances, colorNames } from 'config'
 import { lch } from 'utils'
+import { SetTextColorsType } from 'App'
 
 export const Swatches = React.memo(
   ({
@@ -12,11 +13,13 @@ export const Swatches = React.memo(
     scaleIndex,
     showTextPlots,
     showTextDetails,
+    // setTextColors
   }: {
     scale: ScaleType
     scaleIndex: number
     showTextPlots: boolean
     showTextDetails: boolean
+    // setTextColors: SetTextColorsType
   }) => {
     // console.log('rendered - Swatches')
 
@@ -50,6 +53,7 @@ export const Swatches = React.memo(
               key={pointIndex}
               showTextPlots={showTextPlots}
               showTextDetails={showTextDetails}
+              // setTextColors={setTextColors}
             />
           )
         })}
@@ -65,6 +69,7 @@ const SwatchesSwatch = ({
   highestFoundChromaInScale,
   showTextPlots,
   showTextDetails,
+  // setTextColors
 }: {
   scale: ScaleType
   pointIndex: number
@@ -72,6 +77,7 @@ const SwatchesSwatch = ({
   highestFoundChromaInScale: number
   showTextPlots: boolean
   showTextDetails: boolean
+  // setTextColors: SetTextColorsType
 }) => {
   const color = lch({
     l: luminances[pointIndex],
@@ -119,6 +125,8 @@ const SwatchesSwatch = ({
           vividTextChroma={scale.vividTextChroma}
           showPlot={showTextPlots}
           showDetails={showTextDetails}
+          scaleName={scale.scaleName}
+          // setTextColors={setTextColors}
         />
       )}
       <div className="Swatches__outputs">

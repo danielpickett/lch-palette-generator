@@ -32,7 +32,7 @@ export type StateType = {
   scales: ScaleType[]
 }
 
-export type ActionType =
+export type ThemeActionType =
   | {
       changeType: 'hue'
       scaleIndex: number
@@ -67,9 +67,17 @@ export type ActionType =
       scaleIndex: number
       value: number
     }
-
   | {
-    changeType: 'targetColorString'
-    scaleIndex: number
-    value: string | undefined
-  }
+      changeType: 'targetColorString'
+      scaleIndex: number
+      value: string | undefined
+    }
+
+export type TextColorsType = {
+  [key: string]: string
+}
+
+export type TextColorsActionType = {
+  key: string
+  value: string
+}

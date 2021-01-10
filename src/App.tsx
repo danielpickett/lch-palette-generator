@@ -1,13 +1,22 @@
 import React, { useCallback, useEffect, useReducer, useState } from 'react'
-import { reducer } from 'reducer'
+import { mainReducer } from 'reducers'
 import './App.scss'
 import { IconButton, Output, ScaleGenerator } from 'components'
 import { parseConfig, parseScales } from 'utils'
 import theme from 'config/beewo-theme.json'
 import { faChartScatter, faInfoCircle } from '@fortawesome/pro-light-svg-icons'
 
+export type SetTextColorsType = React.Dispatch<
+  React.SetStateAction<{
+    [key: string]: string
+  }>
+>
+
 function App() {
-  const [state, handleStateChanges] = useReducer(reducer, theme)
+  const [state, handleStateChanges] = useReducer(mainReducer, theme)
+  const [textColors, setTextColors] = useState<{
+    [key: string]: string
+  }>({})
 
   const cssOutput =
     ':root {\n' +
@@ -15,6 +24,16 @@ function App() {
       state.scales,
       (x) => `  --color-${x.scaleNameKebab}-${x.colorName}: ${x.colorHex}`
     ) +
+    '\n}\n'
+
+  const cssTextColorsOutput =
+    ':root {\n' +
+    Object.entries(textColors)
+      .map((entry) => {
+        const [key, value] = entry
+        return '  ' + key + ': ' + value + ';'
+      })
+      .join('\n') +
     '\n}\n'
 
   const scssOutput =
@@ -87,15 +106,20 @@ function App() {
             scaleIndex={scaleIndex}
             scale={scale}
             onChange={handleStateChanges}
+            setTextColors={setTextColors}
             size={size}
           />
         ))}
         <div className="App__the-end"></div>
       </div>
 
-      <div className="App__output" style={{ flexBasis: outputHeightPx + 'px' }}>
+      <div
+        className="App__outputs"
+        style={{ flexBasis: outputHeightPx + 'px' }}
+      >
         <div className="App__drag-handle" onMouseDown={handleMouseDown} />
-        <Output heading="Root CSS Variables" content={cssOutput} />
+        <Output heading="Palette Color CSS" content={cssOutput} />
+        <Output heading="Text Color CSS" content={cssTextColorsOutput} />
         <Output heading="SCSS Aliases" content={scssOutput} />
         <Output heading="Config" content={configOutput} />
       </div>

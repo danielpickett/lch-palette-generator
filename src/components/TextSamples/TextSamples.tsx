@@ -10,7 +10,7 @@ import {
   vividTextColorConfig,
 } from 'config'
 import { lch } from 'utils'
-
+import { SetTextColorsType } from 'App'
 
 export const TextSamples = ({
   bgColor,
@@ -21,6 +21,8 @@ export const TextSamples = ({
   highestFoundChromaInScale,
   showPlot,
   showDetails,
+  scaleName,
+  // setTextColors,
 }: {
   bgColor: LCHColor
   textChroma: number
@@ -30,6 +32,8 @@ export const TextSamples = ({
   highestFoundChromaInScale: number
   showPlot: boolean
   showDetails: boolean
+  scaleName: string
+  // setTextColors: SetTextColorsType
 }) => {
   const greyOnGrey =
     scaleIndex === 0
@@ -49,7 +53,7 @@ export const TextSamples = ({
     chroma: textChroma,
     mix: chromaticTextColorConfig[pointIndex].mix,
     icon: faCircle,
-    label: 'chromatic',
+    label: 'regular',
   })
 
   const vividText = getTextColor({
@@ -76,12 +80,22 @@ export const TextSamples = ({
             colorLCH={config.regular.lch}
             contrast={config.regular.contrast}
             showDetails={showDetails}
+            scaleIndex={scaleIndex}
+            pointIndex={pointIndex}
+            scaleName={scaleName}
+            textVariantLabel={config.label === 'regular' ? config.label : ''}
+            // setTextColors={setTextColors}
           />
           <TextSample
             bgColorHex={lch(config.bgColor).hex()}
             colorLCH={config.subdued.lch}
             contrast={config.subdued.contrast}
             showDetails={showDetails}
+            scaleIndex={scaleIndex}
+            pointIndex={pointIndex}
+            scaleName={scaleName}
+            textVariantLabel={config.label + '-subdued'}
+            // setTextColors={setTextColors}
           />
         </div>
       ))}

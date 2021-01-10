@@ -116,13 +116,6 @@
       "vividTextChroma": 149,
       "chromas": [0, 3.9, 11, 21.9, 42.1, 69.5, 82.4, 71, 55.8, 37.7, 14.941],
       "hue": 31
-    },
-    {
-      "scaleName": "Inform",
-      "chromaticTextChroma": 147,
-      "vividTextChroma": 149,
-      "chromas": [0, 3.9, 11, 21.9, 42.1, 69.5, 82.4, 71, 55.8, 37.7, 14.941],
-      "hue": 305.9
     }
   ]
 }

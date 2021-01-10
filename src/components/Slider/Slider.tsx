@@ -25,8 +25,8 @@ export const Slider = React.memo(
     const handleMouseDown = () => setIsDragging(true)
 
     const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
-      e.preventDefault()
       if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
+        e.preventDefault()
         let sign = e.key === 'ArrowLeft' ? -1 : 1
 
         let diff: number
@@ -86,12 +86,16 @@ export const Slider = React.memo(
         style={{ width }}
       >
         {!!renderBackground && renderBackground(isDragging)}
-        {!!renderHandle ? renderHandle(isDragging) :<div
-          className="Slider__handle"
-          style={{
-            left: `${(value / (max - min)) * 100}%`,
-          }}
-        />}
+        {!!renderHandle ? (
+          renderHandle(isDragging)
+        ) : (
+          <div
+            className="Slider__handle"
+            style={{
+              left: `${(value / (max - min)) * 100}%`,
+            }}
+          />
+        )}
       </div>
     )
   }

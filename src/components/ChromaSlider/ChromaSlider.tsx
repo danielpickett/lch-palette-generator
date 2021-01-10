@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react'
-import { ActionType, LCHColor } from 'types'
+import { ThemeActionType, LCHColor } from 'types'
 import { getMaxChroma } from 'utils'
 import './ChromaSlider.scss'
 
@@ -7,7 +7,7 @@ type ChromaSliderPropsType = {
   color: LCHColor
   scaleIndex: number
   pointIndex: number
-  onChange: (action: ActionType) => void
+  onChange: (action: ThemeActionType) => void
   size: number
 }
 
@@ -40,9 +40,10 @@ export const ChromaSlider = React.memo(
     )
     const handleKeyDown = useCallback(
       (e: React.KeyboardEvent<HTMLDivElement>) => {
-        e.preventDefault() // stops page from scrolling on up/down arrow keys
+        
 
         if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
+          e.preventDefault() // stops page from scrolling on up/down arrow keys
           let sign = e.key === 'ArrowLeft' ? -1 : 1
           let chromaChange: number
 

@@ -1,7 +1,7 @@
-import { ActionType, StateType } from 'types'
+import { ThemeActionType, StateType } from 'types'
 import chromajs from 'chroma-js'
 
-export const reducer = (state: StateType, action: ActionType) => {
+export const mainReducer = (state: StateType, action: ThemeActionType) => {
   switch (action.changeType) {
     case 'chromaReset': {
       return {

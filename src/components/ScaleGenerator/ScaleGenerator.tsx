@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import './ScaleGenerator.scss'
 import { Plotter, Slider } from 'components'
 import { Swatches } from 'components/Swatches'
-import { ScaleType, ActionType } from 'types'
+import { ScaleType, ThemeActionType } from 'types'
 import { IconButton } from 'components'
 import { ChromaSlider } from 'components/ChromaSlider'
 import { colorNames, luminances } from 'config'
@@ -17,18 +17,21 @@ import { getMaxChroma, lch } from 'utils'
 import { HueSliderBackground } from 'components/HueSliderBackground'
 import { ChromaLimitSlider } from 'components/ChromaLimitSlider'
 import { TargetColorInput } from 'components/TargetColorInput'
+import { SetTextColorsType } from 'App'
 
 export const ScaleGenerator = React.memo(
   ({
     scale,
     onChange,
+    setTextColors,
     size,
     scaleIndex,
     showTextPlots,
     showTextDetails,
   }: {
     scale: ScaleType
-    onChange: (action: ActionType) => void
+    onChange: (action: ThemeActionType) => void
+    setTextColors: SetTextColorsType
     size: number
     scaleIndex: number
     showTextPlots: boolean
@@ -260,6 +263,7 @@ export const ScaleGenerator = React.memo(
           scaleIndex={scaleIndex}
           showTextPlots={showTextPlots}
           showTextDetails={showTextDetails}
+          // setTextColors={setTextColors}
         />
       </div>
     )
