@@ -113,7 +113,7 @@ const SwatchesSwatch = ({
 
       {swatchColor && (
         <TextSamples
-          bgColor={{
+          bgColorLCH={{
             l: luminances[pointIndex],
             c: scale.chromas[pointIndex],
             h: scale.hue,

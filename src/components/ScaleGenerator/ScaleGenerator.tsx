@@ -17,13 +17,11 @@ import { getMaxChroma, lch } from 'utils'
 import { HueSliderBackground } from 'components/HueSliderBackground'
 import { ChromaLimitSlider } from 'components/ChromaLimitSlider'
 import { TargetColorInput } from 'components/TargetColorInput'
-import { SetTextColorsType } from 'App'
 
 export const ScaleGenerator = React.memo(
   ({
     scale,
     onChange,
-    setTextColors,
     size,
     scaleIndex,
     showTextPlots,
@@ -31,7 +29,6 @@ export const ScaleGenerator = React.memo(
   }: {
     scale: ScaleType
     onChange: (action: ThemeActionType) => void
-    setTextColors: SetTextColorsType
     size: number
     scaleIndex: number
     showTextPlots: boolean

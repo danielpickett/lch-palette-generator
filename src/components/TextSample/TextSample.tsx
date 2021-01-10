@@ -3,7 +3,7 @@ import './TextSample.scss'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faExclamationTriangle } from '@fortawesome/pro-solid-svg-icons'
 import { LCHColor } from 'types'
-import { colorNames } from 'config'
+// import { colorNames } from 'config'
 import { lch } from 'utils'
 // import { SetTextColorsType } from 'App'
 
@@ -16,11 +16,11 @@ export const TextSample = ({
   scaleIndex,
   scaleName,
   textVariantLabel,
-  // setTextColors,
-}: {
+}: // setTextColors,
+{
   bgColorHex: string
   colorLCH: LCHColor
-  contrast: number
+  contrast: number | null
   showDetails: boolean
   pointIndex: number
   scaleIndex: number
@@ -31,11 +31,11 @@ export const TextSample = ({
   const colorHex = lch(colorLCH).hex()
   const colorRGB = 'rgb(' + lch(colorLCH).rgb().join(', ') + ')'
 
-  console.log(
-    `text-on-${scaleName.toLowerCase()}-${
-      colorNames[pointIndex]
-    }-${textVariantLabel}${contrast < 4.5 ? '-NOT_ACCESSIBLE': ''}: ${colorHex}`
-  )
+  // console.log(
+  //   `text-on-${scaleName.toLowerCase()}-${
+  //     colorNames[pointIndex]
+  //   }-${textVariantLabel}${contrast < 4.5 ? '-NOT_ACCESSIBLE': ''}: ${colorHex}`
+  // )
 
   // setTextColors((prev) => {
   //   return {
@@ -58,9 +58,9 @@ export const TextSample = ({
       style={{ color: colorHex, backgroundColor: bgColorHex }}
     >
       <div className="TextSample__main-copy">
-        <span>Sample Text {contrast.toFixed(2)}</span>
+        <span>Sample Text {contrast?.toFixed(2)}</span>
         <span>
-          {contrast < 4.5 && (
+          {!!contrast && contrast < 4.5 && (
             <FontAwesomeIcon
               className="TextSample__icon"
               icon={faExclamationTriangle}

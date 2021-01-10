@@ -3,17 +3,17 @@ import { LCHColor } from 'types'
 import './TextSamples.scss'
 import { TextSample, TextSamplesPlot } from 'components'
 import { faSquare, faCircle } from '@fortawesome/pro-solid-svg-icons'
-import { getTextColor } from './getTextColor'
+import { getTextColor } from 'utils'
 import {
   greyscaleTextColorConfig,
-  chromaticTextColorConfig,
+  regularTextColorConfig,
   vividTextColorConfig,
 } from 'config'
 import { lch } from 'utils'
 // import { SetTextColorsType } from 'App'
 
 export const TextSamples = ({
-  bgColor,
+  bgColorLCH,
   textChroma,
   vividTextChroma,
   scaleIndex,
@@ -24,7 +24,7 @@ export const TextSamples = ({
   scaleName,
   // setTextColors,
 }: {
-  bgColor: LCHColor
+  bgColorLCH: LCHColor
   textChroma: number
   vividTextChroma: number
   scaleIndex: number
@@ -38,7 +38,7 @@ export const TextSamples = ({
   const greyOnGrey =
     scaleIndex === 0
       ? getTextColor({
-          bgColor: bgColor,
+          bgColorLCH: bgColorLCH,
           lum: greyscaleTextColorConfig[pointIndex].lum,
           chroma: highestFoundChromaInScale,
           mix: greyscaleTextColorConfig[pointIndex].mix,
@@ -48,16 +48,16 @@ export const TextSamples = ({
       : null
 
   const chromaticText = getTextColor({
-    bgColor: bgColor,
-    lum: chromaticTextColorConfig[pointIndex].lum,
+    bgColorLCH: bgColorLCH,
+    lum: regularTextColorConfig[pointIndex].lum,
     chroma: textChroma,
-    mix: chromaticTextColorConfig[pointIndex].mix,
+    mix: regularTextColorConfig[pointIndex].mix,
     icon: faCircle,
     label: 'regular',
   })
 
   const vividText = getTextColor({
-    bgColor: bgColor,
+    bgColorLCH: bgColorLCH,
     lum: vividTextColorConfig[pointIndex].lum,
     minLum: vividTextColorConfig[pointIndex].minLum,
     chroma: vividTextChroma,
@@ -76,7 +76,7 @@ export const TextSamples = ({
       {textColorConfigs.map((config, index) => (
         <div className="TextSamples__samples" key={index}>
           <TextSample
-            bgColorHex={lch(config.bgColor).hex()}
+            bgColorHex={lch(config.bgColorLCH).hex()}
             colorLCH={config.regular.lch}
             contrast={config.regular.contrast}
             showDetails={showDetails}
@@ -87,7 +87,7 @@ export const TextSamples = ({
             // setTextColors={setTextColors}
           />
           <TextSample
-            bgColorHex={lch(config.bgColor).hex()}
+            bgColorHex={lch(config.bgColorLCH).hex()}
             colorLCH={config.subdued.lch}
             contrast={config.subdued.contrast}
             showDetails={showDetails}

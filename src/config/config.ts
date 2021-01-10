@@ -40,7 +40,7 @@ export const greyscaleTextColorConfig = [
   { lum: 96, mix: 0.75 }, // 900 darkest
 ]
 
-export const chromaticTextColorConfig = [
+export const regularTextColorConfig = [
   { lum: 20, mix: 0.75 }, // 000 white
   { lum: 20, mix: 0.75 }, // 050
   { lum: 20, mix: 0.75 }, // 100

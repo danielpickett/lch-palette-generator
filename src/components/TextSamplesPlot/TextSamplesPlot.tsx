@@ -1,5 +1,5 @@
 import { Canvas } from 'components'
-import { getTextColor } from 'components/TextSamples/getTextColor'
+import { getTextColor } from 'utils'
 import React, { Fragment } from 'react'
 import './TextSamplesPlot.scss'
 import { lch } from 'utils'
@@ -10,11 +10,11 @@ export const TextSamplesPlot = ({
   textColorConfigs: ReturnType<typeof getTextColor>[]
 }) => {
   const size = 1
-  const bgColor = textColorConfigs[0].bgColor
+  const bgColor = textColorConfigs[0].bgColorLCH
 
   return (
     <div className="TextSamplesPlot">
-      <Canvas hue={textColorConfigs[0].bgColor.h} size={size} />
+      <Canvas hue={textColorConfigs[0].bgColorLCH.h} size={size} />
       <div
         className="TextSamplesPlot__mark"
         style={{ left: bgColor.c * size, bottom: bgColor.l * size }}

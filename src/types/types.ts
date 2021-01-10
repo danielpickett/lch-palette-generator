@@ -72,12 +72,3 @@ export type ThemeActionType =
       scaleIndex: number
       value: string | undefined
     }
-
-export type TextColorsType = {
-  [key: string]: string
-}
-
-export type TextColorsActionType = {
-  key: string
-  value: string
-}
