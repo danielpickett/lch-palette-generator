@@ -5,7 +5,7 @@ import { faExclamationTriangle } from '@fortawesome/pro-solid-svg-icons'
 import { LCHColor } from 'types'
 import { colorNames } from 'config'
 import { lch } from 'utils'
-import { SetTextColorsType } from 'App'
+// import { SetTextColorsType } from 'App'
 
 export const TextSample = ({
   bgColorHex,

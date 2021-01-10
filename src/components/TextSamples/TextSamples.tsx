@@ -10,7 +10,7 @@ import {
   vividTextColorConfig,
 } from 'config'
 import { lch } from 'utils'
-import { SetTextColorsType } from 'App'
+// import { SetTextColorsType } from 'App'
 
 export const TextSamples = ({
   bgColor,

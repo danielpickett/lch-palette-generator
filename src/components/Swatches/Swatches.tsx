@@ -5,7 +5,7 @@ import chromajs from 'chroma-js'
 import { TextSamples } from 'components'
 import { luminances, colorNames } from 'config'
 import { lch } from 'utils'
-import { SetTextColorsType } from 'App'
+// import { SetTextColorsType } from 'App'
 
 export const Swatches = React.memo(
   ({
