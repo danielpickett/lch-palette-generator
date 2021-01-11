@@ -2,15 +2,18 @@ import { Output } from 'components'
 import React from 'react'
 import { StateType } from 'types'
 import { parseConfig, parseScales } from 'utils'
+import { VividTextColorsForGreyShadeType } from 'utils/extractVividTextColorsForGreyScale'
 import { TextColorsType } from 'utils/getDerivedColors'
 import './Outputs.scss'
 
 export const Outputs = ({
   state,
-  derivedColors,
+  textColors,
+  vividTextColorsForGreyShades,
 }: {
   state: StateType
-  derivedColors: TextColorsType[]
+  textColors: TextColorsType[]
+  vividTextColorsForGreyShades: VividTextColorsForGreyShadeType[]
 }) => {
   const cssPaletteColorsOutput = parseScales(
     state.scales,
@@ -18,7 +21,7 @@ export const Outputs = ({
       `  --color-${scale.scaleNameKebab}-${scale.shadeName}: ${scale.colorHex}`
   )
 
-  const cssTextColorsOutput = derivedColors.reduce(
+  const cssTextColorsOutput = textColors.reduce(
     (stringOutput: string, scale) => {
       const newString = scale.shades
         .map((shade) => {
@@ -29,7 +32,8 @@ export const Outputs = ({
             `  --${shade.vividTextColorSubdued.tokenName}: ${shade.vividTextColorSubdued.hex};\n\n`
           )
         })
-        .join('').slice(0, -1)
+        .join('')
+        .slice(0, -1)
       return stringOutput + newString
     },
     ''
@@ -45,19 +49,19 @@ export const Outputs = ({
         `$color-${x.scaleNameKebab}-${x.shadeName}: var(--color-${x.scaleNameKebab}-${x.shadeName});`
     ) + '\n'
 
-  const sassTextColorAliases = derivedColors.reduce(
+  const sassTextColorAliases = textColors.reduce(
     (stringOutput: string, scale) => {
-      const newString =
-        scale.shades
-          .map((shade) => {
-            return (
-              `$${shade.textColor.tokenName}: var(--${shade.textColor.tokenName});\n` +
-              `$${shade.textColorSubdued.tokenName}: var(--${shade.textColorSubdued.tokenName});\n` +
-              `$${shade.vividTextColor.tokenName}: var(--${shade.vividTextColor.tokenName});\n` +
-              `$${shade.vividTextColorSubdued.tokenName}: var(--${shade.vividTextColorSubdued.tokenName});\n\n`
-            )
-          })
-          .join('').slice(0, -1)
+      const newString = scale.shades
+        .map((shade) => {
+          return (
+            `$${shade.textColor.tokenName}: var(--${shade.textColor.tokenName});\n` +
+            `$${shade.textColorSubdued.tokenName}: var(--${shade.textColorSubdued.tokenName});\n` +
+            `$${shade.vividTextColor.tokenName}: var(--${shade.vividTextColor.tokenName});\n` +
+            `$${shade.vividTextColorSubdued.tokenName}: var(--${shade.vividTextColorSubdued.tokenName});\n\n`
+          )
+        })
+        .join('')
+        .slice(0, -1)
       return stringOutput + newString
     },
     ''
