@@ -1,7 +1,7 @@
 import React from 'react'
 import './Swatches.scss'
 import { ScaleType } from 'types'
-import { DerivedColorType, DerivedShadeType } from 'utils/deriveColors'
+import { DerivedColorType, DerivedShadeType } from 'utils/getDerivedColors'
 import chromajs from 'chroma-js'
 import { TextSamples } from 'components'
 import { luminances, colorNames } from 'config'

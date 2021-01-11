@@ -1,5 +1,5 @@
 import { Canvas } from 'components'
-import { TextColorsType } from 'utils/deriveColors'
+import { TextColorsType } from 'utils/getDerivedColors'
 import React from 'react'
 import './TextSamplesPlot.scss'
 import { lch } from 'utils'

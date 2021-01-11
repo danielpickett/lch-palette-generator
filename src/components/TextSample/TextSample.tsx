@@ -3,11 +3,7 @@ import './TextSample.scss'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faExclamationTriangle } from '@fortawesome/pro-solid-svg-icons'
 import chromajs from 'chroma-js'
-import { LCHColor } from 'types'
-import { TextColorsType } from 'utils/deriveColors'
-// import { colorNames } from 'config'
-import { lch } from 'utils'
-// import { SetTextColorsType } from 'App'
+import { TextColorsType } from 'utils/getDerivedColors'
 
 export const TextSample = ({
   bgColorHex,

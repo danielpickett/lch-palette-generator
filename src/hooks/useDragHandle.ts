@@ -1,10 +1,12 @@
 import { useCallback, useEffect, useState } from 'react'
 
 export const useDragHandle = (
-  dragHandleRef: React.RefObject<HTMLDivElement>
+  dragHandleRef: React.RefObject<HTMLDivElement>,
+  initialHeight: number
 ) => {
   const [handleIsDragging, setHandleIsDragging] = useState(false)
-  const [outputHeightPx, setOutputHeightPx] = useState(45)
+  const [outputHeightPx, setOutputHeightPx] = useState(initialHeight)
+  const minHeight = 45
 
   const handleMouseUp = useCallback(() => setHandleIsDragging(false), [
     setHandleIsDragging,
@@ -12,10 +14,10 @@ export const useDragHandle = (
   const handleMouseMove = useCallback((e: globalThis.MouseEvent) => {
     const docHeight = document.body.offsetHeight
     let newHeight = docHeight - e.clientY
-    if (newHeight < 45) newHeight = 45
+    if (newHeight < minHeight) newHeight = minHeight
     if (newHeight > docHeight - 42) newHeight = docHeight - 42
     setOutputHeightPx(newHeight)
-  }, [])
+  }, [minHeight])
 
   useEffect(() => {
     const dragHandle = dragHandleRef.current

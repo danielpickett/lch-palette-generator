@@ -1,5 +1,5 @@
 import React from 'react'
-import { ColorExtended, LCHColor } from 'types'
+import { LCHColor } from 'types'
 import { getMaxChroma, lch } from 'utils'
 import chromajs from 'chroma-js'
 import { IconDefinition } from '@fortawesome/fontawesome-svg-core'
@@ -54,19 +54,15 @@ export const getTextColor = ({
   }
 
   const textColorRegularObj = lch(color)
-  const textColorRegularHex = textColorRegularObj._rgb._clipped
-    ? null
-    : textColorRegularObj.hex()
+  const textColorRegularHex = textColorRegularObj.hex()
 
   const textColorSubduedObj = chromajs.mix(
     bgColorObj,
     textColorRegularObj,
     mix,
     'lch'
-  ) as ColorExtended
-  const textColorSubduedHex = textColorSubduedObj._rgb._clipped
-    ? null
-    : textColorSubduedObj.hex()
+  )
+  const textColorSubduedHex = textColorSubduedObj.hex()
 
   return {
     bgColorLCH,

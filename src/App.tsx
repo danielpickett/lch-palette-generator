@@ -4,7 +4,7 @@ import './App.scss'
 import { Outputs, ScaleGenerator, Toolbar } from 'components'
 import { useDragHandle } from 'hooks'
 import theme from 'config/beewo-theme.json'
-import { deriveColors } from 'utils'
+import { getDerivedColors } from 'utils'
 
 function App() {
   const [state, handleStateChanges] = useReducer(mainReducer, theme)
@@ -24,10 +24,9 @@ function App() {
   )
 
   const dragHandleRef = useRef<HTMLDivElement>(null)
-  const outputHeightPx = useDragHandle(dragHandleRef)
+  const outputHeightPx = useDragHandle(dragHandleRef, 200) // 45
 
-  const colors = deriveColors(state)
-  // console.log('colors', colors)
+  const derivedColors = getDerivedColors(state)
 
   return (
     <div className="App">
@@ -43,7 +42,7 @@ function App() {
             key={scaleIndex}
             scaleIndex={scaleIndex}
             scale={scale}
-            derivedColor={colors[scaleIndex]}
+            derivedColor={derivedColors[scaleIndex]}
             onChange={handleStateChanges}
             size={size}
           />
@@ -59,7 +58,7 @@ function App() {
         }}
       >
         <div className="App__drag-handle" ref={dragHandleRef} />
-        <Outputs state={state} />
+        <Outputs state={state} derivedColors={derivedColors}  />
       </div>
     </div>
   )

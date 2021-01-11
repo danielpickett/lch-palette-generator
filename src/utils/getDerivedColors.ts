@@ -45,7 +45,7 @@ export type DerivedColorType = {
   shades: DerivedShadeType[]
 }
 
-export const deriveColors = (state: StateType): DerivedColorType[] => {
+export const getDerivedColors = (state: StateType): DerivedColorType[] => {
   return state.scales.map((scale, scaleIndex) => {
     return {
       scaleName: scale.scaleName,
@@ -111,7 +111,7 @@ export const deriveColors = (state: StateType): DerivedColorType[] => {
             hex: bgColorHex,
           },
           textColor: {
-            tokenName: 'text-color-on' + nameKebab,
+            tokenName: 'text-color-on-' + nameKebab,
             lch: textColors.regular.lch,
             hex: textColors.regular.hex,
             contrast: textColors.regular.contrast,
@@ -119,7 +119,7 @@ export const deriveColors = (state: StateType): DerivedColorType[] => {
             plotMarker: textColors.marker,
           },
           textColorSubdued: {
-            tokenName: 'text-color-on' + nameKebab + '-subdued',
+            tokenName: 'text-color-on-' + nameKebab + '-subdued',
             lch: textColors.subdued.lch,
             hex: textColors.subdued.hex,
             contrast: textColors.subdued.contrast,
@@ -127,7 +127,7 @@ export const deriveColors = (state: StateType): DerivedColorType[] => {
             plotMarker: textColors.marker,
           },
           vividTextColor: {
-            tokenName: 'text-color-on' + nameKebab + '-subdued',
+            tokenName: 'text-color-on-' + nameKebab + '-vivid',
             lch: vividTextColors.regular.lch,
             hex: vividTextColors.regular.hex,
             contrast: vividTextColors.regular.contrast,
@@ -135,7 +135,7 @@ export const deriveColors = (state: StateType): DerivedColorType[] => {
             plotMarker: vividTextColors.marker,
           },
           vividTextColorSubdued: {
-            tokenName: 'text-color-on' + nameKebab + '-subdued',
+            tokenName: 'text-color-on-' + nameKebab + '-vivid-subdued',
             lch: vividTextColors.subdued.lch,
             hex: vividTextColors.subdued.hex,
             contrast: vividTextColors.subdued.contrast,

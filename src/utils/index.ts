@@ -1,4 +1,5 @@
-export * from './deriveColors'
+export * from './getDerivedColors'
 export * from './getTextColor'
 export * from './lch'
 export * from './utils'
+export * from './kbob'

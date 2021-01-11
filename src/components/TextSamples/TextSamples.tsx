@@ -1,5 +1,5 @@
 import React from 'react'
-import { DerivedShadeType } from 'utils/deriveColors'
+import { DerivedShadeType } from 'utils/getDerivedColors'
 import './TextSamples.scss'
 import { TextSample, TextSamplesPlot } from 'components'
 
