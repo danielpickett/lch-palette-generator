@@ -1,22 +1,27 @@
 import React from 'react'
 import './Swatches.scss'
 import { ScaleType } from 'types'
-import { DerivedColorType, DerivedShadeType } from 'utils/getDerivedColors'
+import {
+  TextColorsType,
+  ChromaticShadeTextColorsType,
+} from 'utils/getDerivedColors'
 import chromajs from 'chroma-js'
 import { TextSamples } from 'components'
-import { luminances, colorNames } from 'config'
-import { lch } from 'utils'
+import { luminances, shadeNames } from 'config'
+import { lch, VividTextColorsForGreyShadeType } from 'utils'
 
 export const Swatches = React.memo(
   ({
     scale,
-    derivedColor,
+    scaleTextColors,
+    vividTextColorsForGreyShades,
     scaleIndex,
     showTextPlots,
     showTextDetails,
   }: {
     scale: ScaleType
-    derivedColor: DerivedColorType
+    scaleTextColors: TextColorsType
+    vividTextColorsForGreyShades?: VividTextColorsForGreyShadeType[]
     scaleIndex: number
     showTextPlots: boolean
     showTextDetails: boolean
@@ -38,7 +43,10 @@ export const Swatches = React.memo(
           ) : (
             <SwatchesSwatch
               scale={scale}
-              derivedShadeColors={derivedColor.shades[shadeIndex]}
+              shadeTextColors={scaleTextColors.shades[shadeIndex]}
+              vividTextColorsForGreyShade={
+                vividTextColorsForGreyShades?.[shadeIndex]
+              }
               shadeIndex={shadeIndex}
               scaleIndex={scaleIndex}
               key={shadeIndex}
@@ -54,14 +62,16 @@ export const Swatches = React.memo(
 
 const SwatchesSwatch = ({
   scale,
-  derivedShadeColors,
+  shadeTextColors,
+  vividTextColorsForGreyShade,
   shadeIndex,
   scaleIndex,
   showTextPlots,
   showTextDetails,
 }: {
   scale: ScaleType
-  derivedShadeColors: DerivedShadeType
+  shadeTextColors: ChromaticShadeTextColorsType
+  vividTextColorsForGreyShade?: VividTextColorsForGreyShadeType
   shadeIndex: number
   scaleIndex: number
   showTextPlots: boolean
@@ -96,12 +106,13 @@ const SwatchesSwatch = ({
       onClick={handleClick}
     >
       <div className="Swatches__label">
-        {scale.scaleName} {colorNames?.[shadeIndex]}
+        {scale.scaleName} {shadeNames?.[shadeIndex]}
       </div>
 
       {swatchColor && (
         <TextSamples
-          shadeColors={derivedShadeColors}
+          shadeTextColors={shadeTextColors}
+          vividTextColorsForGreyShade={vividTextColorsForGreyShade}
           showPlot={showTextPlots}
           showDetails={showTextDetails}
         />

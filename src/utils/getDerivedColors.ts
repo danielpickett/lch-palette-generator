@@ -1,6 +1,6 @@
 import { StateType } from 'types'
 import { getTextColor, lch } from 'utils'
-import { luminances, colorNames } from 'config'
+import { luminances, shadeNames } from 'config'
 import { faSquare, faCircle } from '@fortawesome/pro-solid-svg-icons'
 import {
   regularTextColorConfig,
@@ -8,14 +8,14 @@ import {
   // greyscaleTextColorConfig,
 } from 'config'
 
-export type TextColorsType = {
+export type TextColorType = {
   tokenName: string
   lch: {
     l: number
     c: number
     h: number
   }
-  hex: string | null
+  hex: string
   contrast: number | null
   plotLabel: string
   plotMarker: JSX.Element
@@ -28,25 +28,28 @@ export type BGColorType = {
     c: number
     h: number
   }
-  hex: string | null
+  hex: string
 }
 
-export type DerivedShadeType = {
+export type ChromaticShadeTextColorsType = {
   shadeName: string
   bgColor: BGColorType
-  textColor: TextColorsType
-  textColorSubdued: TextColorsType
-  vividTextColor: TextColorsType
-  vividTextColorSubdued: TextColorsType
+  textColor: TextColorType
+  textColorSubdued: TextColorType
+  vividTextColor: TextColorType
+  vividTextColorSubdued: TextColorType
 }
 
-export type DerivedColorType = {
+export type TextColorsType = {
   scaleName: string
-  shades: DerivedShadeType[]
+  shades: ChromaticShadeTextColorsType[]
 }
 
-export const getDerivedColors = (state: StateType): DerivedColorType[] => {
+export const getDerivedColors = (state: StateType): TextColorsType[] => {
   return state.scales.map((scale, scaleIndex) => {
+    if (scaleIndex === 0) {
+      // return {}
+    }
     return {
       scaleName: scale.scaleName,
       shades: scale.chromas.map((chroma, shadeIndex) => {
@@ -56,7 +59,7 @@ export const getDerivedColors = (state: StateType): DerivedColorType[] => {
           h: scale.hue,
         }
         const color = lch(bgColorLCH)
-        const bgColorHex = color._rgb._clipped ? null : color.hex()
+        const bgColorHex = color.hex()
 
         // const highestFoundChromaInScale = (() => {
         //   let result = 0
@@ -101,10 +104,10 @@ export const getDerivedColors = (state: StateType): DerivedColorType[] => {
         const nameKebab =
           scale.scaleName.toLowerCase().replace(/\s+/g, '-') +
           '-' +
-          colorNames[shadeIndex]
+          shadeNames[shadeIndex]
 
         return {
-          shadeName: colorNames[shadeIndex],
+          shadeName: shadeNames[shadeIndex],
           bgColor: {
             tokenName: 'color-' + nameKebab,
             lch: bgColorLCH,

@@ -1,4 +1,4 @@
-export const colorNames = [
+export const shadeNames = [
   '000',
   '050',
   '100',
@@ -26,19 +26,19 @@ export const luminances = [
   5.0, // 900
 ]
 
-export const greyscaleTextColorConfig = [
-  { lum: 20, mix: 0.75 }, // 000 white
-  { lum: 20, mix: 0.75 }, // 050
-  { lum: 20, mix: 0.75 }, // 100
-  { lum: 20, mix: 0.75 }, // 200
-  { lum: 20, mix: 0.75 }, // 300
-  { lum: 100, mix: 0.75 }, // 400
-  { lum: 100, mix: 0.75 }, // 700
-  { lum: 99, mix: 0.75 }, // 600
-  { lum: 99, mix: 0.75 }, // 700
-  { lum: 97, mix: 0.75 }, // 800
-  { lum: 96, mix: 0.75 }, // 900 darkest
-]
+// export const greyscaleTextColorConfig = [
+//   { lum: 20, mix: 0.75 }, // 000 white
+//   { lum: 20, mix: 0.75 }, // 050
+//   { lum: 20, mix: 0.75 }, // 100
+//   { lum: 20, mix: 0.75 }, // 200
+//   { lum: 20, mix: 0.75 }, // 300
+//   { lum: 100, mix: 0.75 }, // 400
+//   { lum: 100, mix: 0.75 }, // 700
+//   { lum: 99, mix: 0.75 }, // 600
+//   { lum: 99, mix: 0.75 }, // 700
+//   { lum: 97, mix: 0.75 }, // 800
+//   { lum: 96, mix: 0.75 }, // 900 darkest
+// ]
 
 export const regularTextColorConfig = [
   { lum: 20, mix: 0.75 }, // 000 white

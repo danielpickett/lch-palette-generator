@@ -3,37 +3,37 @@ import './TextSample.scss'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faExclamationTriangle } from '@fortawesome/pro-solid-svg-icons'
 import chromajs from 'chroma-js'
-import { TextColorsType } from 'utils/getDerivedColors'
+import { TextColorType } from 'utils/getDerivedColors'
 
 export const TextSample = ({
   bgColorHex,
-  textColors,
+  textColor,
   showDetails,
 }: {
   bgColorHex: string | null
-  textColors: TextColorsType
+  textColor: TextColorType
   showDetails: boolean
 }) => {
-  const colorRGB = textColors.hex ? chromajs(textColors.hex).css() : undefined
+  const colorRGB = textColor.hex ? chromajs(textColor.hex).css() : undefined
 
   const microCopy = [
-    `L: ${textColors.lch.l.toFixed(1)}`,
-    `C: ${textColors.lch.c.toFixed(1)}`,
-    `H: ${textColors.lch.h.toFixed(1)}`,
+    `L: ${textColor.lch.l.toFixed(1)}`,
+    `C: ${textColor.lch.c.toFixed(1)}`,
+    `H: ${textColor.lch.h.toFixed(1)}`,
   ].join(', ')
 
   return (
     <div
       className="TextSample"
       style={{
-        color: textColors.hex || undefined,
+        color: textColor.hex || undefined,
         backgroundColor: bgColorHex || undefined,
       }}
     >
       <div className="TextSample__main-copy">
-        <span>Sample Text {textColors.contrast?.toFixed(2)}</span>
+        <span>Sample Text {textColor.contrast?.toFixed(2)}</span>
         <span>
-          {!!textColors.contrast && textColors.contrast < 4.5 && (
+          {!!textColor.contrast && textColor.contrast < 4.5 && (
             <FontAwesomeIcon
               className="TextSample__icon"
               icon={faExclamationTriangle}

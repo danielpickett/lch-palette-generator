@@ -3,10 +3,10 @@ import './ScaleGenerator.scss'
 import { Plotter, Slider } from 'components'
 import { Swatches } from 'components/Swatches'
 import { ScaleType, ThemeActionType } from 'types'
-import { DerivedColorType } from 'utils//getDerivedColors'
+import { TextColorsType } from 'utils//getDerivedColors'
 import { IconButton } from 'components'
 import { ChromaSlider } from 'components/ChromaSlider'
-import { colorNames, luminances } from 'config'
+import { shadeNames, luminances } from 'config'
 import chromajs from 'chroma-js'
 import {
   faArrowToRight,
@@ -15,6 +15,7 @@ import {
   faFillDrip,
 } from '@fortawesome/pro-light-svg-icons'
 import { getMaxChroma, lch } from 'utils'
+import { VividTextColorsForGreyShadeType } from 'utils/extractVividTextColorsForGreyScale'
 import { HueSliderBackground } from 'components/HueSliderBackground'
 import { ChromaLimitSlider } from 'components/ChromaLimitSlider'
 import { TargetColorInput } from 'components/TargetColorInput'
@@ -22,7 +23,8 @@ import { TargetColorInput } from 'components/TargetColorInput'
 export const ScaleGenerator = React.memo(
   ({
     scale,
-    derivedColor,
+    scaleTextColors,
+    vividTextColorsForGreyShades,
     onChange,
     size,
     scaleIndex,
@@ -30,7 +32,8 @@ export const ScaleGenerator = React.memo(
     showTextDetails,
   }: {
     scale: ScaleType
-    derivedColor: DerivedColorType
+    scaleTextColors: TextColorsType
+    vividTextColorsForGreyShades?: VividTextColorsForGreyShadeType[]
     onChange: (action: ThemeActionType) => void
     size: number
     scaleIndex: number
@@ -184,14 +187,14 @@ export const ScaleGenerator = React.memo(
           </div>
           <div className="ScaleGenerator__plot">
             <div className="ScaleGenerator__chroma-details">
-              {colorNames.map((colorName, index) =>
+              {shadeNames.map((shadeName, index) =>
                 index === 0 ? null : (
                   <div
                     className="ScaleGenerator__chroma-detail"
                     key={index}
                     style={{ top: `${(100 - luminances[index]) * size}px` }}
                   >
-                    {colorName}
+                    {shadeName}
                   </div>
                 )
               )}
@@ -260,11 +263,11 @@ export const ScaleGenerator = React.memo(
         </div>
         <Swatches
           scale={scale}
-          derivedColor={derivedColor}
+          scaleTextColors={scaleTextColors}
+          vividTextColorsForGreyShades={vividTextColorsForGreyShades}
           scaleIndex={scaleIndex}
           showTextPlots={showTextPlots}
           showTextDetails={showTextDetails}
-          // setTextColors={setTextColors}
         />
       </div>
     )

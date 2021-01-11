@@ -2,7 +2,7 @@ import { Output } from 'components'
 import React from 'react'
 import { StateType } from 'types'
 import { parseConfig, parseScales } from 'utils'
-import { DerivedColorType } from 'utils/getDerivedColors'
+import { TextColorsType } from 'utils/getDerivedColors'
 import './Outputs.scss'
 
 export const Outputs = ({
@@ -10,12 +10,12 @@ export const Outputs = ({
   derivedColors,
 }: {
   state: StateType
-  derivedColors: DerivedColorType[]
+  derivedColors: TextColorsType[]
 }) => {
   const cssPaletteColorsOutput = parseScales(
     state.scales,
     (scale) =>
-      `  --color-${scale.scaleNameKebab}-${scale.colorName}: ${scale.colorHex}`
+      `  --color-${scale.scaleNameKebab}-${scale.shadeName}: ${scale.colorHex}`
   )
 
   const cssTextColorsOutput = derivedColors.reduce(
@@ -42,7 +42,7 @@ export const Outputs = ({
     parseScales(
       state.scales,
       (x) =>
-        `$color-${x.scaleNameKebab}-${x.colorName}: var(--color-${x.scaleNameKebab}-${x.colorName});`
+        `$color-${x.scaleNameKebab}-${x.shadeName}: var(--color-${x.scaleNameKebab}-${x.shadeName});`
     ) + '\n'
 
   const sassTextColorAliases = derivedColors.reduce(
