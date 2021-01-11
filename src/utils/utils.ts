@@ -1,6 +1,7 @@
 import { LCHColor, StateType, ScaleType } from 'types'
 import { luminances, colorNames } from 'config'
 import { lch } from 'utils'
+import { kbob } from './kbob'
 
 export const isClipped = (color: LCHColor) => lch(color)._rgb._clipped
 
@@ -102,9 +103,7 @@ export const parseScales = (
               return scale.scaleName
                 ? callback({
                     scaleName: scale.scaleName,
-                    scaleNameKebab: scale.scaleName
-                      .toLowerCase()
-                      .replace(/\s+/g, '-'),
+                    scaleNameKebab: kbob(scale.scaleName),
                     colorName: colorName,
                     colorHex: swatchColor,
                   })

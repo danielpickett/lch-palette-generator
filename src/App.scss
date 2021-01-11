@@ -4,16 +4,7 @@
   display: flex;
   flex-direction: column;
 
-  &__toolbar {
-    flex-grow: 0;
-    box-shadow: 0 0 16px rgba(0, 0, 0, 0.3);
-    position: relative;
-    z-index: 1;
-  }
-  &__buttons {
-    display: flex;
-    padding: 8px;
-  }
+
 
   &__scales {
     position: relative;
@@ -35,11 +26,10 @@
   &__outputs {
     flex-grow: 0;
     flex-shrink: 0;
-    background-color: rgb(30, 30, 30);
-    padding: 1rem;
     display: flex;
-    gap: 1rem;
+    flex-direction: column;
     position: relative;
+    z-index: 2;
   }
 
   &__drag-handle {

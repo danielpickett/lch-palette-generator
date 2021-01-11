@@ -1,43 +1,34 @@
 import React from 'react'
 import './Swatches.scss'
 import { ScaleType } from 'types'
+import { DerivedColorType, DerivedShadeType } from 'utils/getDerivedColors'
 import chromajs from 'chroma-js'
 import { TextSamples } from 'components'
 import { luminances, colorNames } from 'config'
 import { lch } from 'utils'
-// import { SetTextColorsType } from 'App'
 
 export const Swatches = React.memo(
   ({
     scale,
+    derivedColor,
     scaleIndex,
     showTextPlots,
     showTextDetails,
-    // setTextColors
   }: {
     scale: ScaleType
+    derivedColor: DerivedColorType
     scaleIndex: number
     showTextPlots: boolean
     showTextDetails: boolean
-    // setTextColors: SetTextColorsType
   }) => {
     // console.log('rendered - Swatches')
-
-    const highestFoundChromaInScale = (() => {
-      let result = 0
-      scale.chromas.forEach((chroma) => {
-        if (chroma > result) result = chroma
-      })
-      return result
-    })()
-
     return (
       <div className="Swatches">
-        {scale.chromas.map((_, pointIndex) => {
+        {scale.chromas.map((_, shadeIndex) => {
           const hide = false // index === 0
           return hide ? (
             <div
-              key={pointIndex}
+              key={shadeIndex}
               className="Swatches__swatch"
               style={{
                 backgroundColor: 'white',
@@ -47,13 +38,12 @@ export const Swatches = React.memo(
           ) : (
             <SwatchesSwatch
               scale={scale}
-              pointIndex={pointIndex}
+              derivedShadeColors={derivedColor.shades[shadeIndex]}
+              shadeIndex={shadeIndex}
               scaleIndex={scaleIndex}
-              highestFoundChromaInScale={highestFoundChromaInScale}
-              key={pointIndex}
+              key={shadeIndex}
               showTextPlots={showTextPlots}
               showTextDetails={showTextDetails}
-              // setTextColors={setTextColors}
             />
           )
         })}
@@ -64,42 +54,40 @@ export const Swatches = React.memo(
 
 const SwatchesSwatch = ({
   scale,
-  pointIndex,
+  derivedShadeColors,
+  shadeIndex,
   scaleIndex,
-  highestFoundChromaInScale,
   showTextPlots,
   showTextDetails,
-  // setTextColors
 }: {
   scale: ScaleType
-  pointIndex: number
+  derivedShadeColors: DerivedShadeType
+  shadeIndex: number
   scaleIndex: number
-  highestFoundChromaInScale: number
   showTextPlots: boolean
   showTextDetails: boolean
-  // setTextColors: SetTextColorsType
 }) => {
   const color = lch({
-    l: luminances[pointIndex],
-    c: scale.chromas[pointIndex],
+    l: luminances[shadeIndex],
+    c: scale.chromas[shadeIndex],
     h: scale.hue,
   })
   const swatchColor = color._rgb._clipped ? undefined : color.hex()
 
   const handleClick = () => {
     const sliderHandle = document.querySelector(
-      `[data-slider-handle="scale${scaleIndex}-point${pointIndex}"]`
+      `[data-slider-handle="scale${scaleIndex}-point${shadeIndex}"]`
     ) as HTMLDivElement
     if (sliderHandle) sliderHandle.focus()
   }
 
   return (
     <div
-      key={pointIndex}
+      key={shadeIndex}
       className="Swatches__swatch"
       style={{
         color:
-          luminances[pointIndex] > 60 || !swatchColor
+          luminances[shadeIndex] > 60 || !swatchColor
             ? 'rgba(0, 0, 0, .7)'
             : 'rgba(255, 255, 255, .7)',
         backgroundColor: swatchColor,
@@ -108,25 +96,14 @@ const SwatchesSwatch = ({
       onClick={handleClick}
     >
       <div className="Swatches__label">
-        {scale.scaleName} {colorNames?.[pointIndex]}
+        {scale.scaleName} {colorNames?.[shadeIndex]}
       </div>
 
       {swatchColor && (
         <TextSamples
-          bgColor={{
-            l: luminances[pointIndex],
-            c: scale.chromas[pointIndex],
-            h: scale.hue,
-          }}
-          pointIndex={pointIndex}
-          scaleIndex={scaleIndex}
-          textChroma={scale.chromaticTextChroma}
-          highestFoundChromaInScale={highestFoundChromaInScale}
-          vividTextChroma={scale.vividTextChroma}
+          shadeColors={derivedShadeColors}
           showPlot={showTextPlots}
           showDetails={showTextDetails}
-          scaleName={scale.scaleName}
-          // setTextColors={setTextColors}
         />
       )}
       <div className="Swatches__outputs">

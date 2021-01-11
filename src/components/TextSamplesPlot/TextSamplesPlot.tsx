@@ -1,63 +1,63 @@
 import { Canvas } from 'components'
-import { getTextColor } from 'components/TextSamples/getTextColor'
-import React, { Fragment } from 'react'
+import { TextColorsType } from 'utils/getDerivedColors'
+import React from 'react'
 import './TextSamplesPlot.scss'
 import { lch } from 'utils'
+import { LCHColor } from 'types'
 
 export const TextSamplesPlot = ({
-  textColorConfigs,
+  bgColorLCH,
+  textColors,
 }: {
-  textColorConfigs: ReturnType<typeof getTextColor>[]
+  bgColorLCH: LCHColor
+  textColors: TextColorsType[]
 }) => {
   const size = 1
-  const bgColor = textColorConfigs[0].bgColor
 
   return (
     <div className="TextSamplesPlot">
-      <Canvas hue={textColorConfigs[0].bgColor.h} size={size} />
+      <Canvas hue={bgColorLCH.h} size={size} />
       <div
         className="TextSamplesPlot__mark"
-        style={{ left: bgColor.c * size, bottom: bgColor.l * size }}
+        style={{ left: bgColorLCH.c * size, bottom: bgColorLCH.l * size }}
         title={`background color`}
       >
         <div
           className={
             'TextSamplesPlot__bg-mark' +
-            (bgColor.l > 70 ? ' TextSamplesPlot__bg-mark--on-light-bg' : '')
+            (bgColorLCH.l > 70 ? ' TextSamplesPlot__bg-mark--on-light-bg' : '')
           }
-          style={{ color: lch(bgColor).hex() }}
+          style={{ color: lch(bgColorLCH).hex() }}
         />
       </div>
-      {textColorConfigs.map(({ regular, subdued, marker, label }, index) => {
-        return (
-          <Fragment key={index}>
-            <div
-              className="TextSamplesPlot__mark"
-              style={{
-                left: regular.lch.c * size,
-                bottom: regular.lch.l * size,
-              }}
-              title={`${label} regular text color \n${regular.lch.l.toFixed(
-                1
-              )}, ${regular.lch.c.toFixed(1)}, ${regular.lch.h.toFixed(1)}`}
-            >
-              {marker}
-            </div>
-            <div
-              className="TextSamplesPlot__mark"
-              style={{
-                left: subdued.lch.c * size,
-                bottom: subdued.lch.l * size,
-              }}
-              title={`${label} subdued text color \n${subdued.lch.l.toFixed(
-                1
-              )}, ${subdued.lch.c.toFixed(1)}, ${subdued.lch.h.toFixed(1)}`}
-            >
-              {marker}
-            </div>
-          </Fragment>
-        )
-      })}
+      {textColors.map((textColor, index) => (
+        <TEXT_SAMPLES_PLOT__MARK key={index} textColor={textColor} size={size} />
+      ))}
+    </div>
+  )
+}
+
+const TEXT_SAMPLES_PLOT__MARK = ({
+  textColor,
+  size,
+}: {
+  textColor: TextColorsType
+  size: number
+}) => {
+  return (
+    <div
+      className="TextSamplesPlot__mark"
+      style={{
+        left: textColor.lch.c * size,
+        bottom: textColor.lch.l * size,
+      }}
+      title={`${
+        textColor.plotLabel
+      } regular text color \n${textColor.lch.l.toFixed(
+        1
+      )}, ${textColor.lch.c.toFixed(1)}, ${textColor.lch.h.toFixed(1)}`}
+    >
+      {textColor.plotMarker}
     </div>
   )
 }

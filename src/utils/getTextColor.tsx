@@ -6,7 +6,7 @@ import { IconDefinition } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 export const getTextColor = ({
-  bgColor,
+  bgColorLCH,
   lum,
   minLum,
   chroma,
@@ -15,7 +15,7 @@ export const getTextColor = ({
   icon,
   label,
 }: {
-  bgColor: LCHColor
+  bgColorLCH: LCHColor
   lum: number
   minLum?: number
   chroma: number
@@ -24,9 +24,9 @@ export const getTextColor = ({
   icon: IconDefinition
   label: string
 }) => {
-  const bgColorObj = lch(bgColor)
+  const bgColorObj = lch(bgColorLCH)
 
-  const color = { l: lum, c: chroma, h: bgColor.h }
+  const color = { l: lum, c: chroma, h: bgColorLCH.h }
 
   const maxChroma = getMaxChroma(color)
   if (color.c > maxChroma) color.c = maxChroma
@@ -53,18 +53,32 @@ export const getTextColor = ({
     }
   }
 
-  const colorRegularObj = lch(color)
-  const colorSubduedObj = chromajs.mix(bgColorObj, colorRegularObj, mix, 'lch')
+  const textColorRegularObj = lch(color)
+  const textColorRegularHex = textColorRegularObj.hex()
+
+  const textColorSubduedObj = chromajs.mix(
+    bgColorObj,
+    textColorRegularObj,
+    mix,
+    'lch'
+  )
+  const textColorSubduedHex = textColorSubduedObj.hex()
 
   return {
-    bgColor,
+    bgColorLCH,
     regular: {
       lch: color,
-      contrast: chromajs.contrast(bgColorObj, colorRegularObj),
+      hex: textColorRegularHex,
+      contrast: textColorRegularHex
+        ? chromajs.contrast(bgColorObj, textColorRegularObj)
+        : null,
     },
     subdued: {
-      lch: lch(colorSubduedObj.lch()),
-      contrast: chromajs.contrast(colorSubduedObj, bgColorObj),
+      lch: lch(textColorSubduedObj.lch()),
+      hex: textColorSubduedHex,
+      contrast: textColorSubduedHex
+        ? chromajs.contrast(textColorSubduedObj, bgColorObj)
+        : null,
     },
     marker: <FontAwesomeIcon icon={icon} />,
     label,
