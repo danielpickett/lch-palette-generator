@@ -1,6 +1,5 @@
 export * from './extractVividTextColorsForGreyScale'
 export * from './getDerivedColors'
-export * from './getDerivedGreyscaleColors'
 export * from './getTextColor'
 export * from './kbob'
 export * from './lch'
