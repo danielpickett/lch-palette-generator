@@ -1,22 +1,19 @@
-import { StateType } from 'types'
+import { LCHColor, StateType } from 'types'
 import { getTextColor, lch } from 'utils'
-import { luminances, colorNames } from 'config'
-import { faSquare, faCircle } from '@fortawesome/pro-solid-svg-icons'
 import {
+  luminances,
+  shadeNames,
   regularTextColorConfig,
   vividTextColorConfig,
   // greyscaleTextColorConfig,
 } from 'config'
+import { faSquare, faCircle } from '@fortawesome/pro-solid-svg-icons'
 
-export type TextColorsType = {
+export type TextColorType = {
   tokenName: string
-  lch: {
-    l: number
-    c: number
-    h: number
-  }
-  hex: string | null
-  contrast: number | null
+  lch: LCHColor
+  hex: string
+  contrast: number
   plotLabel: string
   plotMarker: JSX.Element
 }
@@ -28,25 +25,25 @@ export type BGColorType = {
     c: number
     h: number
   }
-  hex: string | null
+  hex: string
 }
 
-export type DerivedShadeType = {
+export type ChromaticShadeTextColorsType = {
   shadeName: string
   bgColor: BGColorType
-  textColor: TextColorsType
-  textColorSubdued: TextColorsType
-  vividTextColor: TextColorsType
-  vividTextColorSubdued: TextColorsType
+  textColor: TextColorType
+  textColorSubdued: TextColorType
+  vividTextColor: TextColorType
+  vividTextColorSubdued: TextColorType
 }
 
-export type DerivedColorType = {
+export type TextColorsType = {
   scaleName: string
-  shades: DerivedShadeType[]
+  shades: ChromaticShadeTextColorsType[]
 }
 
-export const getDerivedColors = (state: StateType): DerivedColorType[] => {
-  return state.scales.map((scale, scaleIndex) => {
+export const getDerivedColors = (state: StateType): TextColorsType[] => {
+  return state.scales.map((scale) => {
     return {
       scaleName: scale.scaleName,
       shades: scale.chromas.map((chroma, shadeIndex) => {
@@ -56,27 +53,7 @@ export const getDerivedColors = (state: StateType): DerivedColorType[] => {
           h: scale.hue,
         }
         const color = lch(bgColorLCH)
-        const bgColorHex = color._rgb._clipped ? null : color.hex()
-
-        // const highestFoundChromaInScale = (() => {
-        //   let result = 0
-        //   scale.chromas.forEach((chroma) => {
-        //     if (chroma > result) result = chroma
-        //   })
-        //   return result
-        // })()
-
-        // const greyOnGreyTextColors =
-        //   scaleIndex === 0
-        //     ? getTextColor({
-        //         bgColorLCH: bgColorLCH,
-        //         lum: greyscaleTextColorConfig[shadeIndex].lum,
-        //         chroma: highestFoundChromaInScale,
-        //         mix: greyscaleTextColorConfig[shadeIndex].mix,
-        //         icon: faCircle,
-        //         label: 'greyscale',
-        //       })
-        //     : null
+        const bgColorHex = color.hex()
 
         const textColors = getTextColor({
           bgColorLCH: bgColorLCH,
@@ -101,10 +78,11 @@ export const getDerivedColors = (state: StateType): DerivedColorType[] => {
         const nameKebab =
           scale.scaleName.toLowerCase().replace(/\s+/g, '-') +
           '-' +
-          colorNames[shadeIndex]
+          shadeNames[shadeIndex]
 
         return {
-          shadeName: colorNames[shadeIndex],
+          scaleName: scale.scaleName,
+          shadeName: shadeNames[shadeIndex],
           bgColor: {
             tokenName: 'color-' + nameKebab,
             lch: bgColorLCH,

@@ -1,5 +1,5 @@
 import { LCHColor, StateType, ScaleType } from 'types'
-import { luminances, colorNames } from 'config'
+import { luminances, shadeNames } from 'config'
 import { lch } from 'utils'
 import { kbob } from './kbob'
 
@@ -85,15 +85,15 @@ export const parseScales = (
   callback: (arg: {
     scaleName: string
     scaleNameKebab: string
-    colorName: string
+    shadeName: string
     colorHex: string | undefined
   }) => string
 ) =>
   scales
     .map((scale) =>
       scale.scaleName
-        ? colorNames
-            .map((colorName, index) => {
+        ? shadeNames
+            .map((shadeName, index) => {
               const color = lch({
                 l: luminances[index],
                 c: scale.chromas[index],
@@ -104,7 +104,7 @@ export const parseScales = (
                 ? callback({
                     scaleName: scale.scaleName,
                     scaleNameKebab: kbob(scale.scaleName),
-                    colorName: colorName,
+                    shadeName: shadeName,
                     colorHex: swatchColor,
                   })
                 : ''

@@ -1,5 +1,5 @@
 import { Canvas } from 'components'
-import { TextColorsType } from 'utils/getDerivedColors'
+import { TextColorType } from 'utils/getDerivedColors'
 import React from 'react'
 import './TextSamplesPlot.scss'
 import { lch } from 'utils'
@@ -10,7 +10,7 @@ export const TextSamplesPlot = ({
   textColors,
 }: {
   bgColorLCH: LCHColor
-  textColors: TextColorsType[]
+  textColors: TextColorType[]
 }) => {
   const size = 1
 
@@ -41,7 +41,7 @@ const TEXT_SAMPLES_PLOT__MARK = ({
   textColor,
   size,
 }: {
-  textColor: TextColorsType
+  textColor: TextColorType
   size: number
 }) => {
   return (

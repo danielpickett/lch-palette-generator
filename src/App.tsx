@@ -4,7 +4,11 @@ import './App.scss'
 import { Outputs, ScaleGenerator, Toolbar } from 'components'
 import { useDragHandle } from 'hooks'
 import theme from 'config/beewo-theme.json'
-import { getDerivedColors } from 'utils'
+import {
+  extractVividTextColorsForGreyScale,
+  getDerivedColors,
+  // getDerivedGreyscaleColors,
+} from 'utils'
 
 function App() {
   const [state, handleStateChanges] = useReducer(mainReducer, theme)
@@ -17,7 +21,7 @@ function App() {
     [setShowTextDetails, showTextDetails]
   )
 
-  const [showTextPlots, setShowTextPlots] = useState(true)
+  const [showTextPlots, setShowTextPlots] = useState(false)
   const handleShowTextPlotsChange = useCallback(
     () => setShowTextPlots(!showTextPlots),
     [setShowTextPlots, showTextPlots]
@@ -26,7 +30,13 @@ function App() {
   const dragHandleRef = useRef<HTMLDivElement>(null)
   const outputHeightPx = useDragHandle(dragHandleRef, 200) // 45
 
-  const derivedColors = getDerivedColors(state)
+  const computedTextColors = getDerivedColors(state)
+
+  const vividTextColorsForGreyShades = extractVividTextColorsForGreyScale(
+    computedTextColors
+  )
+
+  // console.log('vividTextColorsForGreyShades', vividTextColorsForGreyShades)
 
   return (
     <div className="App">
@@ -42,7 +52,10 @@ function App() {
             key={scaleIndex}
             scaleIndex={scaleIndex}
             scale={scale}
-            derivedColor={derivedColors[scaleIndex]}
+            scaleTextColors={computedTextColors[scaleIndex]}
+            vividTextColorsForGreyShades={
+              scaleIndex === 0 ? vividTextColorsForGreyShades : undefined
+            }
             onChange={handleStateChanges}
             size={size}
           />
@@ -58,7 +71,11 @@ function App() {
         }}
       >
         <div className="App__drag-handle" ref={dragHandleRef} />
-        <Outputs state={state} derivedColors={derivedColors}  />
+        <Outputs
+          state={state}
+          textColors={computedTextColors}
+          vividTextColorsForGreyShades={vividTextColorsForGreyShades}
+        />
       </div>
     </div>
   )
