@@ -1,15 +1,10 @@
 // I'M ABANDONING THIS APPROACH FOR NOW
-// Instead of calculating all of the vivid text colors again 
-// against the greyscale shade, I should just pass in the 
-// already calculated text colors and pull out the vivid 
+// Instead of calculating all of the vivid text colors again
+// against the greyscale shade, I should just pass in the
+// already calculated text colors and pull out the vivid
 // text colors to use against the grey shades.
 
 // starting a new file with function for that approach.
-
-
-
-
-
 
 import { StateType } from 'types'
 import { getTextColor, kbob, lch } from 'utils'
@@ -59,15 +54,6 @@ export const getDerivedGreyscaleColors = (state: StateType) => {
         return result
       })()
 
-      //       getTextColor({
-      //         bgColorLCH: bgColorLCH,
-      //         lum: greyscaleTextColorConfig[shadeIndex].lum,
-      //         chroma: highestFoundChromaInScale,
-      //         mix: greyscaleTextColorConfig[shadeIndex].mix,
-      //         icon: faCircle,
-      //         label: 'greyscale',
-      //       })
-
       const textColors = getTextColor({
         bgColorLCH: bgColorLCH,
         lum: regularTextColorConfig[shadeIndex].lum,
@@ -78,8 +64,7 @@ export const getDerivedGreyscaleColors = (state: StateType) => {
       })
 
       const vividTextColors = chromaticScales.map((scale, scaleIndex) => {
-        const temp=scale.chromas[shadeIndex]
-        
+        const temp = scale.chromas[shadeIndex]
 
         return temp
       })

@@ -15,34 +15,51 @@ export const Outputs = ({
   textColors: TextColorsType[]
   vividTextColorsForGreyShades: VividTextColorsForGreyShadeType[]
 }) => {
-  const cssPaletteColorsOutput = parseScales(
+  const cssPaletteColors = parseScales(
     state.scales,
     (scale) =>
       `  --color-${scale.scaleNameKebab}-${scale.shadeName}: ${scale.colorHex}`
   )
 
-  const cssTextColorsOutput = textColors.reduce(
-    (stringOutput: string, scale) => {
-      const newString = scale.shades
-        .map((shade) => {
+  const cssTextColors = textColors.reduce((stringOutput: string, scale) => {
+    const newString = scale.shades
+      .map((shade) => {
+        return (
+          `  --${shade.textColor.tokenName}: ${shade.textColor.hex};\n` +
+          `  --${shade.textColorSubdued.tokenName}: ${shade.textColorSubdued.hex};\n` +
+          `  --${shade.vividTextColor.tokenName}: ${shade.vividTextColor.hex};\n` +
+          `  --${shade.vividTextColorSubdued.tokenName}: ${shade.vividTextColorSubdued.hex};\n\n`
+        )
+      })
+      .join('')
+      .slice(0, -1) // removes trailing newline
+    return stringOutput + '\n' + newString
+  }, '')
+
+  const cssVividTextColorsOnGrey = vividTextColorsForGreyShades
+    .reduce((prevTokens: string, textColors) => {
+      const newTokens = textColors.vividTextColorSets
+        .map((textColorSet) => {
           return (
-            `  --${shade.textColor.tokenName}: ${shade.textColor.hex};\n` +
-            `  --${shade.textColorSubdued.tokenName}: ${shade.textColorSubdued.hex};\n` +
-            `  --${shade.vividTextColor.tokenName}: ${shade.vividTextColor.hex};\n` +
-            `  --${shade.vividTextColorSubdued.tokenName}: ${shade.vividTextColorSubdued.hex};\n\n`
+            `  --${textColorSet.vividTextColor.tokenName}: ${textColorSet.vividTextColor.hex};\n` +
+            `  --${textColorSet.vividTextColorSubdued.tokenName}: ${textColorSet.vividTextColorSubdued.hex};`
           )
         })
-        .join('')
-        .slice(0, -1)
-      return stringOutput + newString
-    },
-    ''
-  )
+        .join('\n')
+      return prevTokens + '\n' + newTokens + '\n'
+    }, '')
+    .slice(0, -1) // removes trailing newline
 
-  const cssAllOutput =
-    ':root {\n' + cssPaletteColorsOutput + '\n\n' + cssTextColorsOutput + '}\n'
+  const cssCombined =
+    ':root {\n' +
+    cssPaletteColors +
+    '\n' +
+    cssVividTextColorsOnGrey +
+    '\n' +
+    cssTextColors +
+    '}\n'
 
-  const sassPaletteColorsOutput =
+  const sassPaletteColorAliases =
     parseScales(
       state.scales,
       (x) =>
@@ -67,14 +84,33 @@ export const Outputs = ({
     ''
   )
 
-  const sassAllOutput = sassPaletteColorsOutput + '\n' + sassTextColorAliases
+  const sassVividTextColorsOnGreyAliases = vividTextColorsForGreyShades
+    .reduce((prevTokens: string, textColors) => {
+      const newTokens = textColors.vividTextColorSets
+        .map((textColorSet) => {
+          return (
+            `$${textColorSet.vividTextColor.tokenName}: var(--${textColorSet.vividTextColor.tokenName});\n` +
+            `$${textColorSet.vividTextColorSubdued.tokenName}: var(--${textColorSet.vividTextColorSubdued.tokenName});`
+          )
+        })
+        .join('\n')
+      return prevTokens + '\n' + newTokens + '\n'
+    }, '')
+    .slice(0, -1) // removes trailing newline
+
+  const sassCombined =
+    sassPaletteColorAliases +
+    '\n' +
+    sassVividTextColorsOnGreyAliases +
+    '\n' +
+    sassTextColorAliases
 
   const configOutput = parseConfig(state) + '\n'
 
   return (
     <div className="Outputs">
-      <Output heading="CSS Custom Properties" content={cssAllOutput} />
-      <Output heading="SCSS Aliases" content={sassAllOutput} />
+      <Output heading="CSS Custom Properties" content={cssCombined} />
+      <Output heading="SCSS Aliases" content={sassCombined} />
       <Output heading="Config" content={configOutput} />
     </div>
   )

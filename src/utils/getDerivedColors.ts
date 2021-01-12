@@ -1,22 +1,19 @@
-import { StateType } from 'types'
+import { LCHColor, StateType } from 'types'
 import { getTextColor, lch } from 'utils'
-import { luminances, shadeNames } from 'config'
-import { faSquare, faCircle } from '@fortawesome/pro-solid-svg-icons'
 import {
+  luminances,
+  shadeNames,
   regularTextColorConfig,
   vividTextColorConfig,
   // greyscaleTextColorConfig,
 } from 'config'
+import { faSquare, faCircle } from '@fortawesome/pro-solid-svg-icons'
 
 export type TextColorType = {
   tokenName: string
-  lch: {
-    l: number
-    c: number
-    h: number
-  }
+  lch: LCHColor
   hex: string
-  contrast: number | null
+  contrast: number
   plotLabel: string
   plotMarker: JSX.Element
 }
@@ -46,10 +43,7 @@ export type TextColorsType = {
 }
 
 export const getDerivedColors = (state: StateType): TextColorsType[] => {
-  return state.scales.map((scale, scaleIndex) => {
-    if (scaleIndex === 0) {
-      // return {}
-    }
+  return state.scales.map((scale) => {
     return {
       scaleName: scale.scaleName,
       shades: scale.chromas.map((chroma, shadeIndex) => {
@@ -60,26 +54,6 @@ export const getDerivedColors = (state: StateType): TextColorsType[] => {
         }
         const color = lch(bgColorLCH)
         const bgColorHex = color.hex()
-
-        // const highestFoundChromaInScale = (() => {
-        //   let result = 0
-        //   scale.chromas.forEach((chroma) => {
-        //     if (chroma > result) result = chroma
-        //   })
-        //   return result
-        // })()
-
-        // const greyOnGreyTextColors =
-        //   scaleIndex === 0
-        //     ? getTextColor({
-        //         bgColorLCH: bgColorLCH,
-        //         lum: greyscaleTextColorConfig[shadeIndex].lum,
-        //         chroma: highestFoundChromaInScale,
-        //         mix: greyscaleTextColorConfig[shadeIndex].mix,
-        //         icon: faCircle,
-        //         label: 'greyscale',
-        //       })
-        //     : null
 
         const textColors = getTextColor({
           bgColorLCH: bgColorLCH,
@@ -107,6 +81,7 @@ export const getDerivedColors = (state: StateType): TextColorsType[] => {
           shadeNames[shadeIndex]
 
         return {
+          scaleName: scale.scaleName,
           shadeName: shadeNames[shadeIndex],
           bgColor: {
             tokenName: 'color-' + nameKebab,

@@ -26,35 +26,22 @@ export const Swatches = React.memo(
     showTextPlots: boolean
     showTextDetails: boolean
   }) => {
-    // console.log('rendered - Swatches')
     return (
       <div className="Swatches">
-        {scale.chromas.map((_, shadeIndex) => {
-          const hide = false // index === 0
-          return hide ? (
-            <div
-              key={shadeIndex}
-              className="Swatches__swatch"
-              style={{
-                backgroundColor: 'white',
-                flexBasis: `${(1 / scale.chromas.length) * 100}%`,
-              }}
-            />
-          ) : (
-            <SwatchesSwatch
-              scale={scale}
-              shadeTextColors={scaleTextColors.shades[shadeIndex]}
-              vividTextColorsForGreyShade={
-                vividTextColorsForGreyShades?.[shadeIndex]
-              }
-              shadeIndex={shadeIndex}
-              scaleIndex={scaleIndex}
-              key={shadeIndex}
-              showTextPlots={showTextPlots}
-              showTextDetails={showTextDetails}
-            />
-          )
-        })}
+        {scale.chromas.map((_, shadeIndex) => (
+          <SwatchesSwatch
+            scale={scale}
+            shadeTextColors={scaleTextColors.shades[shadeIndex]}
+            vividTextColorsForGreyShade={
+              vividTextColorsForGreyShades?.[shadeIndex]
+            }
+            shadeIndex={shadeIndex}
+            scaleIndex={scaleIndex}
+            key={shadeIndex}
+            showTextPlots={showTextPlots}
+            showTextDetails={showTextDetails}
+          />
+        ))}
       </div>
     )
   }

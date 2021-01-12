@@ -5,6 +5,12 @@ import chromajs from 'chroma-js'
 import { IconDefinition } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
+// export type TextColorType = {
+//   lch: LCHColor
+//   hex: string
+//   contrast: number
+// }
+
 export const getTextColor = ({
   bgColorLCH,
   lum,
@@ -26,7 +32,7 @@ export const getTextColor = ({
 }) => {
   const bgColorObj = lch(bgColorLCH)
 
-  const color = { l: lum, c: chroma, h: bgColorLCH.h }
+  const color = { l: lum, c: chroma, h: bgColorLCH.h } as LCHColor
 
   const maxChroma = getMaxChroma(color)
   if (color.c > maxChroma) color.c = maxChroma
@@ -69,16 +75,12 @@ export const getTextColor = ({
     regular: {
       lch: color,
       hex: textColorRegularHex,
-      contrast: textColorRegularHex
-        ? chromajs.contrast(bgColorObj, textColorRegularObj)
-        : null,
+      contrast: chromajs.contrast(bgColorObj, textColorRegularObj),
     },
     subdued: {
       lch: lch(textColorSubduedObj.lch()),
       hex: textColorSubduedHex,
-      contrast: textColorSubduedHex
-        ? chromajs.contrast(textColorSubduedObj, bgColorObj)
-        : null,
+      contrast: chromajs.contrast(textColorSubduedObj, bgColorObj),
     },
     marker: <FontAwesomeIcon icon={icon} />,
     label,

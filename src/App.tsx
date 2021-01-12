@@ -31,12 +31,12 @@ function App() {
   const outputHeightPx = useDragHandle(dragHandleRef, 200) // 45
 
   const computedTextColors = getDerivedColors(state)
-  // const derivedGreyscaleColors = getDerivedGreyscaleColors(state)
-  // console.log(derivedGreyscaleColors)
 
   const vividTextColorsForGreyShades = extractVividTextColorsForGreyScale(
     computedTextColors
   )
+
+  // console.log('vividTextColorsForGreyShades', vividTextColorsForGreyShades)
 
   return (
     <div className="App">
@@ -71,7 +71,11 @@ function App() {
         }}
       >
         <div className="App__drag-handle" ref={dragHandleRef} />
-        <Outputs state={state} textColors={computedTextColors} vividTextColorsForGreyShades={vividTextColorsForGreyShades} />
+        <Outputs
+          state={state}
+          textColors={computedTextColors}
+          vividTextColorsForGreyShades={vividTextColorsForGreyShades}
+        />
       </div>
     </div>
   )
