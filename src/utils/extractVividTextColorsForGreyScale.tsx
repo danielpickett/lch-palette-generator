@@ -82,9 +82,9 @@ export const extractVividTextColorsForGreyScale = (
               //   vividSubduedContrast < 4.5 ? '--UNSAFE' : ''
 
               const vividtokenName = 
-                `text-color-${scaleKebab}-on-grey-${shadeName}--vivid` // prettier-ignore
+                `text-on-grey-${shadeName}--${scaleKebab}--vivid` // prettier-ignore
               const vividSubduedtokenName =
-                `text-color-${scaleKebab}-on-grey-${shadeName}--vivid--subdued` // prettier-ignore
+                `text-on-grey-${shadeName}--${scaleKebab}--vivid--subdued` // prettier-ignore
 
               return {
                 srcScaleKebab: scaleKebab,
