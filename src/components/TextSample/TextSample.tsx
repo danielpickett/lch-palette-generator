@@ -1,7 +1,7 @@
 import React from 'react'
 import './TextSample.scss'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faExclamationTriangle } from '@fortawesome/pro-solid-svg-icons'
+import { faExclamationCircle } from '@fortawesome/pro-light-svg-icons'
 import chromajs from 'chroma-js'
 import { TextColorType } from 'utils/getDerivedColors'
 
@@ -32,14 +32,14 @@ export const TextSample = ({
     >
       <div className="TextSample__main-copy">
         <span>Sample Text {textColor.contrast?.toFixed(2)}</span>
-        <span>
-          {!!textColor.contrast && textColor.contrast < 4.5 && (
-            <FontAwesomeIcon
+        {!!textColor.contrast && textColor.contrast < 4.5 && (
+          <span>!
+            {/* <FontAwesomeIcon
               className="TextSample__icon"
-              icon={faExclamationTriangle}
-            />
-          )}
-        </span>
+              icon={faExclamationCircle}
+            /> */}
+          </span>
+        )}
       </div>
       {showDetails && (
         <div className="TextSample__micro-copy">

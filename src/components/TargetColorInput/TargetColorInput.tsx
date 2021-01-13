@@ -1,6 +1,6 @@
 import React from 'react'
 import './TargetColorInput.scss'
-import { ThemeActionType } from 'types'
+import { ActionType } from 'types'
 
 export const TargetColorInput = ({
   value,
@@ -10,7 +10,7 @@ export const TargetColorInput = ({
 }: {
   value: string
   scaleIndex: number
-  onChange: (action: ThemeActionType) => void
+  onChange: (action: ActionType) => void
   onBlur?: () => void
 }) => {
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {

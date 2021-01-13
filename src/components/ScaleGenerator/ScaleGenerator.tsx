@@ -1,8 +1,7 @@
 import React, { useState } from 'react'
 import './ScaleGenerator.scss'
-import { Plotter, Slider } from 'components'
-import { Swatches } from 'components/Swatches'
-import { ScaleType, ThemeActionType } from 'types'
+import { Plotter, Slider, Swatch } from 'components'
+import { ScaleType, ActionType } from 'types'
 import { TextColorsType } from 'utils//getDerivedColors'
 import { IconButton } from 'components'
 import { ChromaSlider } from 'components/ChromaSlider'
@@ -34,23 +33,23 @@ export const ScaleGenerator = React.memo(
     scale: ScaleType
     scaleTextColors: TextColorsType
     vividTextColorsForGreyShades?: VividTextColorsForGreyShadeType[]
-    onChange: (action: ThemeActionType) => void
+    onChange: (action: ActionType) => void
     size: number
     scaleIndex: number
     showTextPlots: boolean
     showTextDetails: boolean
   }) => {
     const handleSnapChroma = (value: number) => {
-      scale.chromas.forEach((chroma, pointIndex) => {
+      scale.chromas.forEach((chroma, shadeIndex) => {
         const maxChroma = getMaxChroma({
-          l: luminances[pointIndex],
+          l: luminances[shadeIndex],
           c: chroma,
           h: scale.hue,
         })
         onChange({
           changeType: 'chroma',
           scaleIndex: scaleIndex,
-          pointIndex: pointIndex,
+          shadeIndex: shadeIndex,
           value: value,
           min: 0,
           max: maxChroma,
@@ -219,26 +218,27 @@ export const ScaleGenerator = React.memo(
                 className="ScaleGenerator__limit-line"
                 style={{ left: `${scale.vividTextChroma * size}px` }}
               />
-              {scale.chromas.map((chroma, pointIndex) =>
-                pointIndex === 0 ? null : (
+              {scale.chromas.map((chroma, shadeIndex) =>
+                shadeIndex === 0 ? null : (
                   <div
                     className="ScaleGenerator__point"
-                    key={pointIndex}
+                    key={shadeIndex}
                     style={{
                       width: `${150 * size}px`,
-                      top: `${(100 - luminances[pointIndex]) * size}px`,
+                      top: `${(100 - luminances[shadeIndex]) * size}px`,
                     }}
                   >
                     <ChromaSlider
-                      size={size}
                       scaleIndex={scaleIndex}
-                      pointIndex={pointIndex}
+                      shadeIndex={shadeIndex}
                       color={{
-                        l: luminances[pointIndex],
-                        c: scale.chromas[pointIndex],
+                        l: luminances[shadeIndex],
+                        c: scale.chromas[shadeIndex],
                         h: scale.hue,
                       }}
                       onChange={onChange}
+                      size={size}
+                      defaultShade={scale.defaultShade === shadeIndex}
                     />
                   </div>
                 )
@@ -261,14 +261,24 @@ export const ScaleGenerator = React.memo(
             </div>
           </div>
         </div>
-        <Swatches
-          scale={scale}
-          scaleTextColors={scaleTextColors}
-          vividTextColorsForGreyShades={vividTextColorsForGreyShades}
-          scaleIndex={scaleIndex}
-          showTextPlots={showTextPlots}
-          showTextDetails={showTextDetails}
-        />
+        <div className="ScaleGenerator__swatches">
+          {scale.chromas.map((_, shadeIndex) => (
+            <Swatch
+              scale={scale}
+              shadeTextColors={scaleTextColors.shades[shadeIndex]}
+              vividTextColorsForGreyShade={
+                vividTextColorsForGreyShades?.[shadeIndex]
+              }
+              shadeIndex={shadeIndex}
+              scaleIndex={scaleIndex}
+              key={shadeIndex}
+              showTextPlots={showTextPlots}
+              showTextDetails={showTextDetails}
+              defaultShade={scale.defaultShade === shadeIndex}
+              onChange={onChange}
+            />
+          ))}
+        </div>
       </div>
     )
   }

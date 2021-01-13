@@ -11,6 +11,7 @@
     },
     {
       "scaleName": "Primary",
+      "defaultShade": 6,
       "chromaticTextChroma": 31.9,
       "vividTextChroma": 137.8,
       "chromas": [
@@ -32,6 +33,7 @@
     },
     {
       "scaleName": "Secondary",
+      "defaultShade": 6,
       "chromaticTextChroma": 65.5,
       "vividTextChroma": 123.5,
       "chromas": [
@@ -53,6 +55,7 @@
     },
     {
       "scaleName": "Tertiary",
+      "defaultShade": 6,
       "chromaticTextChroma": 65.5,
       "vividTextChroma": 123.5,
       "chromas": [
@@ -74,6 +77,7 @@
     },
     {
       "scaleName": "Success",
+      "defaultShade": 6,
       "chromaticTextChroma": 147,
       "vividTextChroma": 149,
       "chromas": [
@@ -93,6 +97,7 @@
     },
     {
       "scaleName": "Warning",
+      "defaultShade": 6,
       "chromaticTextChroma": 147,
       "vividTextChroma": 149,
       "chromas": [
@@ -112,6 +117,7 @@
     },
     {
       "scaleName": "Danger",
+      "defaultShade": 6,
       "chromaticTextChroma": 147,
       "vividTextChroma": 149,
       "chromas": [0, 3.9, 11, 21.9, 42.1, 69.5, 82.4, 71, 55.8, 37.7, 14.941],

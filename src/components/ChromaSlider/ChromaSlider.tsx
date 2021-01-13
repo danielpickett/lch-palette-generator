@@ -1,23 +1,25 @@
 import React, { useCallback, useEffect, useState } from 'react'
-import { ThemeActionType, LCHColor } from 'types'
+import { ActionType, LCHColor } from 'types'
 import { getMaxChroma } from 'utils'
 import './ChromaSlider.scss'
 
 type ChromaSliderPropsType = {
   color: LCHColor
   scaleIndex: number
-  pointIndex: number
-  onChange: (action: ThemeActionType) => void
+  shadeIndex: number
+  onChange: (action: ActionType) => void
   size: number
+  defaultShade?: boolean
 }
 
 export const ChromaSlider = React.memo(
   ({
     color,
     scaleIndex,
-    pointIndex,
+    shadeIndex,
     onChange,
     size,
+    defaultShade,
   }: ChromaSliderPropsType) => {
     const [isDragging, setIsDragging] = useState(false)
     const maxChroma = getMaxChroma(color)
@@ -30,18 +32,16 @@ export const ChromaSlider = React.memo(
         onChange({
           changeType: 'chroma',
           scaleIndex,
-          pointIndex,
+          shadeIndex,
           value: chromaChange,
           min: 0,
           max: maxChroma,
         })
       },
-      [size, scaleIndex, pointIndex, maxChroma, onChange]
+      [size, scaleIndex, shadeIndex, maxChroma, onChange]
     )
     const handleKeyDown = useCallback(
       (e: React.KeyboardEvent<HTMLDivElement>) => {
-        
-
         if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
           e.preventDefault() // stops page from scrolling on up/down arrow keys
           let sign = e.key === 'ArrowLeft' ? -1 : 1
@@ -54,14 +54,14 @@ export const ChromaSlider = React.memo(
           onChange({
             changeType: 'chroma',
             scaleIndex,
-            pointIndex,
+            shadeIndex,
             value: chromaChange,
             min: 0,
             max: maxChroma,
           })
         }
       },
-      [scaleIndex, pointIndex, maxChroma, onChange]
+      [scaleIndex, shadeIndex, maxChroma, onChange]
     )
 
     useEffect(() => {
@@ -89,15 +89,25 @@ export const ChromaSlider = React.memo(
         onMouseDown={handleMouseDown}
         tabIndex={0}
         onKeyDown={handleKeyDown}
-        data-slider-handle={`scale${scaleIndex}-point${pointIndex}`}
+        data-slider-handle={`scale${scaleIndex}-point${shadeIndex}`}
       >
         <div
-          className="ChromaSlider__dot"
+          className={
+            'ChromaSlider__dot' +
+            (defaultShade ? ' ChromaSlider__dot--default-shade' : '')
+          }
           style={{
             left: `${color.c * size}px`,
           }}
         >
-          <div className="ChromaSlider__tooltip">{color.c.toFixed(1)}</div>
+          <div
+            className={
+              'ChromaSlider__tooltip' +
+              (defaultShade ? ' ChromaSlider__tooltip--default-shade' : '')
+            }
+          >
+            {color.c.toFixed(1)}
+          </div>
         </div>
       </div>
     )
