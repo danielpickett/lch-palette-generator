@@ -28,7 +28,7 @@ function App() {
   )
 
   const dragHandleRef = useRef<HTMLDivElement>(null)
-  const outputHeightPx = useDragHandle(dragHandleRef, 200) // 45
+  const outputHeightPx = useDragHandle(dragHandleRef, 800) // 45
 
   const computedTextColors = getDerivedColors(state)
 

@@ -47,7 +47,7 @@ export const Outputs = ({
   )
 
   const cssTextColors = textColors
-    // .slice(1)
+    .slice(1)
     .reduce((stringOutput: string, scale) => {
       const newString = scale.shades
         .map((shade) => {
@@ -65,32 +65,32 @@ export const Outputs = ({
     }, '')
 
   const greyTextColors = textColors[0]
-  console.log('greyTextColors', greyTextColors)
 
   const cssVividTextColorsOnGrey = vividTextColorsForGreyShades
     .reduce((prevTokens: string, textColors, shadeIndex) => {
-      console.log(shadeIndex, textColors)
-      const newTokens = textColors.vividTextColorSets
-        .map((textColorSet) => {
-          const { tokenName: token, hex } = textColorSet.vividTextColor
-          const {
-            tokenName: tokenSubdued,
-            hex: hexSubdued,
-          } = textColorSet.vividTextColorSubdued
-          const len = 45
-          const greyOnGreyShade = greyTextColors.shades[shadeIndex].textColor
-          const greyOnGreyShadeSubdued =
-            greyTextColors.shades[shadeIndex].textColorSubdued
-          return (
-            // prettier-ignore
-            `  --${greyOnGreyShade.tokenName}:${gap(greyOnGreyShade.tokenName, len)} ${greyOnGreyShade.hex};\n` + 
-            // prettier-ignore
-            `  --${greyOnGreyShadeSubdued.tokenName}:${gap( greyOnGreyShadeSubdued.tokenName, len )} ${greyOnGreyShadeSubdued.hex};\n` +
-            `  --${token}:${gap(token, len)} ${hex};\n` +
-            `  --${tokenSubdued}:${gap(tokenSubdued, len)} ${hexSubdued};\n`
-          )
-        })
-        .join('\n')
+      const len = 45
+      const greyOnGreyShade = greyTextColors.shades[shadeIndex].textColor
+      const greyOnGreyShadeSubdued =
+        greyTextColors.shades[shadeIndex].textColorSubdued
+      const newTokens =
+        // prettier-ignore
+        `  --${greyOnGreyShade.tokenName}:${gap(greyOnGreyShade.tokenName, len )} ${greyOnGreyShade.hex};\n` +
+        // prettier-ignore
+        `  --${greyOnGreyShadeSubdued.tokenName}:${gap( greyOnGreyShadeSubdued.tokenName, len )} ${greyOnGreyShadeSubdued.hex};\n` +
+        textColors.vividTextColorSets
+          .map((textColorSet) => {
+            const { tokenName: token, hex } = textColorSet.vividTextColor
+            const {
+              tokenName: tokenSubdued,
+              hex: hexSubdued,
+            } = textColorSet.vividTextColorSubdued
+
+            return (
+              `  --${token}:${gap(token, len)} ${hex};\n` +
+              `  --${tokenSubdued}:${gap(tokenSubdued, len)} ${hexSubdued};`
+            )
+          })
+          .join('\n')
       return prevTokens + '\n' + newTokens + '\n'
     }, '')
     .slice(0, -1) // removes trailing newline
