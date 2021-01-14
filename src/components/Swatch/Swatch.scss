@@ -37,5 +37,8 @@
 }
 
 .Swatch__label:hover .Swatch__hover-background {
-  opacity: .075;
+  opacity: 0.075;
+}
+.Swatch--grey-scale .Swatch__label:hover {
+  cursor: auto;
 }

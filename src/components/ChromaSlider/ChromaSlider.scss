@@ -17,7 +17,8 @@
     &--default-shade {
       border-radius: 0;
       transform: translate(-50%, -50%) rotate(45deg);
-      box-shadow: 0 0 0 1.5px black, 0 0 0 3px white, 0 0 8px 4px black;
+      // box-shadow: 0 0 0 1.5px black, 0 0 0 3px white, 0 0 8px 4px black;
+      box-shadow: 0 0 8px black, 0 0 0 1px black;
     }
   }
 
@@ -65,7 +66,7 @@
       display: block;
     }
     &__dot {
-      box-shadow: 0 0 8px rgba(0, 0, 0, 1), 0 0 0 1px rgba(0, 0, 0, 1);
+      // box-shadow: 0 0 8px rgba(0, 0, 0, 1), 0 0 0 1px rgba(0, 0, 0, 1);
       &::after {
         content: '';
         display: block;

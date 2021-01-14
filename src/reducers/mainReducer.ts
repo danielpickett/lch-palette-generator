@@ -129,7 +129,7 @@ export const mainReducer = (state: StateType, action: ActionType) => {
       return {
         ...state,
         scales: state.scales.map((scale, index) =>
-          index === action.scaleIndex
+          index === action.scaleIndex && scale.scaleName !== 'Grey'
             ? { ...scale, defaultShade: action.shadeIndex }
             : scale
         ),

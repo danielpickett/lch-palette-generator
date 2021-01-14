@@ -51,7 +51,11 @@ export const Swatch = ({
   return (
     <div
       key={shadeIndex}
-      className={'Swatch' + (defaultShade ? ' Swatch--default-shade' : '')}
+      className={
+        'Swatch' +
+        (defaultShade ? ' Swatch--default-shade' : '') +
+        (scale.scaleName === 'Grey' ? ' Swatch--grey-scale' : '')
+      }
       style={{
         color: shadeTextColors.textColor.hex,
         backgroundColor: swatchColor,
@@ -60,12 +64,14 @@ export const Swatch = ({
       onClick={handleClick}
     >
       <div className="Swatch__label" onClick={handleMakeDefaultShade}>
-        <div
-          className="Swatch__hover-background"
-          style={{
-            backgroundColor: shadeTextColors.textColor.hex,
-          }}
-        />
+        {scale.scaleName !== 'Grey' && (
+          <div
+            className="Swatch__hover-background"
+            style={{
+              backgroundColor: shadeTextColors.textColor.hex,
+            }}
+          />
+        )}
         <span>
           {scale.scaleName} {shadeNames?.[shadeIndex]}
         </span>
