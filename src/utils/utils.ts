@@ -80,39 +80,96 @@ export const getMinMaxLuminance = (
   }
 }
 
-export const parseScales = (
+export const parseScaleShades = (
   scales: ScaleType[],
   callback: (arg: {
     scaleName: string
     scaleNameKebab: string
     shadeName: string
+    shadeIndex: number
+    isDefaultShade: boolean
     colorHex: string | undefined
+  }) => string
+  // defaultShadesCallback?: (arg: {
+  //   scaleName: string
+  //   scaleNameKebab: string
+  //   shadeName: string
+  //   shadeIndex: number
+  //   // isDefaultShade: boolean
+  // }) => string
+) =>
+  scales
+    .map((scale) => {
+      return shadeNames
+        .map((shadeName, index) => {
+          const color = lch({
+            l: luminances[index],
+            c: scale.chromas[index],
+            h: scale.hue,
+          })
+          const swatchColor = color._rgb._clipped ? undefined : color.hex()
+          return callback({
+            scaleName: scale.scaleName,
+            scaleNameKebab: kbob(scale.scaleName),
+            shadeName: shadeName,
+            shadeIndex: index,
+            isDefaultShade: index === scale.defaultShade,
+            colorHex: swatchColor,
+          })
+        })
+        .join('\n') //+
+      // (defaultShadesCallback && !!scale.defaultShade
+      //   ? '\n' +
+      //     defaultShadesCallback({
+      //       scaleName: scale.scaleName,
+      //       scaleNameKebab: kbob(scale.scaleName),
+      //       shadeName: shadeNames[scale.defaultShade],
+      //       shadeIndex: scale.defaultShade,
+      //     })
+      //   : '')
+    })
+    .join('\n\n')
+
+export const parseDefaults = (
+  scales: ScaleType[],
+  callback: (arg: {
+    scaleNameKebab: string
+    defaultShadeName: string
+    darkerShadeName: string
+    lighterShadeName: string
   }) => string
 ) =>
   scales
-    .map((scale) =>
-      scale.scaleName
-        ? shadeNames
-            .map((shadeName, index) => {
-              const color = lch({
-                l: luminances[index],
-                c: scale.chromas[index],
-                h: scale.hue,
-              })
-              const swatchColor = color._rgb._clipped ? undefined : color.hex()
-              return scale.scaleName
-                ? callback({
-                    scaleName: scale.scaleName,
-                    scaleNameKebab: kbob(scale.scaleName),
-                    shadeName: shadeName,
-                    colorHex: swatchColor,
-                  })
-                : ''
-            })
-            .join('\n')
-        : ''
-    )
-    .join('\n\n')
+    .filter((scale) => !!scale.defaultShade)
+    .map((scale) => {
+      const defaultShadeIndex = scale.defaultShade as number
+      const defaultShadeName = shadeNames[defaultShadeIndex]
+      const darkerShadeName =
+        defaultShadeIndex < 10
+          ? shadeNames[defaultShadeIndex + 1]
+          : defaultShadeName
+      const lighterShadeName =
+        defaultShadeIndex > 0
+          ? shadeNames[defaultShadeIndex - 1]
+          : defaultShadeName
+
+      if (defaultShadeIndex === 0) {
+        console.log(
+          ' boo',
+          kbob(scale.scaleName),
+          defaultShadeName,
+          darkerShadeName,
+          lighterShadeName
+        )
+      }
+      return callback({
+        scaleNameKebab: kbob(scale.scaleName),
+        defaultShadeName,
+        darkerShadeName,
+        lighterShadeName,
+      })
+    })
+    .join('\n')
 
 export const parseConfig = (state: StateType) =>
   JSON.stringify(

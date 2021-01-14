@@ -20,6 +20,7 @@ export type ColorExtended = Color & {
 
 export type ScaleType = {
   scaleName: string
+  defaultShade?: number
   targetColorString?: string
   targetColorNickname?: string
   chromaticTextChroma: number
@@ -32,7 +33,7 @@ export type StateType = {
   scales: ScaleType[]
 }
 
-export type ThemeActionType =
+export type ActionType =
   | {
       changeType: 'hue'
       scaleIndex: number
@@ -43,7 +44,7 @@ export type ThemeActionType =
   | {
       changeType: 'chroma'
       scaleIndex: number
-      pointIndex: number
+      shadeIndex: number
       value: number
       min: number
       max: number
@@ -71,4 +72,9 @@ export type ThemeActionType =
       changeType: 'targetColorString'
       scaleIndex: number
       value: string | undefined
+    }
+  | {
+      changeType: 'defaultShade'
+      scaleIndex: number
+      shadeIndex: number
     }

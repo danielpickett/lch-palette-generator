@@ -1,7 +1,7 @@
-import { ThemeActionType, StateType } from 'types'
+import { ActionType, StateType } from 'types'
 import chromajs from 'chroma-js'
 
-export const mainReducer = (state: StateType, action: ThemeActionType) => {
+export const mainReducer = (state: StateType, action: ActionType) => {
   switch (action.changeType) {
     case 'chromaReset': {
       return {
@@ -91,7 +91,7 @@ export const mainReducer = (state: StateType, action: ThemeActionType) => {
             ? {
                 ...scale,
                 chromas: scale.chromas.map((chroma, index) => {
-                  if (index === action.pointIndex) {
+                  if (index === action.shadeIndex) {
                     if (chroma + action.value < action.min) return action.min
                     if (chroma + action.value > action.max) return action.max
                     return chroma + action.value
@@ -121,6 +121,16 @@ export const mainReducer = (state: StateType, action: ThemeActionType) => {
                 targetColorString: action.value,
                 hue: hue ? hue : scale.hue,
               }
+            : scale
+        ),
+      }
+    }
+    case 'defaultShade': {
+      return {
+        ...state,
+        scales: state.scales.map((scale, index) =>
+          index === action.scaleIndex && scale.scaleName !== 'Grey'
+            ? { ...scale, defaultShade: action.shadeIndex }
             : scale
         ),
       }

@@ -14,6 +14,12 @@
     top: 50%;
     left: 0;
     transform: translate(-50%, -50%);
+    &--default-shade {
+      border-radius: 0;
+      transform: translate(-50%, -50%) rotate(45deg);
+      // box-shadow: 0 0 0 1.5px black, 0 0 0 3px white, 0 0 8px 4px black;
+      box-shadow: 0 0 8px black, 0 0 0 1px black;
+    }
   }
 
   &__tooltip {
@@ -21,14 +27,17 @@
     top: 50%;
     left: calc(100% + 8px);
     background-color: black;
-    transform: translateY(-50%);
     color: white;
     padding: 0 4px;
     font-size: 12px;
     border-radius: 5px;
     pointer-events: none;
     opacity: 0;
-    // transition: opacity 1s;
+    transform: translateY(-50%);
+    &--default-shade {
+      transform-origin: -12px center;
+      transform: translateY(-50%) rotate(-45deg);
+    }
   }
 }
 
@@ -37,7 +46,6 @@
   .ChromaSlider {
     &__tooltip {
       opacity: 1;
-      // transition: opacity 0s;
     }
   }
 }
@@ -46,7 +54,6 @@
   .ChromaSlider {
     &__tooltip {
       opacity: 1;
-      // transition: opacity 0s;
     }
   }
 }
@@ -59,7 +66,7 @@
       display: block;
     }
     &__dot {
-      box-shadow: 0 0 8px rgba(0, 0, 0, 1), 0 0 0 1px rgba(0, 0, 0, 1);
+      // box-shadow: 0 0 8px rgba(0, 0, 0, 1), 0 0 0 1px rgba(0, 0, 0, 1);
       &::after {
         content: '';
         display: block;
