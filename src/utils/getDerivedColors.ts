@@ -43,7 +43,7 @@ export type TextColorsType = {
 }
 
 export const getDerivedColors = (state: StateType): TextColorsType[] => {
-  return state.scales.map((scale) => {
+  return state.scales.map((scale, scaleIndex) => {
     return {
       scaleName: scale.scaleName,
       shades: scale.chromas.map((chroma, shadeIndex) => {
@@ -75,21 +75,21 @@ export const getDerivedColors = (state: StateType): TextColorsType[] => {
           label: 'vivid',
         })
 
-        const nameKebab =
-          scale.scaleName.toLowerCase().replace(/\s+/g, '-') +
-          '-' +
-          shadeNames[shadeIndex]
+        const token =
+          scaleIndex === 0 && shadeIndex === 0
+            ? 'white'
+            : scale.scaleName.toLowerCase() + '-' + shadeNames[shadeIndex]
 
         return {
           scaleName: scale.scaleName,
           shadeName: shadeNames[shadeIndex],
           bgColor: {
-            tokenName: 'color-' + nameKebab,
+            tokenName: 'color-' + token,
             lch: bgColorLCH,
             hex: bgColorHex,
           },
           textColor: {
-            tokenName: 'text-on-' + nameKebab,
+            tokenName: 'text-on-' + token,
             lch: textColors.regular.lch,
             hex: textColors.regular.hex,
             contrast: textColors.regular.contrast,
@@ -97,7 +97,7 @@ export const getDerivedColors = (state: StateType): TextColorsType[] => {
             plotMarker: textColors.marker,
           },
           textColorSubdued: {
-            tokenName: 'text-on-' + nameKebab + '--subdued',
+            tokenName: 'text-on-' + token + '--subdued',
             lch: textColors.subdued.lch,
             hex: textColors.subdued.hex,
             contrast: textColors.subdued.contrast,
@@ -105,7 +105,7 @@ export const getDerivedColors = (state: StateType): TextColorsType[] => {
             plotMarker: textColors.marker,
           },
           vividTextColor: {
-            tokenName: 'text-on-' + nameKebab + '--vivid',
+            tokenName: 'text-on-' + token + '--vivid',
             lch: vividTextColors.regular.lch,
             hex: vividTextColors.regular.hex,
             contrast: vividTextColors.regular.contrast,
@@ -113,7 +113,7 @@ export const getDerivedColors = (state: StateType): TextColorsType[] => {
             plotMarker: vividTextColors.marker,
           },
           vividTextColorSubdued: {
-            tokenName: 'text-on-' + nameKebab + '--vivid--subdued',
+            tokenName: 'text-on-' + token + '--vivid--subdued',
             lch: vividTextColors.subdued.lch,
             hex: vividTextColors.subdued.hex,
             contrast: vividTextColors.subdued.contrast,

@@ -1,0 +1,26 @@
+.Toolbar {
+  flex-grow: 0;
+  box-shadow: 0 0 16px rgba(0, 0, 0, 0.3);
+  position: relative;
+  z-index: 1;
+  background-color: white;
+
+  &__buttons {
+    display: flex;
+    padding: 8px;
+  }
+
+  &__number-input {
+    // border: 1px solid #8A8A8F;
+    border: none;
+    color: #8A8A8F;
+    // box-shadow: 0 0 0 1px #8A8A8F;
+    border-radius: 5px;
+    margin-left: 8px;
+    width: 64px;
+    padding: 0 5px;
+    &:hover {
+      box-shadow: 0 0 0 1px #8A8A8F;
+    }
+  }
+}

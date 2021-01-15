@@ -1,4 +1,4 @@
-import { LCHColor, StateType, ScaleType } from 'types'
+import { LCHColor, ScaleType } from 'types'
 import { luminances, shadeNames } from 'config'
 import { lch } from 'utils'
 import { kbob } from './kbob'
@@ -85,48 +85,36 @@ export const parseScaleShades = (
   callback: (arg: {
     scaleName: string
     scaleNameKebab: string
-    shadeName: string
+    shadeName: string | null
     shadeIndex: number
     isDefaultShade: boolean
     colorHex: string | undefined
   }) => string
-  // defaultShadesCallback?: (arg: {
-  //   scaleName: string
-  //   scaleNameKebab: string
-  //   shadeName: string
-  //   shadeIndex: number
-  //   // isDefaultShade: boolean
-  // }) => string
 ) =>
   scales
-    .map((scale) => {
+    .map((scale, scaleIndex) => {
       return shadeNames
-        .map((shadeName, index) => {
+        .map((shadeName, shadeIndex) => {
           const color = lch({
-            l: luminances[index],
-            c: scale.chromas[index],
+            l: luminances[shadeIndex],
+            c: scale.chromas[shadeIndex],
             h: scale.hue,
           })
           const swatchColor = color._rgb._clipped ? undefined : color.hex()
+          if (shadeIndex === 0) {
+            return ''
+          }
+
           return callback({
             scaleName: scale.scaleName,
             scaleNameKebab: kbob(scale.scaleName),
             shadeName: shadeName,
-            shadeIndex: index,
-            isDefaultShade: index === scale.defaultShade,
+            shadeIndex: shadeIndex,
+            isDefaultShade: shadeIndex === scale.defaultShade,
             colorHex: swatchColor,
           })
         })
-        .join('\n') //+
-      // (defaultShadesCallback && !!scale.defaultShade
-      //   ? '\n' +
-      //     defaultShadesCallback({
-      //       scaleName: scale.scaleName,
-      //       scaleNameKebab: kbob(scale.scaleName),
-      //       shadeName: shadeNames[scale.defaultShade],
-      //       shadeIndex: scale.defaultShade,
-      //     })
-      //   : '')
+        .join('\n')
     })
     .join('\n\n')
 
@@ -149,7 +137,7 @@ export const parseDefaults = (
           ? shadeNames[defaultShadeIndex + 1]
           : defaultShadeName
       const lighterShadeName =
-        defaultShadeIndex > 0
+        defaultShadeIndex > 1
           ? shadeNames[defaultShadeIndex - 1]
           : defaultShadeName
 
@@ -170,12 +158,3 @@ export const parseDefaults = (
       })
     })
     .join('\n')
-
-export const parseConfig = (state: StateType) =>
-  JSON.stringify(
-    state,
-    function (key, val) {
-      return val?.toFixed ? Number(val.toFixed(3)) : val
-    },
-    2
-  )

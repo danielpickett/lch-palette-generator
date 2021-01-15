@@ -11,13 +11,14 @@ export const useDragHandle = (
   const handleMouseUp = useCallback(() => setHandleIsDragging(false), [
     setHandleIsDragging,
   ])
-  const handleMouseMove = useCallback((e: globalThis.MouseEvent) => {
-    const docHeight = document.body.offsetHeight
-    let newHeight = docHeight - e.clientY
-    if (newHeight < minHeight) newHeight = minHeight
-    if (newHeight > docHeight - 42) newHeight = docHeight - 42
-    setOutputHeightPx(newHeight)
-  }, [minHeight])
+  const handleMouseMove = useCallback(
+    (e: globalThis.MouseEvent) => {
+      setOutputHeightPx((prev) =>
+        prev - e.movementY >= minHeight ? prev - e.movementY : minHeight
+      )
+    },
+    [minHeight]
+  )
 
   useEffect(() => {
     const dragHandle = dragHandleRef.current

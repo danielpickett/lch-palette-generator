@@ -41,7 +41,7 @@ export const extractVividTextColorsForGreyScale = (
       }
     })
 
-  const finalResult = greyScaleTextColors.shades.reduce(
+  return greyScaleTextColors.shades.reduce(
     (
       prev: VividTextColorsForGreyShadeType[],
       greyShadeTextColors,
@@ -72,19 +72,26 @@ export const extractVividTextColorsForGreyScale = (
                 vividText.hex(),
                 greyBgColorHex
               )
+
               // const vivid_UNSAFE = vividContrast < 4.5 ? '--UNSAFE' : ''
 
               const vividSubduedContrast = chromajs.contrast(
                 vividTextSubdued.hex(),
                 greyBgColorHex
               )
+
               // const vividSubdued_UNSAFE =
               //   vividSubduedContrast < 4.5 ? '--UNSAFE' : ''
 
-              const vividtokenName = 
-                `text-on-grey-${shadeName}--vivid--${scaleKebab}` // prettier-ignore
+              const vividtokenName =
+                shadeIndex === 0
+                  ? `text-on-white--${scaleKebab}`
+                  : `text-on-grey-${shadeName}--${scaleKebab}`
+
               const vividSubduedtokenName =
-                `text-on-grey-${shadeName}--vivid--subdued--${scaleKebab}` // prettier-ignore
+                shadeIndex === 0
+                  ? `text-on-white--${scaleKebab}--subdued`
+                  : `text-on-grey-${shadeName}--${scaleKebab}--subdued`
 
               return {
                 srcScaleKebab: scaleKebab,
@@ -113,6 +120,4 @@ export const extractVividTextColorsForGreyScale = (
     },
     []
   )
-
-  return finalResult
 }

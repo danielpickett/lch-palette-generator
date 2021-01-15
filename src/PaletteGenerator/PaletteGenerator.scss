@@ -1,0 +1,54 @@
+.PaletteGenerator {
+  box-shadow: 0 0 16px rgba(0, 0, 0, 0.25);
+  position: fixed;
+  z-index: 100;
+
+  display: flex;
+  flex-direction: column;
+  bottom: 40px;
+  right: 40px;
+  width: 80vw;
+  max-width: 100vw;
+  height: 50vh;
+
+  &__scales {
+    position: relative;
+    z-index: 0;
+    flex-grow: 1;
+    overflow: auto;
+  }
+
+  &__the-end {
+    text-align: center;
+    padding-top: 16px;
+    max-width: 160px;
+    margin: 0 auto;
+    margin-top: 16px;
+    margin-bottom: 8px;
+    border-top: 1px dashed currentColor;
+  }
+
+  &__outputs {
+    flex-grow: 0;
+    flex-shrink: 0;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    z-index: 2;
+    max-height: calc(100% - 42px);
+  }
+
+  &__drag-handle {
+    position: absolute;
+    top: -8px;
+    left: 0;
+    opacity: 0.5;
+    height: 16px;
+    width: 100%;
+    cursor: ns-resize;
+    &:hover {
+      background-color: grey;
+    }
+  }
+}
