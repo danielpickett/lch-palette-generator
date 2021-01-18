@@ -6,8 +6,9 @@ type FontWeightType = 'normal' | 'bolder' | 'lighter'
 
 export const Text = ({
   on,
+  kind,
+  UNSAFE,
   children,
-  color,
   size = 'm',
   tag = 'span',
   weight,
@@ -18,21 +19,16 @@ export const Text = ({
   UNSAFE_className,
   truncate,
 }: TextPropsType) => {
-  const _color = (() => {
-    if (color === undefined) {
-      const _on = (on && on.split('-')[0]) || 'grey'
-      if (_on === 'primary') return 'primary'
-      if (_on === 'success') return 'success'
-      if (_on === 'warning') return 'warning'
-      if (_on === 'danger') return 'danger'
-      return 'grey'
-    }
-    return color
-  })()
+  const color =
+    `var(--text-on-` +
+    `${on}` +
+    `${kind !== undefined ? '--' + kind : ''}` +
+    `${UNSAFE ? '--UNSAFE' : ''}` +
+    `)`
 
   const _style: CSSProperties = {
     fontSize: `var(--text-size-${size})`,
-    color: `var(--text-on-${on})`,
+    color: color,
     fontWeight: (weight
       ? `var(--text-weight-${weight})`
       : undefined) as FontWeightType,

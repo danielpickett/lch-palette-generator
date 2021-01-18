@@ -14,8 +14,9 @@ export const PaletteGenerator = () => {
     showTextPlots: false,
     showTextChromaControls: false,
     showColorOutputs: false,
-    fullscreen: true,
-    size: 1.25,
+    fullscreen: false,
+    size: 1,
+    outputInitialHeight: 42
   }
 
   const [state, handleStateChanges] = useReducer(mainReducer, theme)
@@ -63,7 +64,7 @@ export const PaletteGenerator = () => {
   ])
 
   const outputDragHandleRef = useRef<HTMLDivElement>(null)
-  const outputHeightPx = useDragHandle(outputDragHandleRef, 42, 42) // 45
+  const outputHeightPx = useDragHandle(outputDragHandleRef, defaults.outputInitialHeight, 42) // 45
 
   const computedTextColors = getDerivedColors(state)
 
