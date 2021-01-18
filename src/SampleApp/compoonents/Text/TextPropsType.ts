@@ -2,9 +2,11 @@ import * as CSS from 'csstype'
 import { ReactNode } from 'react'
 import * as Types from 'types'
 
-// on, kind and UNSAFE prop types come from the union types below
 
 interface CommonTextProps {
+  // on?: string (see union types far below)
+  // kind?: string (see union types far below)
+  // UNSAFE?: boolean (see union types far below)
   children?: ReactNode
   size?: 'xxxl' | 'xxl' | 'xl' | 'l' | 'm' | 's' | 'xs'
   tag?: 'p' | 'span'
