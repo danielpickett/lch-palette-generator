@@ -5,7 +5,7 @@ import { StateType } from 'types'
 import {
   parseDefaults,
   parseScaleShades,
-  convertTokenOutputToTypes,
+  // convertTokenOutputToTypes,
 } from 'utils'
 import { VividTextColorsForGreyShadeType } from 'utils/extractVividTextColorsForGreyScale'
 import { TextColorsType } from 'utils/getDerivedColors'
@@ -127,13 +127,13 @@ export const Outputs = ({
     `${nonColorTokens}`
   ).replace(/\n{3,}/g, '\n\n')
 
-  // const tokenRegEx = / {2}--(.+): .*$/gm
-  // const sassReplacer = (match: string, captureGroup1: string) => {
-  //   const _ = makeGap(captureGroup1, 45)
-  //   return `$${captureGroup1}: ${_} var(--${captureGroup1});`
-  // }
+  const tokenRegEx = / {2}--(.+): .*$/gm
+  const sassReplacer = (match: string, captureGroup1: string) => {
+    const _ = makeGap(captureGroup1, 45)
+    return `$${captureGroup1}: ${_} var(--${captureGroup1});`
+  }
 
-  // const sassCombined = cssCombined.replace(tokenRegEx, sassReplacer)
+  const sassCombined = cssCombined.replace(tokenRegEx, sassReplacer)
 
   const hasInvalidScaleName = state.scales.some(
     (scale) => scale.scaleName.match(/\s/) !== null
@@ -150,58 +150,7 @@ export const Outputs = ({
 
   const cssRootRule = `:root{\n${cssCombined}}\n`
 
-  const sampleToken = `text-on-primary-200
-text-on-primary-200--subdued
-text-on-primary-200--vivid
-text-on-primary-200--vivid-subdued--UNSAFE
-
-text-on-primary-lighter
-text-on-primary-lighter--subdued--UNSAFE
-text-on-primary-lighter--vivid
-text-on-primary-lighter--vivid-subdued--UNSAFE
-text-on-primary
-text-on-primary--subdued--UNSAFE
-text-on-primary--vivid
-text-on-primary--vivid-subdued--UNSAFE
-text-on-primary-darker
-text-on-primary-darker--subdued--UNSAFE
-text-on-primary-darker--vivid
-text-on-primary-darker--vivid-subdued--UNSAFE
-
-
-text-on-white
-text-on-white--subdued
-text-on-white--primary
-text-on-white--primary-subdued--UNSAFE
-text-on-white--secondary
-text-on-white--secondary-subdued--UNSAFE
-text-on-white--tertiary
-text-on-white--tertiary-subdued--UNSAFE
-text-on-white--success
-text-on-white--success-subdued--UNSAFE
-text-on-white--warning
-text-on-white--warning-subdued--UNSAFE
-text-on-white--danger
-text-on-white--danger-subdued--UNSAFE
-text-on-grey-050
-text-on-grey-050--subdued
-text-on-grey-050--primary
-text-on-grey-050--primary-subdued--UNSAFE
-text-on-grey-050--secondary
-text-on-grey-050--secondary-subdued--UNSAFE
-text-on-grey-050--tertiary
-text-on-grey-050--tertiary-subdued--UNSAFE
-text-on-grey-050--success
-text-on-grey-050--success-subdued--UNSAFE
-text-on-grey-050--warning
-text-on-grey-050--warning-subdued--UNSAFE
-text-on-grey-050--danger
-text-on-grey-050--danger-subdued--UNSAFE`
-  
-
-  const typeScriptTypes = convertTokenOutputToTypes(cssCombined)
-
-  // console.log('typeScriptTypes', typeScriptTypes)
+  // const typeScriptTypes = convertTokenOutputToTypes(cssCombined)
 
   return (
     <div className="Outputs">
@@ -209,16 +158,16 @@ text-on-grey-050--danger-subdued--UNSAFE`
         heading="CSS Variables"
         content={!!errorMsg ? errorMsg : cssRootRule}
       />
-      <Output heading="TypeScript Types" content={typeScriptTypes} />
-      {/* <Output
+      {/* <Output heading="TypeScript Types" content={typeScriptTypes} /> */}
+      <Output
         heading="Sass Aliases"
         content={!!errorMsg ? errorMsg : sassCombined}
-      /> */}
-      {/* <Output
+      />
+      <Output
         heading="Config"
         content={JSON.stringify(state, null, 2) + '\n'}
         style={{ maxWidth: '420px' }}
-      /> */}
+      />
       {ReactDOM.createPortal(<style>{cssRootRule}</style>, document.head)}
     </div>
   )
