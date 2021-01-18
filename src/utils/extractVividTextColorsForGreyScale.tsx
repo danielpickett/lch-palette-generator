@@ -60,8 +60,8 @@ export const extractVividTextColorsForGreyScale = (
               const vividText = lch(currGreyShade.vividTextColorLCH)
 
               const vividTextSubdued = chromajs.mix(
-                greyBgColorHex,
                 vividText.hex(),
+                greyBgColorHex,
                 vividTextColorConfig[shadeIndex].mix
               )
 
@@ -90,8 +90,8 @@ export const extractVividTextColorsForGreyScale = (
 
               const vividSubduedtokenName =
                 shadeIndex === 0
-                  ? `text-on-white--${scaleKebab}--subdued`
-                  : `text-on-grey-${shadeName}--${scaleKebab}--subdued`
+                  ? `text-on-white--${scaleKebab}-subdued--UNSAFE`
+                  : `text-on-grey-${shadeName}--${scaleKebab}-subdued--UNSAFE`
 
               return {
                 srcScaleKebab: scaleKebab,

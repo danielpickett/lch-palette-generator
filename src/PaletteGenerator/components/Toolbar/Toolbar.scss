@@ -1,4 +1,5 @@
 .Toolbar {
+  display: flex;
   flex-grow: 0;
   box-shadow: 0 0 16px rgba(0, 0, 0, 0.3);
   position: relative;
@@ -10,17 +11,25 @@
     padding: 8px;
   }
 
+  &__divider {
+    width: 1px;
+    border-right: 1px solid #8a8a8f;
+    margin-left: 16px;
+    margin-right: 8px;
+    // height: 100%;
+  }
+
   &__number-input {
     // border: 1px solid #8A8A8F;
     border: none;
-    color: #8A8A8F;
-    // box-shadow: 0 0 0 1px #8A8A8F;
+    color: #8a8a8f;
+    box-shadow: 0 0 0 1px #e1e1e6;
     border-radius: 5px;
     margin-left: 8px;
     width: 64px;
     padding: 0 5px;
     &:hover {
-      box-shadow: 0 0 0 1px #8A8A8F;
+      box-shadow: 0 0 0 1px #8a8a8f;
     }
   }
 }

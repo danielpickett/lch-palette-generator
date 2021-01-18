@@ -8,29 +8,47 @@
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  cursor: pointer;
+  position: relative;
+  border: 2px solid transparent;
 
-  &__label {
-    padding: 8px;
-    height: 32px;
+  &__check-wrapper {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    transform: rotate(45deg);
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    cursor: pointer;
-    position: relative;
-  }
-
-  &__hover-background {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    justify-content: center;
+    height: 22px;
+    width: 22px;
+    background-color: inherit;
     opacity: 0;
   }
 
-  &__check {
-    font-size: 20px;
+  &__check-background {
+    position: absolute;
+    height: 22px;
+    width: 44px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  &__check-icon {
+    font-size: 10px;
+    transform: rotate(-45deg) translate(-25%, 25%);
+  }
+
+  &__label {
+    padding: 10px 6px;
+    padding-right: 16px;
+    line-height: 0.75;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    grid-gap: 1ex;
+    gap: 1ex;
+    position: relative;
   }
 
   &__outputs {
@@ -42,9 +60,36 @@
   }
 }
 
-.Swatch__label:hover .Swatch__hover-background {
-  opacity: 0.075;
+.Swatch:hover {
+  .Swatch {
+    &__check-wrapper {
+      opacity: 0.25;
+      &:hover {
+        opacity: 1;
+      }
+    }
+  }
 }
-.Swatch--grey-scale .Swatch__label:hover {
-  cursor: auto;
+
+.Swatch--is-default-shade {
+  .Swatch__check-wrapper {
+    opacity: 1 !important;
+  }
+}
+
+.Swatch--is-eligible-as-default {
+  .Swatch {
+    &__hover-background:hover {
+      opacity: 0.075;
+      cursor: pointer;
+    }
+  }
+}
+
+.Swatch--is-clickable:hover {
+  cursor: pointer;
+  border-color: currentColor;
+  &.Swatch--is-impossible-color {
+    border-color: #1e1e1e;
+  }
 }

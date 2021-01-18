@@ -1,14 +1,3 @@
 .App {
-  position: relative;
-  &__sample-app-toggle-button {
-    z-index: 1;
-    position: absolute;
-    right: 8px; 
-    top: 8px;
-
-  }
-  &__palette-generator {
-  }
-  &__sample-app {
-  }
+  display: block;
 }

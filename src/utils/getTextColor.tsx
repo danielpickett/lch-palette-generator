@@ -63,8 +63,8 @@ export const getTextColor = ({
   const textColorRegularHex = textColorRegularObj.hex()
 
   const textColorSubduedObj = chromajs.mix(
-    bgColorObj,
     textColorRegularObj,
+    bgColorObj,
     mix,
     'lch'
   )

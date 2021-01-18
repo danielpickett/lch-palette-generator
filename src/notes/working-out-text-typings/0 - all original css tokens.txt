@@ -1,0 +1,542 @@
+  --text-on-primary-050
+  --text-on-primary-050--subdued
+  --text-on-primary-050--vivid
+  --text-on-primary-050--vivid-subdued
+
+  --text-on-primary-100
+  --text-on-primary-100--subdued
+  --text-on-primary-100--vivid
+  --text-on-primary-100--vivid-subdued
+
+  --text-on-primary-200
+  --text-on-primary-200--subdued
+  --text-on-primary-200--vivid
+  --text-on-primary-200--vivid-subdued
+
+  --text-on-primary-300
+  --text-on-primary-300--subdued
+  --text-on-primary-300--vivid
+  --text-on-primary-300--vivid-subdued
+
+  --text-on-primary-400
+  --text-on-primary-400--subdued
+  --text-on-primary-400--vivid
+  --text-on-primary-400--vivid-subdued
+
+  --text-on-primary-500
+  --text-on-primary-500--subdued
+  --text-on-primary-500--vivid
+  --text-on-primary-500--vivid-subdued
+
+  --text-on-primary-600
+  --text-on-primary-600--subdued
+  --text-on-primary-600--vivid
+  --text-on-primary-600--vivid-subdued
+
+  --text-on-primary-700
+  --text-on-primary-700--subdued
+  --text-on-primary-700--vivid
+  --text-on-primary-700--vivid-subdued
+
+  --text-on-primary-800
+  --text-on-primary-800--subdued
+  --text-on-primary-800--vivid
+  --text-on-primary-800--vivid-subdued
+
+  --text-on-primary-900
+  --text-on-primary-900--subdued
+  --text-on-primary-900--vivid
+  --text-on-primary-900--vivid-subdued
+
+  --text-on-secondary-050
+  --text-on-secondary-050--subdued
+  --text-on-secondary-050--vivid
+  --text-on-secondary-050--vivid-subdued
+
+  --text-on-secondary-100
+  --text-on-secondary-100--subdued
+  --text-on-secondary-100--vivid
+  --text-on-secondary-100--vivid-subdued
+
+  --text-on-secondary-200
+  --text-on-secondary-200--subdued
+  --text-on-secondary-200--vivid
+  --text-on-secondary-200--vivid-subdued
+
+  --text-on-secondary-300
+  --text-on-secondary-300--subdued
+  --text-on-secondary-300--vivid
+  --text-on-secondary-300--vivid-subdued
+
+  --text-on-secondary-400
+  --text-on-secondary-400--subdued
+  --text-on-secondary-400--vivid
+  --text-on-secondary-400--vivid-subdued
+
+  --text-on-secondary-500
+  --text-on-secondary-500--subdued
+  --text-on-secondary-500--vivid
+  --text-on-secondary-500--vivid-subdued
+
+  --text-on-secondary-600
+  --text-on-secondary-600--subdued
+  --text-on-secondary-600--vivid
+  --text-on-secondary-600--vivid-subdued
+
+  --text-on-secondary-700
+  --text-on-secondary-700--subdued
+  --text-on-secondary-700--vivid
+  --text-on-secondary-700--vivid-subdued
+
+  --text-on-secondary-800
+  --text-on-secondary-800--subdued
+  --text-on-secondary-800--vivid
+  --text-on-secondary-800--vivid-subdued
+
+  --text-on-secondary-900
+  --text-on-secondary-900--subdued
+  --text-on-secondary-900--vivid
+  --text-on-secondary-900--vivid-subdued
+
+  --text-on-tertiary-050
+  --text-on-tertiary-050--subdued
+  --text-on-tertiary-050--vivid
+  --text-on-tertiary-050--vivid-subdued
+
+  --text-on-tertiary-100
+  --text-on-tertiary-100--subdued
+  --text-on-tertiary-100--vivid
+  --text-on-tertiary-100--vivid-subdued
+
+  --text-on-tertiary-200
+  --text-on-tertiary-200--subdued
+  --text-on-tertiary-200--vivid
+  --text-on-tertiary-200--vivid-subdued
+
+  --text-on-tertiary-300
+  --text-on-tertiary-300--subdued
+  --text-on-tertiary-300--vivid
+  --text-on-tertiary-300--vivid-subdued
+
+  --text-on-tertiary-400
+  --text-on-tertiary-400--subdued
+  --text-on-tertiary-400--vivid
+  --text-on-tertiary-400--vivid-subdued
+
+  --text-on-tertiary-500
+  --text-on-tertiary-500--subdued
+  --text-on-tertiary-500--vivid
+  --text-on-tertiary-500--vivid-subdued
+
+  --text-on-tertiary-600
+  --text-on-tertiary-600--subdued
+  --text-on-tertiary-600--vivid
+  --text-on-tertiary-600--vivid-subdued
+
+  --text-on-tertiary-700
+  --text-on-tertiary-700--subdued
+  --text-on-tertiary-700--vivid
+  --text-on-tertiary-700--vivid-subdued
+
+  --text-on-tertiary-800
+  --text-on-tertiary-800--subdued
+  --text-on-tertiary-800--vivid
+  --text-on-tertiary-800--vivid-subdued
+
+  --text-on-tertiary-900
+  --text-on-tertiary-900--subdued
+  --text-on-tertiary-900--vivid
+  --text-on-tertiary-900--vivid-subdued
+
+  --text-on-success-050
+  --text-on-success-050--subdued
+  --text-on-success-050--vivid
+  --text-on-success-050--vivid-subdued
+
+  --text-on-success-100
+  --text-on-success-100--subdued
+  --text-on-success-100--vivid
+  --text-on-success-100--vivid-subdued
+
+  --text-on-success-200
+  --text-on-success-200--subdued
+  --text-on-success-200--vivid
+  --text-on-success-200--vivid-subdued
+
+  --text-on-success-300
+  --text-on-success-300--subdued
+  --text-on-success-300--vivid
+  --text-on-success-300--vivid-subdued
+
+  --text-on-success-400
+  --text-on-success-400--subdued
+  --text-on-success-400--vivid
+  --text-on-success-400--vivid-subdued
+
+  --text-on-success-500
+  --text-on-success-500--subdued
+  --text-on-success-500--vivid
+  --text-on-success-500--vivid-subdued
+
+  --text-on-success-600
+  --text-on-success-600--subdued
+  --text-on-success-600--vivid
+  --text-on-success-600--vivid-subdued
+
+  --text-on-success-700
+  --text-on-success-700--subdued
+  --text-on-success-700--vivid
+  --text-on-success-700--vivid-subdued
+
+  --text-on-success-800
+  --text-on-success-800--subdued
+  --text-on-success-800--vivid
+  --text-on-success-800--vivid-subdued
+
+  --text-on-success-900
+  --text-on-success-900--subdued
+  --text-on-success-900--vivid
+  --text-on-success-900--vivid-subdued
+
+  --text-on-warning-050
+  --text-on-warning-050--subdued
+  --text-on-warning-050--vivid
+  --text-on-warning-050--vivid-subdued
+
+  --text-on-warning-100
+  --text-on-warning-100--subdued
+  --text-on-warning-100--vivid
+  --text-on-warning-100--vivid-subdued
+
+  --text-on-warning-200
+  --text-on-warning-200--subdued
+  --text-on-warning-200--vivid
+  --text-on-warning-200--vivid-subdued
+
+  --text-on-warning-300
+  --text-on-warning-300--subdued
+  --text-on-warning-300--vivid
+  --text-on-warning-300--vivid-subdued
+
+  --text-on-warning-400
+  --text-on-warning-400--subdued
+  --text-on-warning-400--vivid
+  --text-on-warning-400--vivid-subdued
+
+  --text-on-warning-500
+  --text-on-warning-500--subdued
+  --text-on-warning-500--vivid
+  --text-on-warning-500--vivid-subdued
+
+  --text-on-warning-600
+  --text-on-warning-600--subdued
+  --text-on-warning-600--vivid
+  --text-on-warning-600--vivid-subdued
+
+  --text-on-warning-700
+  --text-on-warning-700--subdued
+  --text-on-warning-700--vivid
+  --text-on-warning-700--vivid-subdued
+
+  --text-on-warning-800
+  --text-on-warning-800--subdued
+  --text-on-warning-800--vivid
+  --text-on-warning-800--vivid-subdued
+
+  --text-on-warning-900
+  --text-on-warning-900--subdued
+  --text-on-warning-900--vivid
+  --text-on-warning-900--vivid-subdued
+
+  --text-on-danger-050
+  --text-on-danger-050--subdued
+  --text-on-danger-050--vivid
+  --text-on-danger-050--vivid-subdued
+
+  --text-on-danger-100
+  --text-on-danger-100--subdued
+  --text-on-danger-100--vivid
+  --text-on-danger-100--vivid-subdued
+
+  --text-on-danger-200
+  --text-on-danger-200--subdued
+  --text-on-danger-200--vivid
+  --text-on-danger-200--vivid-subdued
+
+  --text-on-danger-300
+  --text-on-danger-300--subdued
+  --text-on-danger-300--vivid
+  --text-on-danger-300--vivid-subdued
+
+  --text-on-danger-400
+  --text-on-danger-400--subdued
+  --text-on-danger-400--vivid
+  --text-on-danger-400--vivid-subdued
+
+  --text-on-danger-500
+  --text-on-danger-500--subdued
+  --text-on-danger-500--vivid
+  --text-on-danger-500--vivid-subdued
+
+  --text-on-danger-600
+  --text-on-danger-600--subdued
+  --text-on-danger-600--vivid
+  --text-on-danger-600--vivid-subdued
+
+  --text-on-danger-700
+  --text-on-danger-700--subdued
+  --text-on-danger-700--vivid
+  --text-on-danger-700--vivid-subdued
+
+  --text-on-danger-800
+  --text-on-danger-800--subdued
+  --text-on-danger-800--vivid
+  --text-on-danger-800--vivid-subdued
+
+  --text-on-danger-900
+  --text-on-danger-900--subdued
+  --text-on-danger-900--vivid
+  --text-on-danger-900--vivid-subdued
+
+  --text-on-white
+  --text-on-white--subdued
+  --text-on-white--primary
+  --text-on-white--primary--subdued
+  --text-on-white--secondary
+  --text-on-white--secondary--subdued
+  --text-on-white--tertiary
+  --text-on-white--tertiary--subdued
+  --text-on-white--success
+  --text-on-white--success--subdued
+  --text-on-white--warning
+  --text-on-white--warning--subdued
+  --text-on-white--danger
+  --text-on-white--danger--subdued
+
+  --text-on-grey-050
+  --text-on-grey-050--subdued
+  --text-on-grey-050--primary
+  --text-on-grey-050--primary-subdued
+  --text-on-grey-050--secondary
+  --text-on-grey-050--secondary-subdued
+  --text-on-grey-050--tertiary
+  --text-on-grey-050--tertiary-subdued
+  --text-on-grey-050--success
+  --text-on-grey-050--success-subdued
+  --text-on-grey-050--warning
+  --text-on-grey-050--warning-subdued
+  --text-on-grey-050--danger
+  --text-on-grey-050--danger-subdued
+
+  --text-on-grey-100
+  --text-on-grey-100--subdued
+  --text-on-grey-100--primary
+  --text-on-grey-100--primary-subdued
+  --text-on-grey-100--secondary
+  --text-on-grey-100--secondary-subdued
+  --text-on-grey-100--tertiary
+  --text-on-grey-100--tertiary-subdued
+  --text-on-grey-100--success
+  --text-on-grey-100--success-subdued
+  --text-on-grey-100--warning
+  --text-on-grey-100--warning-subdued
+  --text-on-grey-100--danger
+  --text-on-grey-100--danger-subdued
+
+  --text-on-grey-200
+  --text-on-grey-200--subdued
+  --text-on-grey-200--primary
+  --text-on-grey-200--primary-subdued
+  --text-on-grey-200--secondary
+  --text-on-grey-200--secondary-subdued
+  --text-on-grey-200--tertiary
+  --text-on-grey-200--tertiary-subdued
+  --text-on-grey-200--success
+  --text-on-grey-200--success-subdued
+  --text-on-grey-200--warning
+  --text-on-grey-200--warning-subdued
+  --text-on-grey-200--danger
+  --text-on-grey-200--danger-subdued
+
+  --text-on-grey-300
+  --text-on-grey-300--subdued
+  --text-on-grey-300--primary
+  --text-on-grey-300--primary-subdued
+  --text-on-grey-300--secondary
+  --text-on-grey-300--secondary-subdued
+  --text-on-grey-300--tertiary
+  --text-on-grey-300--tertiary-subdued
+  --text-on-grey-300--success
+  --text-on-grey-300--success-subdued
+  --text-on-grey-300--warning
+  --text-on-grey-300--warning-subdued
+  --text-on-grey-300--danger
+  --text-on-grey-300--danger-subdued
+
+  --text-on-grey-400
+  --text-on-grey-400--subdued
+  --text-on-grey-400--primary
+  --text-on-grey-400--primary-subdued
+  --text-on-grey-400--secondary
+  --text-on-grey-400--secondary-subdued
+  --text-on-grey-400--tertiary
+  --text-on-grey-400--tertiary-subdued
+  --text-on-grey-400--success
+  --text-on-grey-400--success-subdued
+  --text-on-grey-400--warning
+  --text-on-grey-400--warning-subdued
+  --text-on-grey-400--danger
+  --text-on-grey-400--danger-subdued
+
+  --text-on-grey-500
+  --text-on-grey-500--subdued
+  --text-on-grey-500--primary
+  --text-on-grey-500--primary-subdued
+  --text-on-grey-500--secondary
+  --text-on-grey-500--secondary-subdued
+  --text-on-grey-500--tertiary
+  --text-on-grey-500--tertiary-subdued
+  --text-on-grey-500--success
+  --text-on-grey-500--success-subdued
+  --text-on-grey-500--warning
+  --text-on-grey-500--warning-subdued
+  --text-on-grey-500--danger
+  --text-on-grey-500--danger-subdued
+
+  --text-on-grey-600
+  --text-on-grey-600--subdued
+  --text-on-grey-600--primary
+  --text-on-grey-600--primary-subdued
+  --text-on-grey-600--secondary
+  --text-on-grey-600--secondary-subdued
+  --text-on-grey-600--tertiary
+  --text-on-grey-600--tertiary-subdued
+  --text-on-grey-600--success
+  --text-on-grey-600--success-subdued
+  --text-on-grey-600--warning
+  --text-on-grey-600--warning-subdued
+  --text-on-grey-600--danger
+  --text-on-grey-600--danger-subdued
+
+  --text-on-grey-700
+  --text-on-grey-700--subdued
+  --text-on-grey-700--primary
+  --text-on-grey-700--primary-subdued
+  --text-on-grey-700--secondary
+  --text-on-grey-700--secondary-subdued
+  --text-on-grey-700--tertiary
+  --text-on-grey-700--tertiary-subdued
+  --text-on-grey-700--success
+  --text-on-grey-700--success-subdued
+  --text-on-grey-700--warning
+  --text-on-grey-700--warning-subdued
+  --text-on-grey-700--danger
+  --text-on-grey-700--danger-subdued
+
+  --text-on-grey-800
+  --text-on-grey-800--subdued
+  --text-on-grey-800--primary
+  --text-on-grey-800--primary-subdued
+  --text-on-grey-800--secondary
+  --text-on-grey-800--secondary-subdued
+  --text-on-grey-800--tertiary
+  --text-on-grey-800--tertiary-subdued
+  --text-on-grey-800--success
+  --text-on-grey-800--success-subdued
+  --text-on-grey-800--warning
+  --text-on-grey-800--warning-subdued
+  --text-on-grey-800--danger
+  --text-on-grey-800--danger-subdued
+
+  --text-on-grey-900
+  --text-on-grey-900--subdued
+  --text-on-grey-900--primary
+  --text-on-grey-900--primary-subdued
+  --text-on-grey-900--secondary
+  --text-on-grey-900--secondary-subdued
+  --text-on-grey-900--tertiary
+  --text-on-grey-900--tertiary-subdued
+  --text-on-grey-900--success
+  --text-on-grey-900--success-subdued
+  --text-on-grey-900--warning
+  --text-on-grey-900--warning-subdued
+  --text-on-grey-900--danger
+  --text-on-grey-900--danger-subdued
+
+  --text-on-primary-lighter
+  --text-on-primary-lighter--subdued
+  --text-on-primary-lighter--vivid
+  --text-on-primary-lighter--vivid-subdued
+  --text-on-primary
+  --text-on-primary--subdued
+  --text-on-primary--vivid
+  --text-on-primary--vivid-subdued
+  --text-on-primary-darker
+  --text-on-primary-darker--subdued
+  --text-on-primary-darker--vivid
+  --text-on-primary-darker--vivid-subdued
+
+  --text-on-secondary-lighter
+  --text-on-secondary-lighter--subdued
+  --text-on-secondary-lighter--vivid
+  --text-on-secondary-lighter--vivid-subdued
+  --text-on-secondary
+  --text-on-secondary--subdued
+  --text-on-secondary--vivid
+  --text-on-secondary--vivid-subdued
+  --text-on-secondary-darker
+  --text-on-secondary-darker--subdued
+  --text-on-secondary-darker--vivid
+  --text-on-secondary-darker--vivid-subdued
+
+  --text-on-tertiary-lighter
+  --text-on-tertiary-lighter--subdued
+  --text-on-tertiary-lighter--vivid
+  --text-on-tertiary-lighter--vivid-subdued
+  --text-on-tertiary
+  --text-on-tertiary--subdued
+  --text-on-tertiary--vivid
+  --text-on-tertiary--vivid-subdued
+  --text-on-tertiary-darker
+  --text-on-tertiary-darker--subdued
+  --text-on-tertiary-darker--vivid
+  --text-on-tertiary-darker--vivid-subdued
+
+  --text-on-success-lighter
+  --text-on-success-lighter--subdued
+  --text-on-success-lighter--vivid
+  --text-on-success-lighter--vivid-subdued
+  --text-on-success
+  --text-on-success--subdued
+  --text-on-success--vivid
+  --text-on-success--vivid-subdued
+  --text-on-success-darker
+  --text-on-success-darker--subdued
+  --text-on-success-darker--vivid
+  --text-on-success-darker--vivid-subdued
+
+  --text-on-warning-lighter
+  --text-on-warning-lighter--subdued
+  --text-on-warning-lighter--vivid
+  --text-on-warning-lighter--vivid-subdued
+  --text-on-warning
+  --text-on-warning--subdued
+  --text-on-warning--vivid
+  --text-on-warning--vivid-subdued
+  --text-on-warning-darker
+  --text-on-warning-darker--subdued
+  --text-on-warning-darker--vivid
+  --text-on-warning-darker--vivid-subdued
+
+  --text-on-danger-lighter
+  --text-on-danger-lighter--subdued
+  --text-on-danger-lighter--vivid
+  --text-on-danger-lighter--vivid-subdued
+  --text-on-danger
+  --text-on-danger--subdued
+  --text-on-danger--vivid
+  --text-on-danger--vivid-subdued
+  --text-on-danger-darker
+  --text-on-danger-darker--subdued
+  --text-on-danger-darker--vivid
+  --text-on-danger-darker--vivid-subdued

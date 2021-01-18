@@ -1,12 +1,18 @@
 .TextSample {
   min-height: 20px;
   position: relative;
-  padding: 2px 8px;
+  padding: 2px 6px;
 
   &__main-copy {
     display: flex;
     align-items: center;
     justify-content: space-between;
+  }
+
+  &__sample-text {
+    &:hover {
+      text-decoration: underline;
+    }
   }
 
   &__icon {
@@ -17,5 +23,17 @@
   &__micro-copy {
     font-size: 0.8em;
     margin-bottom: 8px;
+  }
+
+  &__tooltip {
+    background-color: #1e1e1e;
+    color: white;
+    padding: 4px 8px;
+    white-space: nowrap;
+    width: max-content;
+    position: absolute;
+    bottom: calc(100%);
+    right: 0;
+    z-index: 100;
   }
 }

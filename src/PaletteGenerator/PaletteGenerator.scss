@@ -1,7 +1,10 @@
 .PaletteGenerator {
+  background-color: white;
   box-shadow: 0 0 16px rgba(0, 0, 0, 0.25);
   position: fixed;
   z-index: 100;
+  overflow: hidden;
+  border-radius: 8px;
 
   display: flex;
   flex-direction: column;
@@ -51,4 +54,8 @@
       background-color: grey;
     }
   }
+}
+
+.PaletteGenerator--is-fullscreen {
+  border-radius: 0;
 }

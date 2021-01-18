@@ -1,6 +1,13 @@
+@import 'tokens';
+
 .SampleApp {
-  font-size: 24px;
-  padding: 24px;
-  color: var(--text-on-primary);
-  background-color: var(--color-primary);
+  background-color: $color-grey-050;
+  height: 100vh;
+  overflow: auto;
+  &__header {
+    font-size: 24px;
+    padding: 16px;
+    color: var(--text-on-primary);
+    background-color: var(--color-primary);
+  }
 }

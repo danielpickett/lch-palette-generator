@@ -5,6 +5,7 @@ import { StateType } from 'types'
 import { parseDefaults, parseScaleShades } from 'utils'
 import { VividTextColorsForGreyShadeType } from 'utils/extractVividTextColorsForGreyScale'
 import { TextColorsType } from 'utils/getDerivedColors'
+import { nonComputedTokens } from 'config'
 import './Outputs.scss'
 
 export const Outputs = ({
@@ -23,34 +24,34 @@ export const Outputs = ({
   }
 
   const cssPaletteColors =
-    `  --color-white: ${' '.repeat(32)} #ffffff;\n\n` +
+    `  --color-white: ${' '.repeat(42)} #ffffff;\n\n` +
     `${parseScaleShades(state.scales, (scale) => {
-      const gap = makeGap(scale.scaleNameKebab, 33)
+      const gap = makeGap(scale.scaleNameKebab, 43)
       return `  --color-${scale.scaleNameKebab}-${scale.shadeName}: ${gap} ${scale.colorHex};`
     })}\n`
 
   const cssPaletteColorDefaults = `${parseDefaults(state.scales, (x) => {
-    const gap = makeGap(x.scaleNameKebab, 11)
+    const gap = makeGap(x.scaleNameKebab, 21)
     return (
       // palette colors
-      `  --color-${x.scaleNameKebab}-lighter:                   ${gap} var(--color-${x.scaleNameKebab}-${x.lighterShadeName});\n` +
-      `  --color-${x.scaleNameKebab}:                           ${gap} var(--color-${x.scaleNameKebab}-${x.defaultShadeName});\n` +
-      `  --color-${x.scaleNameKebab}-darker:                    ${gap} var(--color-${x.scaleNameKebab}-${x.darkerShadeName});\n` +
+      `  --color-${x.scaleNameKebab}-lighter:                                    ${gap} var(--color-${x.scaleNameKebab}-${x.lighterShadeName});\n` +
+      `  --color-${x.scaleNameKebab}:                                            ${gap} var(--color-${x.scaleNameKebab}-${x.defaultShadeName});\n` +
+      `  --color-${x.scaleNameKebab}-darker:                                     ${gap} var(--color-${x.scaleNameKebab}-${x.darkerShadeName});\n` +
       // text colors lighter
-      `  --text-on-${x.scaleNameKebab}-lighter:                 ${gap} var(--text-on-${x.scaleNameKebab}-${x.lighterShadeName});\n` +
-      `  --text-on-${x.scaleNameKebab}-lighter--subdued:        ${gap} var(--text-on-${x.scaleNameKebab}-${x.lighterShadeName}--subdued);\n` +
-      `  --text-on-${x.scaleNameKebab}-lighter--vivid:          ${gap} var(--text-on-${x.scaleNameKebab}-${x.lighterShadeName}--vivid);\n` +
-      `  --text-on-${x.scaleNameKebab}-lighter--vivid--subdued: ${gap} var(--text-on-${x.scaleNameKebab}-${x.lighterShadeName}--vivid--subdued);\n` +
+      `  --text-on-${x.scaleNameKebab}-lighter:                                  ${gap} var(--text-on-${x.scaleNameKebab}-${x.lighterShadeName});\n` +
+      `  --text-on-${x.scaleNameKebab}-lighter--subdued--UNSAFE:                 ${gap} var(--text-on-${x.scaleNameKebab}-${x.lighterShadeName}--subdued--UNSAFE);\n` +
+      `  --text-on-${x.scaleNameKebab}-lighter--vivid:                           ${gap} var(--text-on-${x.scaleNameKebab}-${x.lighterShadeName}--vivid);\n` +
+      `  --text-on-${x.scaleNameKebab}-lighter--vivid-subdued--UNSAFE:           ${gap} var(--text-on-${x.scaleNameKebab}-${x.lighterShadeName}--vivid-subdued--UNSAFE);\n` +
       // text colors regular
-      `  --text-on-${x.scaleNameKebab}:                         ${gap} var(--text-on-${x.scaleNameKebab}-${x.defaultShadeName});\n` +
-      `  --text-on-${x.scaleNameKebab}--subdued:                ${gap} var(--text-on-${x.scaleNameKebab}-${x.defaultShadeName}--subdued);\n` +
-      `  --text-on-${x.scaleNameKebab}--vivid:                  ${gap} var(--text-on-${x.scaleNameKebab}-${x.defaultShadeName}--vivid);\n` +
-      `  --text-on-${x.scaleNameKebab}--vivid--subdued:         ${gap} var(--text-on-${x.scaleNameKebab}-${x.defaultShadeName}--vivid--subdued);\n` +
+      `  --text-on-${x.scaleNameKebab}:                                          ${gap} var(--text-on-${x.scaleNameKebab}-${x.defaultShadeName});\n` +
+      `  --text-on-${x.scaleNameKebab}--subdued--UNSAFE:                         ${gap} var(--text-on-${x.scaleNameKebab}-${x.defaultShadeName}--subdued--UNSAFE);\n` +
+      `  --text-on-${x.scaleNameKebab}--vivid:                                   ${gap} var(--text-on-${x.scaleNameKebab}-${x.defaultShadeName}--vivid);\n` +
+      `  --text-on-${x.scaleNameKebab}--vivid-subdued--UNSAFE:                   ${gap} var(--text-on-${x.scaleNameKebab}-${x.defaultShadeName}--vivid-subdued--UNSAFE);\n` +
       // text colors darker
-      `  --text-on-${x.scaleNameKebab}-darker:                  ${gap} var(--text-on-${x.scaleNameKebab}-${x.darkerShadeName});\n` +
-      `  --text-on-${x.scaleNameKebab}-darker--subdued:         ${gap} var(--text-on-${x.scaleNameKebab}-${x.darkerShadeName}--subdued);\n` +
-      `  --text-on-${x.scaleNameKebab}-darker--vivid:           ${gap} var(--text-on-${x.scaleNameKebab}-${x.darkerShadeName}--vivid);\n` +
-      `  --text-on-${x.scaleNameKebab}-darker--vivid--subdued:  ${gap} var(--text-on-${x.scaleNameKebab}-${x.darkerShadeName}--vivid--subdued);\n`
+      `  --text-on-${x.scaleNameKebab}-darker:                                   ${gap} var(--text-on-${x.scaleNameKebab}-${x.darkerShadeName});\n` +
+      `  --text-on-${x.scaleNameKebab}-darker--subdued--UNSAFE:                  ${gap} var(--text-on-${x.scaleNameKebab}-${x.darkerShadeName}--subdued--UNSAFE);\n` +
+      `  --text-on-${x.scaleNameKebab}-darker--vivid:                            ${gap} var(--text-on-${x.scaleNameKebab}-${x.darkerShadeName}--vivid);\n` +
+      `  --text-on-${x.scaleNameKebab}-darker--vivid-subdued--UNSAFE:            ${gap} var(--text-on-${x.scaleNameKebab}-${x.darkerShadeName}--vivid-subdued--UNSAFE);\n`
     )
   })}` //.slice(0, -1)
 
@@ -62,7 +63,7 @@ export const Outputs = ({
           if (shadeIndex === 0) {
             return ''
           }
-          const len = 44
+          const len = 54
           // prettier-ignore
           return (
             `  --${shade.textColor.tokenName}:${makeGap(shade.textColor.tokenName, len)} ${shade.textColor.hex};\n` + 
@@ -99,13 +100,27 @@ export const Outputs = ({
       return prevTokens + '\n' + newTokens + '\n'
     },
     ''
-  ) //.replace(/grey-000/gm, 'white').replace(/grey-000/gm, 'white')
+  )
+
+  const toCSS = ({ property, value }: { property: string; value: string }) => {
+    return `  ${property}: ${value};`
+  }
+
+  let nonColorTokens = ''
+
+  nonComputedTokens.forEach((tokenSet) => {
+    tokenSet.forEach((token) => {
+      nonColorTokens = nonColorTokens + toCSS(token) + '\n'
+    })
+    nonColorTokens = nonColorTokens + '\n'
+  })
 
   const cssCombined = (
     `${cssPaletteColors}\n` +
     `${cssTextColors}\n` +
     `${cssTextColorsOnGrey}\n` +
-    `${cssPaletteColorDefaults}`
+    `${cssPaletteColorDefaults}\n` +
+    `${nonColorTokens}`
   ).replace(/\n{3,}/g, '\n\n')
 
   const tokenRegEx = / {2}--(.+): .*$/gm
@@ -143,7 +158,7 @@ export const Outputs = ({
       />
       <Output
         heading="Config"
-        content={JSON.stringify(state, null, 2)}
+        content={JSON.stringify(state, null, 2) + '\n'}
         style={{ maxWidth: '420px' }}
       />
       {ReactDOM.createPortal(<style>{cssRootRule}</style>, document.head)}

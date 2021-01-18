@@ -5,6 +5,7 @@ import {
   shadeNames,
   regularTextColorConfig,
   vividTextColorConfig,
+  safeTextOnChromaticColors,
   // greyscaleTextColorConfig,
 } from 'config'
 import { faSquare, faCircle } from '@fortawesome/pro-solid-svg-icons'
@@ -80,6 +81,16 @@ export const getDerivedColors = (state: StateType): TextColorsType[] => {
             ? 'white'
             : scale.scaleName.toLowerCase() + '-' + shadeNames[shadeIndex]
 
+        const isSafe = (
+          key: 'default' | 'subdued' | 'vivid' | 'vivid-subdued'
+        ) => {
+          return safeTextOnChromaticColors[shadeIndex][key]
+            ? ''
+            : '--UNSAFE'
+        }
+
+        // + isSafe('default')
+
         return {
           scaleName: scale.scaleName,
           shadeName: shadeNames[shadeIndex],
@@ -89,7 +100,7 @@ export const getDerivedColors = (state: StateType): TextColorsType[] => {
             hex: bgColorHex,
           },
           textColor: {
-            tokenName: 'text-on-' + token,
+            tokenName: 'text-on-' + token + isSafe('default'),
             lch: textColors.regular.lch,
             hex: textColors.regular.hex,
             contrast: textColors.regular.contrast,
@@ -97,7 +108,7 @@ export const getDerivedColors = (state: StateType): TextColorsType[] => {
             plotMarker: textColors.marker,
           },
           textColorSubdued: {
-            tokenName: 'text-on-' + token + '--subdued',
+            tokenName: 'text-on-' + token + '--subdued' + isSafe('subdued'),
             lch: textColors.subdued.lch,
             hex: textColors.subdued.hex,
             contrast: textColors.subdued.contrast,
@@ -105,7 +116,7 @@ export const getDerivedColors = (state: StateType): TextColorsType[] => {
             plotMarker: textColors.marker,
           },
           vividTextColor: {
-            tokenName: 'text-on-' + token + '--vivid',
+            tokenName: 'text-on-' + token + '--vivid' + isSafe('vivid'),
             lch: vividTextColors.regular.lch,
             hex: vividTextColors.regular.hex,
             contrast: vividTextColors.regular.contrast,
@@ -113,7 +124,8 @@ export const getDerivedColors = (state: StateType): TextColorsType[] => {
             plotMarker: vividTextColors.marker,
           },
           vividTextColorSubdued: {
-            tokenName: 'text-on-' + token + '--vivid--subdued',
+            tokenName:
+              'text-on-' + token + '--vivid-subdued' + isSafe('vivid-subdued'),
             lch: vividTextColors.subdued.lch,
             hex: vividTextColors.subdued.hex,
             contrast: vividTextColors.subdued.contrast,

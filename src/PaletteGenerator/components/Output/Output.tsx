@@ -37,16 +37,8 @@ export const Output = ({
       className={'Output' + (showConfirm ? ' Output--is-confirming' : '')}
       style={style}
     >
-      <h3 className="Output__heading">{heading}</h3>
-
-      <div className="Output__output">
-        <textarea
-          className="Output__textarea"
-          readOnly
-          value={content}
-          ref={ref}
-        />
-
+      <div className="Output__heading">
+        <div>{heading}</div>
         <div className="Output__button">
           <IconButton
             onClick={() => {
@@ -57,8 +49,17 @@ export const Output = ({
             // icon="clipboard"
             faIcon={faClipboard}
           />
-          <div className="Output__confirmation">Copied</div>
+          <div className="Output__confirmation">copied</div>
         </div>
+      </div>
+
+      <div className="Output__output">
+        <textarea
+          className="Output__textarea"
+          readOnly
+          value={content}
+          ref={ref}
+        />
       </div>
     </div>
   )

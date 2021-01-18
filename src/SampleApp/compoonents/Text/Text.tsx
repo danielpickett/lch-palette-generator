@@ -5,16 +5,15 @@ import { TextPropsType } from './TextPropsType'
 type FontWeightType = 'normal' | 'bolder' | 'lighter'
 
 export const Text = ({
+  on,
   children,
+  color,
   size = 'm',
   tag = 'span',
   weight,
   textAlign,
-  on,
-  color,
   textTransform,
   noWrap,
-  subdued,
   UNSAFE_style,
   UNSAFE_className,
   truncate,
@@ -31,15 +30,9 @@ export const Text = ({
     return color
   })()
 
-  const colorModifier = (() => {
-    if (subdued === true) return '--subdued'
-    if (subdued === 'dangerously') return '--dangerously-subdued'
-    return ''
-  })()
-
   const _style: CSSProperties = {
     fontSize: `var(--text-size-${size})`,
-    color: `var(--text-on-${on}--color-${_color + colorModifier})`,
+    color: `var(--text-on-${on})`,
     fontWeight: (weight
       ? `var(--text-weight-${weight})`
       : undefined) as FontWeightType,

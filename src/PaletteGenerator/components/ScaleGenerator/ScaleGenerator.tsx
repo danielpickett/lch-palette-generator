@@ -262,7 +262,10 @@ export const ScaleGenerator = React.memo(
           </div>
           <div className="ScaleGenerator__footer">
             <div className="ScaleGenerator__hue">h: {scale.hue.toFixed(1)}</div>
-            <div className="ScaleGenerator__hue-slider">
+            <div
+              className="ScaleGenerator__hue-slider"
+              onKeyPress={() => handleSnapChroma(150)}
+            >
               <Slider
                 value={scale.hue}
                 min={0}

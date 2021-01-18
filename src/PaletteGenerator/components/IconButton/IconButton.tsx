@@ -1,5 +1,5 @@
 import React, { CSSProperties } from 'react'
-import './Button.scss'
+import './IconButton.scss'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { IconDefinition } from '@fortawesome/pro-light-svg-icons'
 
@@ -19,7 +19,7 @@ export const IconButton = React.forwardRef<
       title={props.title}
       style={props.style}
       ref={ref}
-      className="Button"
+      className="IconButton"
       onClick={props.onClick}
     >
       {!!props.faIcon && <FontAwesomeIcon icon={props.faIcon} />}

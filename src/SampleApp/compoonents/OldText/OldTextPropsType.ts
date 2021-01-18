@@ -368,7 +368,7 @@ interface OnDanger900ColorDanger {
   subdued?: false | true | 'dangerously'
 }
 
-export type TextPropsType = Types.CommonPropsType &
+export type OldTextPropsType = Types.CommonPropsType &
   CommonTextProps &
   (
     | OnWhiteColorGrey

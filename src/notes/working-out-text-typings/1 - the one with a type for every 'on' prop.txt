@@ -1,0 +1,830 @@
+type TextOnPrimary050 {
+  on: 'primary-050'
+  kind:
+    | 'subdued'
+    | 'vivid'
+    | 'vivid-subdued'
+  }
+
+type TextOnPrimary100 {
+  on: 'primary-100'
+  kind:
+    | 'subdued'
+    | 'vivid'
+    | 'vivid-subdued'
+  }
+
+type TextOnPrimary200 {
+  on: 'primary-200'
+  kind:
+    | 'subdued'
+    | 'vivid'
+    | 'vivid-subdued'
+  }
+
+type TextOnPrimary300 {
+  on: 'primary-300'
+  kind:
+    | 'subdued'
+    | 'vivid'
+    | 'vivid-subdued'
+  }
+
+type TextOnPrimary400 {
+  on: 'primary-400'
+  kind:
+    | 'subdued'
+    | 'vivid'
+    | 'vivid-subdued'
+  }
+
+type TextOnPrimary500 {
+  on: 'primary-500'
+  kind:
+    | 'subdued'
+    | 'vivid'
+    | 'vivid-subdued'
+  }
+
+type TextOnPrimary600 {
+  on: 'primary-600'
+  kind:
+    | 'subdued'
+    | 'vivid'
+    | 'vivid-subdued'
+  }
+
+type TextOnPrimary700 {
+  on: 'primary-700'
+  kind:
+    | 'subdued'
+    | 'vivid'
+    | 'vivid-subdued'
+  }
+
+type TextOnPrimary800 {
+  on: 'primary-800'
+  kind:
+    | 'subdued'
+    | 'vivid'
+    | 'vivid-subdued'
+  }
+
+type TextOnPrimary900 {
+  on: 'primary-900'
+  kind:
+    | 'subdued'
+    | 'vivid'
+    | 'vivid-subdued'
+  }
+
+type TextOnSecondary050 {
+  on: 'secondary-050'
+  kind:
+    | 'subdued'
+    | 'vivid'
+    | 'vivid-subdued'
+  }
+
+type TextOnSecondary100 {
+  on: 'secondary-100'
+  kind:
+    | 'subdued'
+    | 'vivid'
+    | 'vivid-subdued'
+  }
+
+type TextOnSecondary200 {
+  on: 'secondary-200'
+  kind:
+    | 'subdued'
+    | 'vivid'
+    | 'vivid-subdued'
+  }
+
+type TextOnSecondary300 {
+  on: 'secondary-300'
+  kind:
+    | 'subdued'
+    | 'vivid'
+    | 'vivid-subdued'
+  }
+
+type TextOnSecondary400 {
+  on: 'secondary-400'
+  kind:
+    | 'subdued'
+    | 'vivid'
+    | 'vivid-subdued'
+  }
+
+type TextOnSecondary500 {
+  on: 'secondary-500'
+  kind:
+    | 'subdued'
+    | 'vivid'
+    | 'vivid-subdued'
+  }
+
+type TextOnSecondary600 {
+  on: 'secondary-600'
+  kind:
+    | 'subdued'
+    | 'vivid'
+    | 'vivid-subdued'
+  }
+
+type TextOnSecondary700 {
+  on: 'secondary-700'
+  kind:
+    | 'subdued'
+    | 'vivid'
+    | 'vivid-subdued'
+  }
+
+type TextOnSecondary800 {
+  on: 'secondary-800'
+  kind:
+    | 'subdued'
+    | 'vivid'
+    | 'vivid-subdued'
+  }
+
+type TextOnSecondary900 {
+  on: 'secondary-900'
+  kind:
+    | 'subdued'
+    | 'vivid'
+    | 'vivid-subdued'
+  }
+
+type TextOnTertiary050 {
+  on: 'tertiary-050'
+  kind:
+    | 'subdued'
+    | 'vivid'
+    | 'vivid-subdued'
+  }
+
+type TextOnTertiary100 {
+  on: 'tertiary-100'
+  kind:
+    | 'subdued'
+    | 'vivid'
+    | 'vivid-subdued'
+  }
+
+type TextOnTertiary200 {
+  on: 'tertiary-200'
+  kind:
+    | 'subdued'
+    | 'vivid'
+    | 'vivid-subdued'
+  }
+
+type TextOnTertiary300 {
+  on: 'tertiary-300'
+  kind:
+    | 'subdued'
+    | 'vivid'
+    | 'vivid-subdued'
+  }
+
+type TextOnTertiary400 {
+  on: 'tertiary-400'
+  kind:
+    | 'subdued'
+    | 'vivid'
+    | 'vivid-subdued'
+  }
+
+type TextOnTertiary500 {
+  on: 'tertiary-500'
+  kind:
+    | 'subdued'
+    | 'vivid'
+    | 'vivid-subdued'
+  }
+
+type TextOnTertiary600 {
+  on: 'tertiary-600'
+  kind:
+    | 'subdued'
+    | 'vivid'
+    | 'vivid-subdued'
+  }
+
+type TextOnTertiary700 {
+  on: 'tertiary-700'
+  kind:
+    | 'subdued'
+    | 'vivid'
+    | 'vivid-subdued'
+  }
+
+type TextOnTertiary800 {
+  on: 'tertiary-800'
+  kind:
+    | 'subdued'
+    | 'vivid'
+    | 'vivid-subdued'
+  }
+
+type TextOnTertiary900 {
+  on: 'tertiary-900'
+  kind:
+    | 'subdued'
+    | 'vivid'
+    | 'vivid-subdued'
+  }
+
+type TextOnSuccess050 {
+  on: 'success-050'
+  kind:
+    | 'subdued'
+    | 'vivid'
+    | 'vivid-subdued'
+  }
+
+type TextOnSuccess100 {
+  on: 'success-100'
+  kind:
+    | 'subdued'
+    | 'vivid'
+    | 'vivid-subdued'
+  }
+
+type TextOnSuccess200 {
+  on: 'success-200'
+  kind:
+    | 'subdued'
+    | 'vivid'
+    | 'vivid-subdued'
+  }
+
+type TextOnSuccess300 {
+  on: 'success-300'
+  kind:
+    | 'subdued'
+    | 'vivid'
+    | 'vivid-subdued'
+  }
+
+type TextOnSuccess400 {
+  on: 'success-400'
+  kind:
+    | 'subdued'
+    | 'vivid'
+    | 'vivid-subdued'
+  }
+
+type TextOnSuccess500 {
+  on: 'success-500'
+  kind:
+    | 'subdued'
+    | 'vivid'
+    | 'vivid-subdued'
+  }
+
+type TextOnSuccess600 {
+  on: 'success-600'
+  kind:
+    | 'subdued'
+    | 'vivid'
+    | 'vivid-subdued'
+  }
+
+type TextOnSuccess700 {
+  on: 'success-700'
+  kind:
+    | 'subdued'
+    | 'vivid'
+    | 'vivid-subdued'
+  }
+
+type TextOnSuccess800 {
+  on: 'success-800'
+  kind:
+    | 'subdued'
+    | 'vivid'
+    | 'vivid-subdued'
+  }
+
+type TextOnSuccess900 {
+  on: 'success-900'
+  kind:
+    | 'subdued'
+    | 'vivid'
+    | 'vivid-subdued'
+  }
+
+type TextOnWarning050 {
+  on: 'warning-050'
+  kind:
+    | 'subdued'
+    | 'vivid'
+    | 'vivid-subdued'
+  }
+
+type TextOnWarning100 {
+  on: 'warning-100'
+  kind:
+    | 'subdued'
+    | 'vivid'
+    | 'vivid-subdued'
+  }
+
+type TextOnWarning200 {
+  on: 'warning-200'
+  kind:
+    | 'subdued'
+    | 'vivid'
+    | 'vivid-subdued'
+  }
+
+type TextOnWarning300 {
+  on: 'warning-300'
+  kind:
+    | 'subdued'
+    | 'vivid'
+    | 'vivid-subdued'
+  }
+
+type TextOnWarning400 {
+  on: 'warning-400'
+  kind:
+    | 'subdued'
+    | 'vivid'
+    | 'vivid-subdued'
+  }
+
+type TextOnWarning500 {
+  on: 'warning-500'
+  kind:
+    | 'subdued'
+    | 'vivid'
+    | 'vivid-subdued'
+  }
+
+type TextOnWarning600 {
+  on: 'warning-600'
+  kind:
+    | 'subdued'
+    | 'vivid'
+    | 'vivid-subdued'
+  }
+
+type TextOnWarning700 {
+  on: 'warning-700'
+  kind:
+    | 'subdued'
+    | 'vivid'
+    | 'vivid-subdued'
+  }
+
+type TextOnWarning800 {
+  on: 'warning-800'
+  kind:
+    | 'subdued'
+    | 'vivid'
+    | 'vivid-subdued'
+  }
+
+type TextOnWarning900 {
+  on: 'warning-900'
+  kind:
+    | 'subdued'
+    | 'vivid'
+    | 'vivid-subdued'
+  }
+
+type TextOnDanger050 {
+  on: 'danger-050'
+  kind:
+    | 'subdued'
+    | 'vivid'
+    | 'vivid-subdued'
+  }
+
+type TextOnDanger100 {
+  on: 'danger-100'
+  kind:
+    | 'subdued'
+    | 'vivid'
+    | 'vivid-subdued'
+  }
+
+type TextOnDanger200 {
+  on: 'danger-200'
+  kind:
+    | 'subdued'
+    | 'vivid'
+    | 'vivid-subdued'
+  }
+
+type TextOnDanger300 {
+  on: 'danger-300'
+  kind:
+    | 'subdued'
+    | 'vivid'
+    | 'vivid-subdued'
+  }
+
+type TextOnDanger400 {
+  on: 'danger-400'
+  kind:
+    | 'subdued'
+    | 'vivid'
+    | 'vivid-subdued'
+  }
+
+type TextOnDanger500 {
+  on: 'danger-500'
+  kind:
+    | 'subdued'
+    | 'vivid'
+    | 'vivid-subdued'
+  }
+
+type TextOnDanger600 {
+  on: 'danger-600'
+  kind:
+    | 'subdued'
+    | 'vivid'
+    | 'vivid-subdued'
+  }
+
+type TextOnDanger700 {
+  on: 'danger-700'
+  kind:
+    | 'subdued'
+    | 'vivid'
+    | 'vivid-subdued'
+  }
+
+type TextOnDanger800 {
+  on: 'danger-800'
+  kind:
+    | 'subdued'
+    | 'vivid'
+    | 'vivid-subdued'
+  }
+
+type TextOnDanger900 {
+  on: 'danger-900'
+  kind:
+    | 'subdued'
+    | 'vivid'
+    | 'vivid-subdued'
+  }
+
+interface TextOnWhite {
+  on: 'white'
+  kind: 
+    | undefined
+    | 'subdued'
+    | 'primary'
+    | 'primary-subdued'
+    | 'secondary'
+    | 'secondary-subdued'
+    | 'tertiary'
+    | 'tertiary-subdued'
+    | 'success'
+    | 'success-subdued'
+    | 'warning'
+    | 'warning-subdued'
+    | 'danger'
+    | 'danger-subdued'
+
+interface TextOnGrey050 {
+  on: 'grey-050'
+  kind: 
+    | undefined
+    | 'subdued'
+    | 'primary'
+    | 'primary-subdued'
+    | 'secondary'
+    | 'secondary-subdued'
+    | 'tertiary'
+    | 'tertiary-subdued'
+    | 'success'
+    | 'success-subdued'
+    | 'warning'
+    | 'warning-subdued'
+    | 'danger'
+    | 'danger-subdued'
+
+interface TextOnGrey100 {
+  on: 'grey-100'
+  kind: 
+    | undefined
+    | 'subdued'
+    | 'primary'
+    | 'primary-subdued'
+    | 'secondary'
+    | 'secondary-subdued'
+    | 'tertiary'
+    | 'tertiary-subdued'
+    | 'success'
+    | 'success-subdued'
+    | 'warning'
+    | 'warning-subdued'
+    | 'danger'
+    | 'danger-subdued'
+}
+
+interface TextOnGrey200 {
+  on: 'grey-200'
+  kind: 
+    | undefined
+    | 'subdued'
+    | 'primary'
+    | 'primary-subdued'
+    | 'secondary'
+    | 'secondary-subdued'
+    | 'tertiary'
+    | 'tertiary-subdued'
+    | 'success'
+    | 'success-subdued'
+    | 'warning'
+    | 'warning-subdued'
+    | 'danger'
+    | 'danger-subdued'
+}
+
+interface TextOnGrey300 {
+  on: 'grey-300'
+  kind: 
+    | undefined
+    | 'subdued'
+    | 'primary'
+    | 'primary-subdued'
+    | 'secondary'
+    | 'secondary-subdued'
+    | 'tertiary'
+    | 'tertiary-subdued'
+    | 'success'
+    | 'success-subdued'
+    | 'warning'
+    | 'warning-subdued'
+    | 'danger'
+    | 'danger-subdued'
+}
+
+interface TextOnGrey400 {
+  on: 'grey-400'
+  kind: 
+    | undefined
+    | 'subdued'
+    | 'primary'
+    | 'primary-subdued'
+    | 'secondary'
+    | 'secondary-subdued'
+    | 'tertiary'
+    | 'tertiary-subdued'
+    | 'success'
+    | 'success-subdued'
+    | 'warning'
+    | 'warning-subdued'
+    | 'danger'
+    | 'danger-subdued'
+}
+
+interface TextOnGrey500 {
+  on: 'grey-500'
+  kind: 
+    | undefined
+    | 'subdued'
+    | 'primary'
+    | 'primary-subdued'
+    | 'secondary'
+    | 'secondary-subdued'
+    | 'tertiary'
+    | 'tertiary-subdued'
+    | 'success'
+    | 'success-subdued'
+    | 'warning'
+    | 'warning-subdued'
+    | 'danger'
+    | 'danger-subdued'
+}
+
+interface TextOnGrey600 {
+  on: 'grey-600'
+  kind: 
+    | undefined
+    | 'subdued'
+    | 'primary'
+    | 'primary-subdued'
+    | 'secondary'
+    | 'secondary-subdued'
+    | 'tertiary'
+    | 'tertiary-subdued'
+    | 'success'
+    | 'success-subdued'
+    | 'warning'
+    | 'warning-subdued'
+    | 'danger'
+    | 'danger-subdued'
+}
+
+interface TextOnGrey700 {
+  on: 'grey-700'
+  kind: 
+    | undefined
+    | 'subdued'
+    | 'primary'
+    | 'primary-subdued'
+    | 'secondary'
+    | 'secondary-subdued'
+    | 'tertiary'
+    | 'tertiary-subdued'
+    | 'success'
+    | 'success-subdued'
+    | 'warning'
+    | 'warning-subdued'
+    | 'danger'
+    | 'danger-subdued'
+}
+
+interface TextOnGrey800 {
+  on: 'grey-800'
+  kind: 
+    | undefined
+    | 'subdued'
+    | 'primary'
+    | 'primary-subdued'
+    | 'secondary'
+    | 'secondary-subdued'
+    | 'tertiary'
+    | 'tertiary-subdued'
+    | 'success'
+    | 'success-subdued'
+    | 'warning'
+    | 'warning-subdued'
+    | 'danger'
+    | 'danger-subdued'
+}
+
+interface TextOnGrey900 {
+  on: 'grey-900'
+  kind: 
+    | undefined
+    | 'subdued'
+    | 'primary'
+    | 'primary-subdued'
+    | 'secondary'
+    | 'secondary-subdued'
+    | 'tertiary'
+    | 'tertiary-subdued'
+    | 'success'
+    | 'success-subdued'
+    | 'warning'
+    | 'warning-subdued'
+    | 'danger'
+    | 'danger-subdued'
+}
+
+interface TextOnPrimaryLighter {
+  on: 'primary-lighter'
+  kind: 
+    | undefined
+    | 'subdued'
+    | 'vivid'
+    | 'vivid-subdued'
+
+interface TextOnPrimary {
+  on: 'primary'
+  kind: 
+    | undefined
+    | 'subdued'
+    | 'vivid'
+    | 'vivid-subdued'
+
+interface TextOnPrimaryDarker {
+  on: 'primary-darker'
+  kind: 
+    | undefined
+    | 'subdued'
+    | 'vivid'
+    | 'vivid-subdued'
+
+interface TextOnSecondaryLighter {
+  on: 'secondary-lighter'
+  kind: 
+    | undefined
+    | 'subdued'
+    | 'vivid'
+    | 'vivid-subdued'
+
+interface TextOnSecondary {
+  on: 'secondary'
+  kind: 
+    | undefined
+    | 'subdued'
+    | '--vivid'
+    | 'vivid-subdued'
+
+interface TextOnSecondaryDarker {
+  on: 'secondary-darker'
+  kind: 
+    | undefined
+    | 'subdued'
+    | 'vivid'
+    | '--vivid-subdued'
+
+interface TextOnTertiaryLighter {
+  on: 'tertiary-lighter'
+  kind: 
+    | undefined
+    | 'subdued'
+    | 'vivid'
+    | 'vivid-subdued'
+
+interface TextOnTertiary {
+  on: 'tertiary'
+  kind: 
+    | undefined
+    | 'subdued'
+    | '-vivid'
+    | 'vivid-subdued'
+
+interface TextOnTertiaryDarker {
+  on: 'tertiary-darker'
+  kind: 
+    | undefined
+    | 'subdued'
+    | 'vivid'
+    | '-vivid-subdued'
+
+interface TextOnSuccessLighter {
+  on: 'success-lighter'
+  kind: 
+    | undefined
+    | 'subdued'
+    | 'vivid'
+    | 'vivid-subdued'
+
+interface TextOnSuccess {
+  on: 'success'
+  kind: 
+    | undefined
+    | 'subdued'
+    | 'vivid'
+    | 'vivid-subdued'
+
+interface TextOnSuccessDarker {
+  on: 'success-darker'
+  kind: 
+    | undefined
+    | 'subdued'
+    | 'vivid'
+    | 'vivid-subdued'
+
+interface TextOnWarningLighter {
+  on: 'warning-lighter'
+  kind: 
+    | undefined
+    | 'subdued'
+    | 'vivid'
+    | 'vivid-subdued'
+
+interface TextOnWarning {
+  on: 'warning'
+  kind: 
+    | undefined
+    | 'subdued'
+    | 'vivid'
+    | 'vivid-subdued'
+
+interface TextOnWarningDarker {
+  on: 'warning-darker'
+  kind: 
+    | undefined
+    | 'subdued'
+    | 'vivid'
+    | 'vivid-subdued'
+
+interface TextOnDangerLighter {
+  on: 'danger-lighter'
+  kind: 
+    | undefined
+    | 'subdued'
+    | 'vivid'
+    | 'vivid-subdued'
+
+interface TextOnDanger {
+  on: 'danger'
+  kind: 
+    | undefined
+    | 'subdued'
+    | 'ivid'
+    | 'vivid-subdued'
+
+interface TextOnDangerDarker {
+  on: 'danger-darker'
+  kind: 
+    | undefined
+    | 'subdued'
+    | 'vivid'
+    | 'ivid-subdued'

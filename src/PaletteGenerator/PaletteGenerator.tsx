@@ -4,54 +4,66 @@ import './PaletteGenerator.scss'
 import { Outputs, ScaleGenerator, Toolbar } from './components'
 import { useDragHandle } from 'hooks'
 import theme from 'config/beewo-theme.json'
-import {
-  extractVividTextColorsForGreyScale,
-  getDerivedColors,
-  // getDerivedGreyscaleColors,
-} from 'utils'
+import { extractVividTextColorsForGreyScale, getDerivedColors } from 'utils'
 import ReactDOM from 'react-dom'
 
 export const PaletteGenerator = () => {
+  const defaults = {
+    showText: true,
+    showTextDetails: false,
+    showTextPlots: false,
+    showTextChromaControls: false,
+    showColorOutputs: false,
+    fullscreen: true,
+    size: 1.25,
+  }
+
   const [state, handleStateChanges] = useReducer(mainReducer, theme)
 
-  const [showTextDetails, setShowTextDetails] = useState(false)
-  const handleShowTextDetailsChange = useCallback(
-    () => setShowTextDetails(!showTextDetails),
-    [setShowTextDetails, showTextDetails]
-  )
-
-  const [showTextPlots, setShowTextPlots] = useState(false)
-  const handleShowTextPlotsChange = useCallback(
-    () => setShowTextPlots(!showTextPlots),
-    [setShowTextPlots, showTextPlots]
-  )
-
-  const [showText, setShowText] = useState(false)
+  const [showText, setShowText] = useState(defaults.showText) // showText
   const handleShowTextChange = useCallback(() => setShowText(!showText), [
     setShowText,
     showText,
   ])
 
-  const [showTextChromaControls, setShowTextChromaControls] = useState(false)
+  const [showTextDetails, setShowTextDetails] = useState(
+    defaults.showTextDetails
+  ) // showTextDetails
+  const handleShowTextDetailsChange = useCallback(
+    () => setShowTextDetails(!showTextDetails),
+    [setShowTextDetails, showTextDetails]
+  )
+
+  const [showTextPlots, setShowTextPlots] = useState(defaults.showTextPlots) // showTextPlots
+  const handleShowTextPlotsChange = useCallback(
+    () => setShowTextPlots(!showTextPlots),
+    [setShowTextPlots, showTextPlots]
+  )
+
+  const [showTextChromaControls, setShowTextChromaControls] = useState(
+    defaults.showTextChromaControls
+  ) // showTextChromaControls
   const handleShowTextChromaControlsChange = useCallback(
     () => setShowTextChromaControls(!showTextChromaControls),
     [setShowTextChromaControls, showTextChromaControls]
   )
 
-  const [showColorOutputs, setShowColorOutputs] = useState(false)
+  const [showColorOutputs, setShowColorOutputs] = useState(
+    defaults.showColorOutputs
+  ) // showColorOutputs
   const handleShowColorOutputsChange = useCallback(
     () => setShowColorOutputs(!showColorOutputs),
     [setShowColorOutputs, showColorOutputs]
   )
 
-  const [fullscreen, setFullscreen] = useState(false)
+  const [fullscreen, setFullscreen] = useState(defaults.fullscreen) // fullscreen
   const handleFullscreenChange = useCallback(() => setFullscreen(!fullscreen), [
     setFullscreen,
     fullscreen,
   ])
 
   const outputDragHandleRef = useRef<HTMLDivElement>(null)
-  const outputHeightPx = useDragHandle(outputDragHandleRef, 45) // 45
+  const outputHeightPx = useDragHandle(outputDragHandleRef, 42, 42) // 45
 
   const computedTextColors = getDerivedColors(state)
 
@@ -59,7 +71,7 @@ export const PaletteGenerator = () => {
     computedTextColors
   )
 
-  const [size, setSize] = useState(1.25)
+  const [size, setSize] = useState(defaults.size)
   const handleCanvasSizeChange = (size: number) => {
     setSize(size)
   }
@@ -68,7 +80,10 @@ export const PaletteGenerator = () => {
     <>
       {ReactDOM.createPortal(
         <div
-          className="PaletteGenerator"
+          className={
+            'PaletteGenerator' +
+            (fullscreen ? ' PaletteGenerator--is-fullscreen' : '')
+          }
           style={
             fullscreen
               ? { height: '100vh', width: '100vw', right: 0, bottom: 0 }
