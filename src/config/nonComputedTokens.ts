@@ -46,16 +46,20 @@ const transitions = [
 
 const boxShadows = [
   {
+    property: '--box-shadow-100',
+    value: `0 0 3px rgba(0, 0, 0, 0.02), 0 1px 3px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.08)`,
+  },
+  {
     property: '--box-shadow-100-dark',
     value: `0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24)`,
   },
   {
     property: '--box-shadow-100-focus',
-    value: `0 1px 3px rgba(93, 85, 250, 0.12), 0 1px 2px rgba(93, 85, 250, 0.24), 0 0 0 1px rgba(93, 85, 250, 0.6)`,
+    value: `0 0 0 3px rgba(0, 81, 255, 0.5), 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24)`,
   },
   {
-    property: '--box-shadow-100',
-    value: `0 0 3px rgba(0, 0, 0, 0.02), 0 1px 3px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.08)`,
+    property: '--box-shadow-200',
+    value: `0 0 6px rgba(0, 0, 0, 0.02665), 0 3px 6px rgba(0, 0, 0, 0.0533), 0 3px 6px rgba(0, 0, 0, 0.0766)`,
   },
   {
     property: '--box-shadow-200-dark',
@@ -63,11 +67,11 @@ const boxShadows = [
   },
   {
     property: '--box-shadow-200-focus',
-    value: `0 3px 6px rgba(93, 85, 250, 0.16), 0 3px 6px rgba(93, 85, 250, 0.23), 0 0 0 1px rgba(93, 85, 250, 0.6)`,
+    value: `0 0 0 3px rgba(0, 81, 255, 0.5), 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)`,
   },
   {
-    property: '--box-shadow-200',
-    value: `0 0 6px rgba(0, 0, 0, 0.02665), 0 3px 6px rgba(0, 0, 0, 0.0533), 0 3px 6px rgba(0, 0, 0, 0.0766)`,
+    property: '--box-shadow-300',
+    value: `0 0 20px rgba(0, 0, 0, 0.03165), 0 10px 20px rgba(0, 0, 0, 0.0633), 0 6px 6px rgba(0, 0, 0, 0.0766)`,
   },
   {
     property: '--box-shadow-300-dark',
@@ -75,11 +79,11 @@ const boxShadows = [
   },
   {
     property: '--box-shadow-300-focus',
-    value: `0 10px 20px rgba(93, 85, 250, 0.19), 0 6px 6px rgba(93, 85, 250, 0.23), 0 0 0 1px rgba(93, 85, 250, 0.6)`,
+    value: `0 0 0 3px rgba(0, 81, 255, 0.5), 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23)`,
   },
   {
-    property: '--box-shadow-300',
-    value: `0 0 20px rgba(0, 0, 0, 0.03165), 0 10px 20px rgba(0, 0, 0, 0.0633), 0 6px 6px rgba(0, 0, 0, 0.0766)`,
+    property: '--box-shadow-400',
+    value: `0 0 28px rgba(0, 0, 0, 0.04165), 0 14px 28px rgba(0, 0, 0, 0.0833), 0 10px 10px rgba(0, 0, 0, 0.0733)`,
   },
   {
     property: '--box-shadow-400-dark',
@@ -87,11 +91,11 @@ const boxShadows = [
   },
   {
     property: '--box-shadow-400-focus',
-    value: `0 14px 28px rgba(93, 85, 250, 0.25), 0 10px 10px rgba(93, 85, 250, 0.22), 0 0 0 1px rgba(93, 85, 250, 0.6)`,
+    value: `0 0 0 3px rgba(0, 81, 255, 0.5), 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22)`,
   },
   {
-    property: '--box-shadow-400',
-    value: `0 0 28px rgba(0, 0, 0, 0.04165), 0 14px 28px rgba(0, 0, 0, 0.0833), 0 10px 10px rgba(0, 0, 0, 0.0733)`,
+    property: '--box-shadow-500',
+    value: `0 0 38px rgba(0, 0, 0, 0.05), 0 19px 38px rgba(0, 0, 0, 0.1), 0 15px 12px rgba(0, 0, 0, 0.0733)`,
   },
   {
     property: '--box-shadow-500-dark',
@@ -99,11 +103,7 @@ const boxShadows = [
   },
   {
     property: '--box-shadow-500-focus',
-    value: `0 19px 38px rgba(93, 85, 250, 0.3), 0 15px 12px rgba(93, 85, 250, 0.22), 0 0 0 1px rgba(93, 85, 250, 0.6)`,
-  },
-  {
-    property: '--box-shadow-500',
-    value: `0 0 38px rgba(0, 0, 0, 0.05), 0 19px 38px rgba(0, 0, 0, 0.1), 0 15px 12px rgba(0, 0, 0, 0.0733)`,
+    value: `0 0 0 3px rgba(0, 81, 255, 0.5), 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22)`,
   },
 ]
 
