@@ -125,36 +125,30 @@ export const parseDefaults = (
     defaultShadeName: string
     darkerShadeName: string
     lighterShadeName: string
+    defaultShadeIndex: number
   }) => string
 ) =>
-  scales
-    .filter((scale) => !!scale.defaultShade)
-    .map((scale) => {
-      const defaultShadeIndex = scale.defaultShade as number
-      const defaultShadeName = shadeNames[defaultShadeIndex]
-      const darkerShadeName =
-        defaultShadeIndex < 10
-          ? shadeNames[defaultShadeIndex + 1]
-          : defaultShadeName
-      const lighterShadeName =
-        defaultShadeIndex > 1
-          ? shadeNames[defaultShadeIndex - 1]
-          : defaultShadeName
+  scales.map((scale) => {
+    if (scale.defaultShade === undefined) {
+      return ''
+    }
 
-      if (defaultShadeIndex === 0) {
-        console.log(
-          ' boo',
-          kbob(scale.scaleName),
-          defaultShadeName,
-          darkerShadeName,
-          lighterShadeName
-        )
-      }
-      return callback({
-        scaleNameKebab: kbob(scale.scaleName),
-        defaultShadeName,
-        darkerShadeName,
-        lighterShadeName,
-      })
+    const defaultShadeIndex = scale.defaultShade
+    const defaultShadeName = shadeNames[defaultShadeIndex]
+    const darkerShadeName =
+      defaultShadeIndex < 10
+        ? shadeNames[defaultShadeIndex + 1]
+        : defaultShadeName
+    const lighterShadeName =
+      defaultShadeIndex > 1
+        ? shadeNames[defaultShadeIndex - 1]
+        : defaultShadeName
+
+    return callback({
+      scaleNameKebab: kbob(scale.scaleName),
+      defaultShadeName,
+      darkerShadeName,
+      lighterShadeName,
+      defaultShadeIndex,
     })
-    .join('\n')
+  })

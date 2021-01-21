@@ -35,7 +35,7 @@
     border-radius: $border-radius-m;
   }
   &__danger-text {
-    color: $text-on-white--danger
+    color: $text-on-white--danger;
   }
   &__danger-button {
     background-color: $color-danger;
@@ -53,17 +53,17 @@
   }
 
   &__cta-button {
-    background-color: $color-danger;
-    color: $text-on-danger--vivid;
-    border: $border-width-default solid $color-danger;
+    background-color: $color-primary;
+    color: $text-on-primary--vivid;
+    border: $border-width-default solid $color-primary;
     border-radius: $border-radius-m;
     padding: 0.5rem 1rem;
     font-weight: $text-weight-bold;
     cursor: pointer;
     &:hover {
-      background-color: $color-danger-darker;
-      border-color: $color-danger-darker;
-      color: $text-on-danger-darker--vivid;
+      background-color: $color-primary-darker;
+      border-color: $color-primary-darker;
+      color: $text-on-primary-darker--vivid;
     }
   }
 }

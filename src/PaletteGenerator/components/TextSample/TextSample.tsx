@@ -6,7 +6,6 @@ import './TextSample.scss'
 import chromajs from 'chroma-js'
 import { TextColorType } from 'utils/getDerivedColors'
 import { Tooltip } from '../Tooltip'
-import { text } from '@fortawesome/fontawesome-svg-core'
 
 export const TextSample = ({
   bgColorHex,
@@ -54,12 +53,22 @@ export const TextSample = ({
           onTriggerMove={() => setActive(false)}
           onClickOutside={() => setActive(false)}
         >
-          <span className="TextSample__sample-text">
+          <span
+            className="TextSample__sample-text"
+            style={{
+              color: textColor.hex,
+            }}
+          >
             {'Sample Text ' + contrast.toFixed(1)}
           </span>
         </Tooltip>
         <span>{isSafeInConfig === false ? '!' : ''}</span>
-        <span>{isSafeInConfig === false && textColor.tokenName.match('UNSAFE') === null ? 'AAAACK' : ''}</span>
+        <span>
+          {isSafeInConfig === false &&
+          textColor.tokenName.match('UNSAFE') === null
+            ? 'AAAACK'
+            : ''}
+        </span>
       </div>
       {/* {isSafeInConfig === true && <div>safe config</div>} */}
       {/* {isSafeInConfig === false && <div>unsafe config</div>} */}

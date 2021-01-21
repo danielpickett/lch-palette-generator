@@ -57,7 +57,7 @@ export const Outputs = ({
       `  --text-on-${x.scaleNameKebab}-darker--vivid:                            ${gap} var(--text-on-${x.scaleNameKebab}-${x.darkerShadeName}--vivid);\n` +
       `  --text-on-${x.scaleNameKebab}-darker--vivid-subdued--UNSAFE:            ${gap} var(--text-on-${x.scaleNameKebab}-${x.darkerShadeName}--vivid-subdued--UNSAFE);\n`
     )
-  })}` //.slice(0, -1)
+  }).join('\n')}` //.slice(0, -1)
 
   const cssTextColors = textColors
     .slice(1) // skip the first scale (grey) because it's text colors are parsed separately below
