@@ -84,12 +84,8 @@ export const getDerivedColors = (state: StateType): TextColorsType[] => {
         const isSafe = (
           key: 'default' | 'subdued' | 'vivid' | 'vivid-subdued'
         ) => {
-          return safeTextOnChromaticColors[shadeIndex][key]
-            ? ''
-            : '--UNSAFE'
+          return safeTextOnChromaticColors[shadeIndex][key] ? '' : '--UNSAFE'
         }
-
-        // + isSafe('default')
 
         return {
           scaleName: scale.scaleName,
