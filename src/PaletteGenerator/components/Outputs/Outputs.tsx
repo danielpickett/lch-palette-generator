@@ -9,7 +9,7 @@ import {
 } from 'utils'
 import { VividTextColorsForGreyShadeType } from 'utils/extractVividTextColorsForGreyScale'
 import { TextColorsType } from 'utils/getDerivedColors'
-import { nonComputedTokens } from 'config'
+import { staticTokens } from 'config'
 import './Outputs.scss'
 
 export const Outputs = ({
@@ -106,25 +106,12 @@ export const Outputs = ({
     ''
   )
 
-  const toCSS = ({ property, value }: { property: string; value: string }) => {
-    return `  ${property}: ${value};`
-  }
-
-  let nonColorTokens = ''
-
-  nonComputedTokens.forEach((tokenSet) => {
-    tokenSet.forEach((token) => {
-      nonColorTokens = nonColorTokens + toCSS(token) + '\n'
-    })
-    nonColorTokens = nonColorTokens + '\n'
-  })
-
   const cssCombined = (
     `${cssPaletteColors}\n` +
     `${cssTextColors}\n` +
     `${cssTextColorsOnGrey}\n` +
     `${cssPaletteColorDefaults}\n` +
-    `${nonColorTokens}`
+    `${staticTokens}`
   ).replace(/\n{3,}/g, '\n\n')
 
   const tokenRegEx = / {2}--(.+): .*$/gm

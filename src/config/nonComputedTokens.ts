@@ -112,12 +112,21 @@ const borderWidth = [
   { property: '--border-width-default', value: '0.125rem' },
 ]
 
+const focusRing = [
+  { property: '--focus-ring', value: '0 0 0 3px rgba(0, 81, 255, 0.5)' },
+  {
+    property: '--focus-ring-inset',
+    value: '0 0 0 3px inset rgba(0, 81, 255, 0.5)',
+  },
+]
+
 export const nonComputedTokens = [
   pixelToRemAliases,
   textSizes,
   borderRadii,
   textWeights,
   transitions,
+  focusRing,
   boxShadows,
   borderWidth,
 ]
