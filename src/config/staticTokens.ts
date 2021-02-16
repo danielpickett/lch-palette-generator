@@ -23,7 +23,7 @@ export const staticTokens = `
   --border-radius-xl:                                                        1rem;
 
   --text-weight-bold:                                                        700;
-  --text-weight-regular:                                                     600;
+  --text-weight-normal:                                                      600;
   --text-weight-light:                                                       300;
 
   --transition-150:                                                          150ms cubic-bezier(0.25, 0.8, 0.25, 1);
