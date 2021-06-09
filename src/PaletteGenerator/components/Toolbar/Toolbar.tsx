@@ -86,6 +86,9 @@ export const Toolbar = React.memo(
               title="Show LCH and RGB color breakdown"
             />
           </div>
+          <div className="Toolbar__comment">
+            use these toolbar buttons to display or hide the nerdy data stuff
+          </div>
           <div className="Toolbar__button" style={{ marginLeft: 'auto' }}>
             <IconButton
               onClick={onFullscreenChange}

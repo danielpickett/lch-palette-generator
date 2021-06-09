@@ -14,7 +14,7 @@ export const PaletteGenerator = () => {
     showTextPlots: false,
     showTextChromaControls: false,
     showColorOutputs: false,
-    fullscreen: false,
+    fullscreen: true,
     size: 3,
     outputInitialHeight: 42,
   }
@@ -22,10 +22,10 @@ export const PaletteGenerator = () => {
   const [state, handleStateChanges] = useReducer(mainReducer, theme)
 
   const [showText, setShowText] = useState(defaults.showText) // showText
-  const handleShowTextChange = useCallback(() => setShowText(!showText), [
-    setShowText,
-    showText,
-  ])
+  const handleShowTextChange = useCallback(
+    () => setShowText(!showText),
+    [setShowText, showText]
+  )
 
   const [showTextDetails, setShowTextDetails] = useState(
     defaults.showTextDetails
@@ -58,10 +58,10 @@ export const PaletteGenerator = () => {
   )
 
   const [fullscreen, setFullscreen] = useState(defaults.fullscreen) // fullscreen
-  const handleFullscreenChange = useCallback(() => setFullscreen(!fullscreen), [
-    setFullscreen,
-    fullscreen,
-  ])
+  const handleFullscreenChange = useCallback(
+    () => setFullscreen(!fullscreen),
+    [setFullscreen, fullscreen]
+  )
 
   const outputDragHandleRef = useRef<HTMLDivElement>(null)
   const outputHeightPx = useDragHandle(
@@ -72,9 +72,8 @@ export const PaletteGenerator = () => {
 
   const computedTextColors = getDerivedColors(state)
 
-  const vividTextColorsForGreyShades = extractVividTextColorsForGreyScale(
-    computedTextColors
-  )
+  const vividTextColorsForGreyShades =
+    extractVividTextColorsForGreyScale(computedTextColors)
 
   const [size, setSize] = useState(defaults.size)
   const handleCanvasSizeChange = (size: number) => {

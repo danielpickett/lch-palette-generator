@@ -10,6 +10,11 @@
     display: flex;
     padding: 8px;
   }
+  &__comment {
+    display: flex;
+    align-items: center;
+    padding: 0 1rem;
+  }
 
   &__divider {
     width: 1px;
