@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/lch-palette-generator/static/css/main.063e5a54.chunk.css",
+    "main.js": "/lch-palette-generator/static/js/main.9f82c178.chunk.js",
+    "main.js.map": "/lch-palette-generator/static/js/main.9f82c178.chunk.js.map",
+    "runtime-main.js": "/lch-palette-generator/static/js/runtime-main.2239347f.js",
+    "runtime-main.js.map": "/lch-palette-generator/static/js/runtime-main.2239347f.js.map",
+    "static/js/2.4c04dfa7.chunk.js": "/lch-palette-generator/static/js/2.4c04dfa7.chunk.js",
+    "static/js/2.4c04dfa7.chunk.js.map": "/lch-palette-generator/static/js/2.4c04dfa7.chunk.js.map",
+    "static/js/3.f77727d6.chunk.js": "/lch-palette-generator/static/js/3.f77727d6.chunk.js",
+    "static/js/3.f77727d6.chunk.js.map": "/lch-palette-generator/static/js/3.f77727d6.chunk.js.map",
+    "index.html": "/lch-palette-generator/index.html",
+    "static/css/main.063e5a54.chunk.css.map": "/lch-palette-generator/static/css/main.063e5a54.chunk.css.map",
+    "static/js/2.4c04dfa7.chunk.js.LICENSE.txt": "/lch-palette-generator/static/js/2.4c04dfa7.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.2239347f.js",
+    "static/js/2.4c04dfa7.chunk.js",
+    "static/css/main.063e5a54.chunk.css",
+    "static/js/main.9f82c178.chunk.js"
+  ]
+}
