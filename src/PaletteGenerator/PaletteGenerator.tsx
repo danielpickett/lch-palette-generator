@@ -3,7 +3,7 @@ import { mainReducer } from 'reducers'
 import './PaletteGenerator.scss'
 import { Outputs, ScaleGenerator, Toolbar } from './components'
 import { useDragHandle } from 'hooks'
-import theme from 'config/beewo-theme.json'
+import theme from 'config/initial-theme.json'
 import { extractVividTextColorsForGreyScale, getDerivedColors } from 'utils'
 import ReactDOM from 'react-dom'
 
@@ -12,10 +12,10 @@ export const PaletteGenerator = () => {
     showText: true,
     showTextDetails: false,
     showTextPlots: false,
-    showTextChromaControls: false,
+    showTextChromaControls: true,
     showColorOutputs: false,
     fullscreen: true,
-    size: 3,
+    size: 2,
     outputInitialHeight: 42,
   }
 
