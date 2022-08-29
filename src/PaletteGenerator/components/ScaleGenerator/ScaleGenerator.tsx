@@ -14,11 +14,11 @@ import { ScaleType, ActionType } from 'types'
 import { shadeNames, luminances } from 'config'
 import chromajs from 'chroma-js'
 import {
-  faArrowToRight,
-  faArrowToLeft,
+  faArrowRight,
+  faArrowLeft,
   faUndo,
   faFillDrip,
-} from '@fortawesome/pro-light-svg-icons'
+} from '@fortawesome/free-solid-svg-icons'
 import {
   getMaxChroma,
   lch,
@@ -166,14 +166,14 @@ export const ScaleGenerator = React.memo(
               <div className="ScaleGenerator__button">
                 <IconButton
                   onClick={() => handleSnapChroma(-150)}
-                  faIcon={faArrowToLeft}
+                  faIcon={faArrowLeft}
                   title="Snap all chromas to zero"
                 />
               </div>
               <div className="ScaleGenerator__button">
                 <IconButton
                   onClick={() => handleSnapChroma(150)}
-                  faIcon={faArrowToRight}
+                  faIcon={faArrowRight}
                   title="Snap all chromas to maximum"
                 />
               </div>

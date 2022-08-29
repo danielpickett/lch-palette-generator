@@ -1,7 +1,7 @@
 import React, { CSSProperties } from 'react'
 import './IconButton.scss'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { IconDefinition } from '@fortawesome/pro-light-svg-icons'
+import { IconDefinition } from '@fortawesome/fontawesome-svg-core'
 
 type IconButtonPropsType = {
   faIcon?: IconDefinition

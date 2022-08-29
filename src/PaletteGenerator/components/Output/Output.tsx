@@ -1,7 +1,7 @@
 import { IconButton } from '../../components'
 import React, { CSSProperties, useEffect, useRef, useState } from 'react'
 import './Output.scss'
-import { faClipboard } from '@fortawesome/pro-light-svg-icons'
+import { faClipboard } from '@fortawesome/free-solid-svg-icons'
 
 export const Output = ({
   heading,

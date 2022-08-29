@@ -8,7 +8,7 @@ import {
   safeTextOnChromaticColors,
   // greyscaleTextColorConfig,
 } from 'config'
-import { faSquare, faCircle } from '@fortawesome/pro-solid-svg-icons'
+import { faSquare, faCircle } from '@fortawesome/free-solid-svg-icons'
 
 export type TextColorType = {
   tokenName: string

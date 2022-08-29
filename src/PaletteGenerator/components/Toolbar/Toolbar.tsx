@@ -1,13 +1,13 @@
 import React from 'react'
 import './Toolbar.scss'
 import {
-  faChartScatter,
-  faGlassesAlt,
+  faProjectDiagram,
+  faGlasses,
   faHashtag,
-  faText,
+  faFont,
   faSlidersH,
   faExpand,
-} from '@fortawesome/pro-light-svg-icons'
+} from '@fortawesome/free-solid-svg-icons'
 import { IconButton } from '../../components'
 
 export const Toolbar = React.memo(
@@ -60,7 +60,7 @@ export const Toolbar = React.memo(
           <div className="Toolbar__button">
             <IconButton
               onClick={onShowTextChange}
-              faIcon={faText}
+              faIcon={faFont}
               title="Show text samples"
             />
           </div>
@@ -74,7 +74,7 @@ export const Toolbar = React.memo(
           <div className="Toolbar__button">
             <IconButton
               onClick={onShowTextPlotsChange}
-              faIcon={faChartScatter}
+              faIcon={faProjectDiagram}
               title="Show plot of text color on LCH canvas"
             />
           </div>
@@ -82,7 +82,7 @@ export const Toolbar = React.memo(
           <div className="Toolbar__button">
             <IconButton
               onClick={onShowTextDetailsChange}
-              faIcon={faGlassesAlt}
+              faIcon={faGlasses}
               title="Show LCH and RGB color breakdown"
             />
           </div>

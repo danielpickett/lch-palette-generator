@@ -4,7 +4,7 @@ import { kbob } from './kbob'
 import chromajs from 'chroma-js'
 import { lch } from 'utils'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCircle } from '@fortawesome/pro-solid-svg-icons'
+import { faCircle } from '@fortawesome/free-solid-svg-icons'
 import React from 'react'
 
 export type VividOnGreyShadeTextColorsType = TextColorType[]

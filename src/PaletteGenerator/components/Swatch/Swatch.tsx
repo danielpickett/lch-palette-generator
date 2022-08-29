@@ -7,7 +7,7 @@ import { ChromaticShadeTextColorsType } from 'utils/getDerivedColors'
 import './Swatch.scss'
 import { lch } from 'utils'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCheck } from '@fortawesome/pro-solid-svg-icons'
+import { faCheck } from '@fortawesome/free-solid-svg-icons'
 
 export const Swatch = ({
   scale,
